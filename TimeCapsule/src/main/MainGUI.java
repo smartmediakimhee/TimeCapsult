@@ -37,6 +37,7 @@ public class MainGUI {
 	ImageIcon icon;
 	ImageIcon icon2;
 	ImageIcon Mainicon;
+	ImageIcon title;
 	private JFrame frame;
 	private JTextField id_input;
 	private JPasswordField pw_input;
@@ -71,6 +72,7 @@ public class MainGUI {
 		Mainicon = new ImageIcon(".\\Image\\back.jpg");
 		icon = new ImageIcon(".\\Image\\1.png");
 		icon2 = new ImageIcon(".\\Image\\2.png");
+		title = new ImageIcon(".\\Image\\maintitle.png");
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1920, 1040);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -241,25 +243,6 @@ public class MainGUI {
 		sl_panel.putConstraint(SpringLayout.EAST, pn_img1, -970, SpringLayout.EAST, panel);
 		panel_1.add(pn_img1);
 
-		JLabel lbl_main = new JLabel("T I M E");
-		sl_panel_1.putConstraint(SpringLayout.NORTH, lbl_main, 191, SpringLayout.SOUTH, pn_img1);
-		sl_panel_1.putConstraint(SpringLayout.EAST, lbl_main, -220, SpringLayout.EAST, panel_1);
-		sl_panel.putConstraint(SpringLayout.SOUTH, pn_img1, -52, SpringLayout.NORTH, lbl_main);
-		sl_panel.putConstraint(SpringLayout.NORTH, lbl_main, 231, SpringLayout.NORTH, panel);
-		sl_panel.putConstraint(SpringLayout.WEST, lbl_main, 755, SpringLayout.WEST, panel);
-		panel_1.add(lbl_main);
-		lbl_main.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_main.setFont(new Font("a엄마의편지B", Font.PLAIN, 60));
-
-		JLabel lblCAP = new JLabel("C A P S U L E");
-		sl_panel_1.putConstraint(SpringLayout.NORTH, lblCAP, 6, SpringLayout.SOUTH, lbl_main);
-		sl_panel_1.putConstraint(SpringLayout.EAST, lblCAP, -153, SpringLayout.EAST, panel_1);
-		sl_panel.putConstraint(SpringLayout.NORTH, lblCAP, 17, SpringLayout.SOUTH, lbl_main);
-		sl_panel.putConstraint(SpringLayout.WEST, lblCAP, 660, SpringLayout.WEST, panel);
-		panel_1.add(lblCAP);
-		lblCAP.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCAP.setFont(new Font("a엄마의편지B", Font.PLAIN, 60));
-
 		JPanel pn_img2 = new JPanel() {
 			public void paintComponent(Graphics g) {
 
@@ -275,15 +258,35 @@ public class MainGUI {
 				super.paintComponent(g);
 			}
 		};
-		sl_panel_1.putConstraint(SpringLayout.NORTH, pn_img2, 312, SpringLayout.SOUTH, lblCAP);
+		sl_panel_1.putConstraint(SpringLayout.NORTH, pn_img2, 649, SpringLayout.SOUTH, pn_img1);
 		sl_panel_1.putConstraint(SpringLayout.WEST, pn_img2, 10, SpringLayout.WEST, pn_img1);
 		sl_panel_1.putConstraint(SpringLayout.SOUTH, pn_img2, -42, SpringLayout.SOUTH, panel_1);
 		sl_panel_1.putConstraint(SpringLayout.EAST, pn_img2, -253, SpringLayout.EAST, panel_1);
-		sl_panel.putConstraint(SpringLayout.NORTH, pn_img2, 41, SpringLayout.SOUTH, lblCAP);
 		sl_panel.putConstraint(SpringLayout.WEST, pn_img2, 123, SpringLayout.EAST, panel_1);
 		sl_panel.putConstraint(SpringLayout.SOUTH, pn_img2, -486, SpringLayout.SOUTH, panel);
 		sl_panel.putConstraint(SpringLayout.EAST, pn_img2, -995, SpringLayout.EAST, panel);
 		panel_1.add(pn_img2);
+		
+		JPanel pn_title = new JPanel() {
+			public void paintComponent(Graphics g) {
+
+				// Approach 1: Dispaly image at at full size
+				// g.drawImage(icon2.getImage(), 0, 0, null);
+				// Approach 2: Scale image to size of component
+				Dimension d = getSize();
+				g.drawImage(title.getImage(), 0, 0, d.width, d.height, null);
+				// Approach 3: Fix the image position in the scroll pane
+				// Point p = scrollPane.getViewport().getViewPosition();
+				// g.drawImage(icon.getImage(), p.x, p.y, null);
+				setOpaque(false); // 그림을 표시하게 설정,투명하게 조절
+				super.paintComponent(g);
+			}
+		};
+		sl_panel_1.putConstraint(SpringLayout.NORTH, pn_title, 196, SpringLayout.SOUTH, pn_img1);
+		sl_panel_1.putConstraint(SpringLayout.WEST, pn_title, -114, SpringLayout.WEST, pn_img1);
+		sl_panel_1.putConstraint(SpringLayout.SOUTH, pn_title, 386, SpringLayout.SOUTH, pn_img1);
+		sl_panel_1.putConstraint(SpringLayout.EAST, pn_title, -116, SpringLayout.EAST, panel_1);
+		panel_1.add(pn_title);
 
 		pw_input = new JPasswordField();
 		pw_input.setDocument((new JTextFieldLimit(8)));

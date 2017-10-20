@@ -73,7 +73,7 @@ public class BoardMainGUI implements Runnable {
 	private void initialize() {
 		icon = new ImageIcon("Image\\back.jpg");
 		icon2 = new ImageIcon("Image\\1.png");
-		icon3 = new ImageIcon("Image\\2.png");
+		icon3 = new ImageIcon("Image\\icon2.png");
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1920, 1040);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -163,6 +163,18 @@ public class BoardMainGUI implements Runnable {
 
 			}
 		};
+		pn_img2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				postGUI post = new postGUI();
+				post.main(null);
+				frame.dispose();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pn_img2.setCursor(new Cursor(12));
+			}
+		});
 
 		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_img2, 813, SpringLayout.NORTH, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.WEST, pn_img2, 0, SpringLayout.WEST, lbl_login);
