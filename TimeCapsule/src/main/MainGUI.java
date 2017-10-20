@@ -31,8 +31,8 @@ public class MainGUI {
 	ImageIcon Mainicon;
 	ImageIcon Maintitle;
 	private JFrame frame;
-	private JTextField txtHwanavercom;
-	private JPasswordField pwdSss;
+	private JTextField id_input;
+	private JPasswordField pw_input;
 
 	/**
 	 * Launch the application.
@@ -106,21 +106,24 @@ public class MainGUI {
 		sl_pn_all.putConstraint(SpringLayout.EAST, lbl_login, -53, SpringLayout.WEST, lbl_sign);
 		pn_all.add(lbl_sign);
 		
-		txtHwanavercom = new JTextField();
-		sl_pn_all.putConstraint(SpringLayout.NORTH, txtHwanavercom, -5, SpringLayout.NORTH, lbl_login);
-		sl_pn_all.putConstraint(SpringLayout.WEST, txtHwanavercom, 1037, SpringLayout.WEST, pn_all);
-		sl_pn_all.putConstraint(SpringLayout.SOUTH, txtHwanavercom, 32, SpringLayout.NORTH, pn_all);
-		sl_pn_all.putConstraint(SpringLayout.EAST, txtHwanavercom, -184, SpringLayout.WEST, lbl_login);
-		txtHwanavercom.setText("hwa7444@naver.com");
-		txtHwanavercom.setOpaque(false);
-		pn_all.add(txtHwanavercom);
-		txtHwanavercom.setColumns(10);
-		txtHwanavercom.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.LIGHT_GRAY));
+		id_input = new JTextField();
+		sl_pn_all.putConstraint(SpringLayout.NORTH, id_input, -5, SpringLayout.NORTH, lbl_login);
+		sl_pn_all.putConstraint(SpringLayout.WEST, id_input, 1037, SpringLayout.WEST, pn_all);
+		sl_pn_all.putConstraint(SpringLayout.SOUTH, id_input, 32, SpringLayout.NORTH, pn_all);
+		sl_pn_all.putConstraint(SpringLayout.EAST, id_input, -184, SpringLayout.WEST, lbl_login);
+		id_input.setText("hwa");
+		String id = id_input.getText(); //id값 불러오기
+		System.out.println(id);
+
+		id_input.setOpaque(false);
+		pn_all.add(id_input);
+		id_input.setColumns(10);
+		id_input.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.LIGHT_GRAY));
 		
 		JPanel pn_contents = new JPanel();
 		sl_pn_all.putConstraint(SpringLayout.SOUTH, pn_contents, 915, SpringLayout.NORTH, pn_all);
 		pn_contents.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(192, 192, 192)));
-		sl_pn_all.putConstraint(SpringLayout.NORTH, pn_contents, 60, SpringLayout.SOUTH, txtHwanavercom);
+		sl_pn_all.putConstraint(SpringLayout.NORTH, pn_contents, 60, SpringLayout.SOUTH, id_input);
 		sl_pn_all.putConstraint(SpringLayout.WEST, pn_contents, 677, SpringLayout.WEST, pn_all);
 		sl_pn_all.putConstraint(SpringLayout.EAST, pn_contents, -606, SpringLayout.EAST, pn_all);
 		pn_all.add(pn_contents);
@@ -204,15 +207,20 @@ public class MainGUI {
 		sl_pn_contents.putConstraint(SpringLayout.EAST, pn_maintitle, -125, SpringLayout.EAST, pn_contents);
 		pn_contents.add(pn_maintitle);
 		
-		pwdSss = new JPasswordField();
-		pwdSss.setText("sss");
-		sl_pn_all.putConstraint(SpringLayout.NORTH, pwdSss, 5, SpringLayout.NORTH, pn_all);
-		sl_pn_all.putConstraint(SpringLayout.WEST, pwdSss, 6, SpringLayout.EAST, txtHwanavercom);
-		sl_pn_all.putConstraint(SpringLayout.SOUTH, pwdSss, 32, SpringLayout.NORTH, pn_all);
-		sl_pn_all.putConstraint(SpringLayout.EAST, pwdSss, 147, SpringLayout.EAST, txtHwanavercom);
-		pn_all.add(pwdSss);
-		pwdSss.setOpaque(false);
-		pwdSss.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.LIGHT_GRAY));
+		pw_input = new JPasswordField();
+		pw_input.setText("sss");
+		@SuppressWarnings("deprecation")
+		char[] pw = pw_input.getPassword();					//비밀번호입력 GUI기능은 캐릭터형태의 배열로 들어가게끔 되있음
+		for (int i = 0; i < pw.length; i++) {				
+			System.out.println(pw[i]);
+		}
+		sl_pn_all.putConstraint(SpringLayout.NORTH, pw_input, 5, SpringLayout.NORTH, pn_all);
+		sl_pn_all.putConstraint(SpringLayout.WEST, pw_input, 6, SpringLayout.EAST, id_input);
+		sl_pn_all.putConstraint(SpringLayout.SOUTH, pw_input, 32, SpringLayout.NORTH, pn_all);
+		sl_pn_all.putConstraint(SpringLayout.EAST, pw_input, 147, SpringLayout.EAST, id_input);
+		pn_all.add(pw_input);
+		pw_input.setOpaque(false);
+		pw_input.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.LIGHT_GRAY));
 
 	}
 }
