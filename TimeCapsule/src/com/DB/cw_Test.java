@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 import com.DTO.FriendDTO;
 
+import main.LoggedIN;
+
 public class cw_Test {
 
 	public static void main(String[] args) {
@@ -36,13 +38,16 @@ public class cw_Test {
 //		fd.add(LoggedIN.Logged_in, "2");
 		
 		//친구 목록
-		ArrayList<FriendDTO> list=fd.list(LoggedIN.Logged_in);
+		ArrayList<FriendDTO> list=fd.list(LoggedIN.Logged_in_id);
 		
 		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(1).getEmail());
+			System.out.print(list.get(1).getEmail()+" ");
+			System.out.println(list.get(1).getName());
 		}
 		
-		
+		//현재 로그인 정보 가져오기
+		//System.out.println(LoggedIN.getInfo().getName()); // 닉네임 정보 가져오기
+		//System.out.println(LoggedIN.getInfo().getEmail()); // 이메일정보 가져오기
 	}
 
 }
