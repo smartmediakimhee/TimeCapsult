@@ -2,6 +2,8 @@ package main;
 
 import java.awt.EventQueue;
 import java.awt.Graphics;
+import javax.swing.JOptionPane;
+
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -19,6 +21,7 @@ import javax.swing.border.MatteBorder;
 
 import com.DB.Board_1_DAO;
 import com.DB.MemberDAO;
+import com.DTO.MemberDTO;
 
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
@@ -95,15 +98,30 @@ public class MainGUI {
 				Board_1_DAO b1 = new Board_1_DAO();
 				MemberDAO md = new MemberDAO();
 				
-				id_input.getText();
-				pw_input.getPassword();
 				
+				String email = id_input.getText();
+				String pw = pw_input.getText();
 				
+				MemberDTO mt = md.selectMember(email);
 				
-				//1.입력받은 아이디 가져오기
-				//2.입력받은 비밀번호 가져오기
-				if (true) {
+				if(md==null) {//입력된 값이 DB 에 없을경우
+					System.out.println("입력된 값이 DB에 존재하지 않습니다");
+
+				} else {
+					System.out.println();
+					System.out.println(mt.getEmail());
+					System.out.println(mt.getPw());
+					System.out.println(mt.getName());
+					System.out.println(mt.getId());
+				}
+
+
+				if (mt.getPw().equals(pw)) {
 					bmgui.main(null);
+				} else {
+					JOptionPane.showMessageDialog(null, "이메일과 패스워드를 확인하세요.");
+
+					
 				}
 				
 				
@@ -118,7 +136,8 @@ public class MainGUI {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				
-				
+				JoinGUI jg = new JoinGUI();
+				jg.main(null);
 			}
 		});
 		sl_panel.putConstraint(SpringLayout.NORTH, lbl_sign, 10, SpringLayout.NORTH, panel);

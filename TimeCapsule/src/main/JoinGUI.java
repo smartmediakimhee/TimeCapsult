@@ -1,27 +1,32 @@
 package main;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.SystemColor;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import javax.swing.UIManager;
-import java.awt.SystemColor;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JPasswordField;
+
+import com.DB.MemberDAO;
+import com.DTO.MemberDTO;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class JoinGUI {
 	JScrollPane scrollPane;
@@ -36,7 +41,7 @@ public class JoinGUI {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -66,7 +71,7 @@ public class JoinGUI {
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1294, 764);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		JPanel panel = new JPanel() {
 			public void paintComponent(Graphics g) {
@@ -176,6 +181,14 @@ public class JoinGUI {
 		panel_2.add(label_5);
 		
 		nameInput = new JTextField();
+		nameInput.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if(arg0.getKeyCode()==10) {
+					makeAccount();
+				}
+			}
+		});
 		nameInput.setToolTipText("");
 		nameInput.setText("\uD2B9\uC218\uBB38\uC790 \uC81C\uC678 8 ~ 12\uC790\uB9AC");
 		nameInput.setColumns(10);
@@ -200,7 +213,9 @@ public class JoinGUI {
 		btn_JOIN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				makeAccount();
 			}
+
 		});
 		btn_JOIN.setBorderPainted(false);
 		btn_JOIN.setBackground(Color.LIGHT_GRAY);
@@ -216,5 +231,41 @@ public class JoinGUI {
 		pwInput.setOpaque(false);
 
 		panel_2.add(pwInput);
+	}
+	private boolean makeAccount() {
+		
+		System.out.println();
+		
+		MemberDAO md = new MemberDAO();
+		ArrayList<MemberDTO> container;
+		
+		String input_email = txtHwanavercom.getText();
+		String input_password = pwInput.getText();
+		String input_name = nameInput.getText(); 
+
+		container = md.selectAllMember(); 
+		System.out.println("기존 사용자를 검색합니다.");
+
+		for (int i = 0; i < container.size(); i++) {
+			System.out.println("기존 사용자 중 중복된 이름이 있는지 검사합니다. 입력 :"+input_email);
+			System.out.print(container.get(i).getId()+"\t");
+			System.out.print(container.get(i).getEmail()+"\t");
+			System.out.print(container.get(i).getPw()+"\t");
+			System.out.println(container.get(i).getName());
+			if(container.get(i).getEmail().equals(input_email)) {
+				System.out.println("중복된 이메일을 사용하는 사람이 있습니다.");
+				JOptionPane.showMessageDialog(null, "중복된 이메일을 사용하는 사람이 있습니다. false 리턴하고 종료합니다.");
+				return false;
+			}
+		}
+		
+		
+		if(md.insertMember(input_email,input_password,input_name)) {
+			System.out.println("ID생성완료");
+			return true;
+		} else {
+			System.out.println("ID생성실패");
+			return false;
+		}
 	}
 }
