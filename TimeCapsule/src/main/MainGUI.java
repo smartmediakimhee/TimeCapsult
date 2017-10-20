@@ -3,6 +3,7 @@ package main;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.SystemColor;
+import java.awt.Window;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -20,6 +21,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainGUI {
 	JScrollPane scrollPane;
@@ -89,6 +92,14 @@ public class MainGUI {
 		pn_all.add(lbl_login);
 
 		JLabel lbl_sign = new JLabel("JOIN");
+		lbl_sign.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			JoinGUI join = new JoinGUI();
+			join.main(null);
+			
+			}
+		});
 		sl_pn_all.putConstraint(SpringLayout.NORTH, lbl_sign, 10, SpringLayout.NORTH, pn_all);
 		sl_pn_all.putConstraint(SpringLayout.WEST, lbl_sign, 1445, SpringLayout.WEST, pn_all);
 		sl_pn_all.putConstraint(SpringLayout.NORTH, lbl_login, 0, SpringLayout.NORTH, lbl_sign);
