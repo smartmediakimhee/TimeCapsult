@@ -31,6 +31,12 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import javax.swing.SwingConstants;
+import javax.swing.JTextArea;
+import java.awt.Font;
+import javax.swing.border.MatteBorder;
 
 public class JoinGUI {
 	JScrollPane scrollPane;
@@ -64,6 +70,13 @@ public class JoinGUI {
 	 */
 	public JoinGUI() {
 		initialize();
+		idInput.setForeground(Color.gray);
+		idInput.setText("아이디는 30자 이내로 만드세요. ");
+
+		pwInput.setText("ssssssss");
+		nameInput.setForeground(Color.gray);
+		nameInput.setText("\uD2B9\uC218\uBB38\uC790\uC81C\uC6788~12\uC790\uB9AC");
+
 	}
 
 	/**
@@ -141,17 +154,42 @@ public class JoinGUI {
 		lblNewLabel.setBounds(143, 203, 57, 15);
 		panel_2.add(lblNewLabel);
 
-		JLabel label = new JLabel("________________________");
-		label.setForeground(new Color(255, 106, 77));
-		label.setBounds(143, 247, 173, 15);
-		panel_2.add(label);
-
-		JLabel label_1 = new JLabel("____________________");
-		label_1.setForeground(new Color(255, 106, 77));
-		label_1.setBounds(289, 247, 160, 15);
-		panel_2.add(label_1);
-
 		idInput = new JTextField();
+		idInput.setFont(new Font("a내손글씨L", Font.PLAIN, 24));
+		idInput.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (idInput.getText().length() == 0) {
+					idInput.setText("아이디는 30자 이내로 만드세요. ");
+					idInput.setForeground(Color.gray);
+				}
+			}
+		});
+		idInput.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) { // id입력창 누르면 글삭제
+				if (idInput.getText().equals("아이디는 30자 이내로 만드세요. ")) {
+					idInput.setText("");
+					idInput.setForeground(Color.black);
+
+				}
+			}
+		});
+		idInput.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int i = 0;
+				while (i < 2) {
+					i++;
+					if (idInput.getText().equals("아이디는 30자 이내로 만드세요. ")) {
+						idInput.setForeground(Color.BLACK);
+						idInput.setText("");
+					}
+
+				}
+			}
+		});
+		idInput.setForeground(Color.BLACK);
 		idInput.setBackground(Color.WHITE);
 		idInput.setToolTipText("");
 		idInput.setText("hwa7444@naver.com");
@@ -163,26 +201,33 @@ public class JoinGUI {
 		idInput.setColumns(10);
 		idInput.setOpaque(false);
 
-		JLabel label_2 = new JLabel("________________________");
-		label_2.setForeground(new Color(255, 106, 77));
-		label_2.setBounds(143, 351, 173, 15);
-		panel_2.add(label_2);
-
 		JLabel label_3 = new JLabel("\uBE44\uBC00\uBC88\uD638");
 		label_3.setBounds(143, 307, 57, 15);
 		panel_2.add(label_3);
 
-		JLabel label_4 = new JLabel("____________________");
-		label_4.setForeground(new Color(255, 106, 77));
-		label_4.setBounds(289, 351, 160, 15);
-		panel_2.add(label_4);
-
-		JLabel label_5 = new JLabel("________________________");
-		label_5.setForeground(new Color(255, 106, 77));
-		label_5.setBounds(143, 460, 173, 15);
-		panel_2.add(label_5);
-
 		nameInput = new JTextField();
+		nameInput.setFont(new Font("a내손글씨L", Font.PLAIN, 24));
+		nameInput.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				for (int i = 0; i < 1; i++) {
+					if (nameInput.getText().length()==0) {
+						nameInput.setForeground(Color.gray);
+						nameInput.setText("특수문자제외8~12자리");
+					}
+				}
+				
+			}
+		});
+		nameInput.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (nameInput.getText().equals("특수문자제외8~12자리")) {
+					nameInput.setForeground(Color.black);
+					nameInput.setText("");
+				}
+			}
+		});
 		nameInput.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
@@ -192,7 +237,7 @@ public class JoinGUI {
 			}
 		});
 		nameInput.setToolTipText("");
-		nameInput.setText("\uD2B9\uC218\uBB38\uC790 \uC81C\uC678 8 ~ 12\uC790\uB9AC");
+		
 		nameInput.setColumns(10);
 		nameInput.setBackground(Color.WHITE);
 		nameInput.setBounds(143, 441, 173, 21);
@@ -206,12 +251,8 @@ public class JoinGUI {
 		label_6.setBounds(143, 416, 57, 15);
 		panel_2.add(label_6);
 
-		JLabel label_7 = new JLabel("____________________");
-		label_7.setForeground(new Color(255, 106, 77));
-		label_7.setBounds(289, 460, 160, 15);
-		panel_2.add(label_7);
-
 		JButton btn_JOIN = new JButton("JOIN");
+		btn_JOIN.setFont(new Font("a바른생각", Font.PLAIN, 12));
 		btn_JOIN.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -229,11 +270,51 @@ public class JoinGUI {
 		btn_JOIN.setBackground(Color.LIGHT_GRAY);
 		btn_JOIN.setBounds(143, 501, 269, 38);
 		panel_2.add(btn_JOIN);
+		JLabel lbl_pw = new JLabel("\uBE44\uBC00\uBC88\uD638\uB294 6~8\uC790\uB9AC");
+		lbl_pw.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_pw.setForeground(Color.GRAY);
+		lbl_pw.setBounds(199, 307, 117, 15);
+		panel_2.add(lbl_pw);
 
 		pwInput = new JPasswordField(); // 비밀번호 입력창
+		pwInput.setFont(new Font("휴먼옛체", Font.PLAIN, 12));
+		pwInput.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (pwInput.getText().length()==0) {
+					pwInput.setText("ssssssss");
+					lbl_pw.setText("비밀번호는 6~8자리");
+					
+				}
+			}
+		});
+		pwInput.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				for (int i = 0; i <1 ; i++) {
+					if (pwInput.getText().equals("ssssssss")) {
+						lbl_pw.setText("");
+						pwInput.setText("");
+					}
+				}
+			}
+		});
+		pwInput.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (pwInput.getText().equals("ssssssss")) {
+					lbl_pw.setText("");
+					pwInput.setText("");
+
+				}
+			}
+		});
+
+		pwInput.setForeground(new Color(255, 144, 144));
+		pwInput.setEchoChar('♥');
 		pwInput.setText("rudeh376");
 		pwInput.setBounds(143, 332, 173, 21);
-		pwInput.setDocument((new JTextFieldLimit(12)));
+		pwInput.setDocument((new JTextFieldLimit(8)));
 		pwInput.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		pwInput.setBackground(new Color(0, 0, 0, 0));
 		pwInput.setOpaque(false);
@@ -243,10 +324,10 @@ public class JoinGUI {
 		JPanel pn_exit = new JPanel() {
 			public void paintComponent(Graphics g) {
 				// Approach 1: Dispaly image at at full size
-//				g.drawImage(icon3.getImage(), 0, 0, null);
+				// g.drawImage(icon3.getImage(), 0, 0, null);
 				// Approach 2: Scale image to size of component
-				 Dimension d = getSize();
-				 g.drawImage(icon3.getImage(), 0, 0, d.width, d.height, null);
+				Dimension d = getSize();
+				g.drawImage(icon3.getImage(), 0, 0, d.width, d.height, null);
 				// Approach 3: Fix the image position in the scroll pane
 				// Point p = scrollPane.getViewport().getViewPosition();
 				// g.drawImage(icon.getImage(), p.x, p.y, null);
@@ -257,10 +338,11 @@ public class JoinGUI {
 		pn_exit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			MainGUI main = new MainGUI();
-			main.main(null);
-			frame.dispose();//원래창 끄기
+				MainGUI main = new MainGUI();
+				main.main(null);
+				frame.dispose();// 원래창 끄기
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				pn_exit.setCursor(new Cursor(12));
@@ -268,6 +350,25 @@ public class JoinGUI {
 		});
 		pn_exit.setBounds(23, 580, 25, 27);
 		panel_2.add(pn_exit);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(255, 162, 162)));
+		panel_3.setBounds(143, 246, 269, 10);
+		panel_2.add(panel_3);
+		panel_3.setOpaque(false);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setOpaque(false);
+		panel_4.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(255, 162, 162)));
+		panel_4.setBounds(143, 349, 269, 10);
+		panel_2.add(panel_4);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setOpaque(false);
+		panel_5.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(255, 162, 162)));
+		panel_5.setBounds(143, 464, 269, 10);
+		panel_2.add(panel_5);
+		
 
 	}
 
@@ -279,9 +380,7 @@ public class JoinGUI {
 		ArrayList<MemberDTO> container;
 
 		String input_email = idInput.getText();
-		
-		
-		
+
 		String input_password = pwInput.getText();
 		String input_name = nameInput.getText();
 
