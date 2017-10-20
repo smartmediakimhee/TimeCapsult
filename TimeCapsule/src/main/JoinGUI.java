@@ -218,6 +218,12 @@ public class JoinGUI {
 				}
 
 			}
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				if (nameInput.getText().equals("특수문자제외8~12자리")) {
+					nameInput.setText("");
+				}
+			}
 		});
 		nameInput.addMouseListener(new MouseAdapter() {
 			@Override
@@ -297,6 +303,13 @@ public class JoinGUI {
 					pwInput.setText("ssssssss");
 					lbl_pw.setText("비밀번호는 6~8자리");
 
+				}
+			}
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (pwInput.getText().equals("ssssssss")) {
+					pwInput.setText("");
+					lbl_pw.setText("");
 				}
 			}
 		});
