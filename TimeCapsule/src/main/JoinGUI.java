@@ -35,6 +35,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
+import java.awt.Font;
 
 public class JoinGUI {
 	JScrollPane scrollPane;
@@ -163,6 +164,7 @@ public class JoinGUI {
 		panel_2.add(label_1);
 
 		idInput = new JTextField();
+		idInput.setFont(new Font("a내손글씨L", Font.PLAIN, 24));
 		idInput.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -228,6 +230,7 @@ public class JoinGUI {
 		panel_2.add(label_5);
 
 		nameInput = new JTextField();
+		nameInput.setFont(new Font("a내손글씨L", Font.PLAIN, 24));
 		nameInput.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -278,6 +281,7 @@ public class JoinGUI {
 		panel_2.add(label_7);
 
 		JButton btn_JOIN = new JButton("JOIN");
+		btn_JOIN.setFont(new Font("a바른생각", Font.PLAIN, 12));
 		btn_JOIN.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -302,6 +306,7 @@ public class JoinGUI {
 		panel_2.add(lbl_pw);
 
 		pwInput = new JPasswordField(); // 비밀번호 입력창
+		pwInput.setFont(new Font("휴먼옛체", Font.PLAIN, 12));
 		pwInput.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
