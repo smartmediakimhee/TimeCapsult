@@ -68,9 +68,9 @@ public class BoardMainGUI implements Runnable {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		icon = new ImageIcon("D:\\¹Ú°æµµ\\¹è°æ.jpg");
-		icon2 = new ImageIcon("D:\\¹Ú°æµµ\\1.jpg");
-		icon3 = new ImageIcon("D:\\¹Ú°æµµ\\2.png");
+		icon = new ImageIcon("Image\\back.jpg");
+		icon2 = new ImageIcon("Image\\1.png");
+		icon3 = new ImageIcon("Image\\2.png");
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1920, 1040);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -268,13 +268,13 @@ public class BoardMainGUI implements Runnable {
 	private String whereIconsrc(String weather) {
 		String src = "";
 		if(weather.equals("¸¼À½")) {
-			src = "image\\sun.png";
+			src = "Image\\sun.png";
 		}else if(weather.equals("Èå¸²")) {
-			src = "image\\cloud.png";
+			src = "Image\\cloud.png";
 		}else if(weather.equals("ºñ¿È")) {
-			src = "image\\rain.png";
+			src = "Image\\rain.png";
 		}else if(weather.equals("´«")) {
-			src = "image\\snow.png";
+			src = "Image\\snow.png";
 		}
 		System.out.println(src);
 		return src;
