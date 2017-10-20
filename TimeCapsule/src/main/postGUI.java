@@ -22,6 +22,9 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.CardLayout;
+
+import com.DB.MemberDAO;
+import com.DTO.MemberDTO;
 import com.toedter.calendar.JCalendar;
 import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
@@ -335,7 +338,7 @@ public class postGUI {
        SpringLayout sl_pn_nickname = new SpringLayout();
        pn_nickname.setLayout(sl_pn_nickname);
        
-       JLabel lbl_name = new JLabel("New label");
+       JLabel lbl_name = new JLabel("New label");//DB에 있는 로그인한 id 불러오기
        lbl_name.setHorizontalAlignment(SwingConstants.CENTER);
        sl_pn_nickname.putConstraint(SpringLayout.NORTH, lbl_name, 0, SpringLayout.NORTH, pn_nickname);
        sl_pn_nickname.putConstraint(SpringLayout.WEST, lbl_name, 0, SpringLayout.WEST, pn_nickname);
