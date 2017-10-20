@@ -33,6 +33,8 @@ public class MainGUI {
 	ImageIcon icon;
 	ImageIcon icon2;
 	ImageIcon Mainicon;
+	ImageIcon Maintitle;
+
 	private JFrame frame;
 	private JTextField id_input;
 	private JPasswordField pw_input;
@@ -67,6 +69,8 @@ public class MainGUI {
 		Mainicon = new ImageIcon(".\\Image\\back.jpg");
 		icon = new ImageIcon(".\\Image\\1.png");
 		icon2 = new ImageIcon(".\\Image\\2.png");
+		Maintitle = new ImageIcon(".\\Image\\maintitle.png");
+
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1920, 1040);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -149,7 +153,8 @@ public class MainGUI {
 			public void mouseClicked(MouseEvent arg0) {
 				
 				JoinGUI jg = new JoinGUI();
-				jg.main(null);
+				jg.main(null);//버튼누르면 회원가입창 띄우고
+				frame.dispose();//버튼누르고 창을 뛰웠을때 원래 창을 끝내는것
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -165,7 +170,6 @@ public class MainGUI {
 		sl_panel.putConstraint(SpringLayout.NORTH, id_input, 5, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.WEST, id_input, 1037, SpringLayout.WEST, panel);
 		sl_panel.putConstraint(SpringLayout.EAST, id_input, -708, SpringLayout.EAST, panel);
-		id_input.setText("hwa7444@naver.com");//아이디 입력하는곳
 		
 		id_input.setOpaque(false);
 		panel.add(id_input);
@@ -254,7 +258,6 @@ public class MainGUI {
 		pw_input = new JPasswordField();
 		sl_panel.putConstraint(SpringLayout.WEST, lbl_login, 6, SpringLayout.EAST, pw_input);
 		sl_panel.putConstraint(SpringLayout.WEST, pw_input, 1202, SpringLayout.WEST, panel);
-		pw_input.setText("sss");
 		sl_panel.putConstraint(SpringLayout.NORTH, pw_input, 5, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.SOUTH, pw_input, 32, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.EAST, pw_input, 147, SpringLayout.EAST, id_input);
