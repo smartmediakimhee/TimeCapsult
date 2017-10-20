@@ -166,7 +166,6 @@ public class MainGUI {
 		sl_panel.putConstraint(SpringLayout.NORTH, id_input, 5, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.WEST, id_input, 1037, SpringLayout.WEST, panel);
 		sl_panel.putConstraint(SpringLayout.EAST, id_input, -708, SpringLayout.EAST, panel);
-		id_input.setText("hwa7444@naver.com");//아이디 입력하는곳
 		
 		id_input.setOpaque(false);
 		panel.add(id_input);
@@ -255,7 +254,6 @@ public class MainGUI {
 		pw_input = new JPasswordField();
 		sl_panel.putConstraint(SpringLayout.WEST, lbl_login, 6, SpringLayout.EAST, pw_input);
 		sl_panel.putConstraint(SpringLayout.WEST, pw_input, 1202, SpringLayout.WEST, panel);
-		pw_input.setText("sss");
 		sl_panel.putConstraint(SpringLayout.NORTH, pw_input, 5, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.SOUTH, pw_input, 32, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.EAST, pw_input, 147, SpringLayout.EAST, id_input);
