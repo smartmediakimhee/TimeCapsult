@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.EventQueue;
+import java.awt.Window;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -17,7 +18,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class JCal {
-
 	private JFrame frame;
 
 	/**
@@ -29,6 +29,7 @@ public class JCal {
 				try {
 					JCal window = new JCal();
 					window.frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -49,7 +50,7 @@ public class JCal {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 302, 247);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		SpringLayout springLayout = new SpringLayout();
 		frame.getContentPane().setLayout(springLayout);
 		
@@ -64,17 +65,21 @@ public class JCal {
 		JCalendar calendar = new JCalendar();
 		
 		panel.add(calendar, "name_28143323268548");
+		
 		calendar.addPropertyChangeListener(new PropertyChangeListener() {
 			
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
 				// TODO Auto-generated method stub
 				 Date d = calendar.getDate();
-			     SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd");
-			     System.out.println(format.format(d));
+			     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		    	 postGUI.date = format.format(d);
+   
 			}
-		});
 
+			
+		});
+		
 	    
 	      
 	           
