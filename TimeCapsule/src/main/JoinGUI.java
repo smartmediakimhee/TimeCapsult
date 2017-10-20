@@ -2,6 +2,7 @@ package main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.SystemColor;
@@ -27,6 +28,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class JoinGUI {
 	JScrollPane scrollPane;
@@ -210,6 +213,12 @@ public class JoinGUI {
 		panel_2.add(label_7);
 		
 		JButton btn_JOIN = new JButton("JOIN");
+		btn_JOIN.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btn_JOIN.setCursor(new Cursor(12));
+			}
+		});
 		btn_JOIN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
