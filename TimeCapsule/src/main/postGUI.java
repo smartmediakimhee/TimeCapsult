@@ -53,7 +53,7 @@ public class postGUI {
    private JTextField txt_title;
    private JTextField txt_content;
    private JTextField textField_1;
-   private JTextField textField_2;
+   private JTextField txtPeriod;
 
    /**
     * Launch the application.
@@ -326,13 +326,23 @@ public class postGUI {
        textField_1.setColumns(10);
        pn_small.add(textField_1);
        
-       textField_2 = new JTextField();
-       sl_pn_small.putConstraint(SpringLayout.NORTH, textField_2, 6, SpringLayout.SOUTH, panel_calendar);
-       sl_pn_small.putConstraint(SpringLayout.WEST, textField_2, -439, SpringLayout.WEST, txt_hour);
-       sl_pn_small.putConstraint(SpringLayout.SOUTH, textField_2, 39, SpringLayout.SOUTH, panel_calendar);
-       sl_pn_small.putConstraint(SpringLayout.EAST, textField_2, -15, SpringLayout.WEST, txt_hour);
-       pn_small.add(textField_2);
-       textField_2.setColumns(10);
+       txtPeriod = new JTextField();
+       txtPeriod.addMouseListener(new MouseAdapter() {
+       	@Override
+       	public void mouseReleased(MouseEvent arg0) {
+       		JCal cal=new JCal();
+       		cal.main(null);
+       		
+       	}
+       });
+       txtPeriod.setHorizontalAlignment(SwingConstants.CENTER);
+       txtPeriod.setText("period");
+       sl_pn_small.putConstraint(SpringLayout.NORTH, txtPeriod, 6, SpringLayout.SOUTH, panel_calendar);
+       sl_pn_small.putConstraint(SpringLayout.WEST, txtPeriod, -439, SpringLayout.WEST, txt_hour);
+       sl_pn_small.putConstraint(SpringLayout.SOUTH, txtPeriod, 39, SpringLayout.SOUTH, panel_calendar);
+       sl_pn_small.putConstraint(SpringLayout.EAST, txtPeriod, -15, SpringLayout.WEST, txt_hour);
+       pn_small.add(txtPeriod);
+       txtPeriod.setColumns(10);
        sl_panel_big.putConstraint(SpringLayout.NORTH, pn_logo, 89, SpringLayout.NORTH, panel_big);
        sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_logo, 280, SpringLayout.NORTH, panel_big);
        panel_big.add(pn_logo);
