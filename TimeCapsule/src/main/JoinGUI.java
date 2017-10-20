@@ -38,7 +38,7 @@ public class JoinGUI {
 	ImageIcon icon2;
 	ImageIcon icon3;
 	private JFrame frame;
-	private JTextField txtHwanavercom;
+	private JTextField idInput;
 	private JTextField nameInput;
 	private JPasswordField pwInput;
 
@@ -151,17 +151,17 @@ public class JoinGUI {
 		label_1.setBounds(289, 247, 160, 15);
 		panel_2.add(label_1);
 
-		txtHwanavercom = new JTextField();
-		txtHwanavercom.setBackground(Color.WHITE);
-		txtHwanavercom.setToolTipText("");
-		txtHwanavercom.setText("hwa7444@naver.com");
-		txtHwanavercom.setBounds(143, 228, 269, 21);
-		txtHwanavercom.setDocument((new JTextFieldLimit(30)));
-		txtHwanavercom.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+		idInput = new JTextField();
+		idInput.setBackground(Color.WHITE);
+		idInput.setToolTipText("");
+		idInput.setText("hwa7444@naver.com");
+		idInput.setBounds(143, 228, 269, 21);
+		idInput.setDocument((new JTextFieldLimit(30)));
+		idInput.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		// txtHwanavercom.setBackground(new Color(0,0,0,0));
-		panel_2.add(txtHwanavercom);
-		txtHwanavercom.setColumns(10);
-		txtHwanavercom.setOpaque(false);
+		panel_2.add(idInput);
+		idInput.setColumns(10);
+		idInput.setOpaque(false);
 
 		JLabel label_2 = new JLabel("________________________");
 		label_2.setForeground(new Color(255, 106, 77));
@@ -278,7 +278,10 @@ public class JoinGUI {
 		MemberDAO md = new MemberDAO();
 		ArrayList<MemberDTO> container;
 
-		String input_email = txtHwanavercom.getText();
+		String input_email = idInput.getText();
+		
+		
+		
 		String input_password = pwInput.getText();
 		String input_name = nameInput.getText();
 
