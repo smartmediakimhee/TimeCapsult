@@ -31,6 +31,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.border.LineBorder;
 
 public class MainGUI {
 	JScrollPane scrollPane;
@@ -169,6 +170,17 @@ public class MainGUI {
 		panel.add(lbl_sign);
 		
 		id_input = new JTextField();
+		sl_panel.putConstraint(SpringLayout.NORTH, id_input, 5, SpringLayout.NORTH, panel);
+		id_input.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				for (int i = 0; i < 1; i++) {
+					if (id_input.getText().equals("아이디 입력")) {
+						id_input.setText("");
+					}
+				}
+			}
+		});
 
 		id_input.addFocusListener(new FocusAdapter() {
 			@Override
@@ -187,7 +199,6 @@ public class MainGUI {
 				}
 			}
 		});
-		sl_panel.putConstraint(SpringLayout.NORTH, id_input, 5, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.WEST, id_input, 1037, SpringLayout.WEST, panel);
 		sl_panel.putConstraint(SpringLayout.EAST, id_input, -708, SpringLayout.EAST, panel);
 		id_input.setText("\uC544\uC774\uB514 \uC785\uB825");//아이디 입력하는곳
@@ -198,12 +209,12 @@ public class MainGUI {
 		id_input.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.LIGHT_GRAY));
 		
 		JPanel panel_1 = new JPanel();
-		sl_panel.putConstraint(SpringLayout.NORTH, panel_1, 92, SpringLayout.NORTH, panel);
-		sl_panel.putConstraint(SpringLayout.SOUTH, id_input, -60, SpringLayout.NORTH, panel_1);
-		panel_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(192, 192, 192)));
+		sl_panel.putConstraint(SpringLayout.SOUTH, id_input, -46, SpringLayout.NORTH, panel_1);
+		sl_panel.putConstraint(SpringLayout.SOUTH, panel_1, -55, SpringLayout.SOUTH, panel);
+		sl_panel.putConstraint(SpringLayout.NORTH, panel_1, 78, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.WEST, panel_1, 677, SpringLayout.WEST, panel);
-		sl_panel.putConstraint(SpringLayout.SOUTH, panel_1, 734, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.EAST, panel_1, -606, SpringLayout.EAST, panel);
+		panel_1.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
 		panel.add(panel_1);
 		SpringLayout sl_panel_1 = new SpringLayout();
 		panel_1.setLayout(sl_panel_1);
@@ -212,10 +223,10 @@ public class MainGUI {
 		JPanel pn_img1 = new JPanel() {
 			public void paintComponent(Graphics g) {
 				// Approach 1: Dispaly image at at full size
-				g.drawImage(icon.getImage(), 0, 0, null);
+//				g.drawImage(icon.getImage(), 0, 0, null);
 				// Approach 2: Scale image to size of component
-				// Dimension d = getSize();
-				// g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
+				 Dimension d = getSize();
+				 g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
 				// Approach 3: Fix the image position in the scroll pane
 				// Point p = scrollPane.getViewport().getViewPosition();
 				// g.drawImage(icon.getImage(), p.x, p.y, null);
@@ -223,42 +234,42 @@ public class MainGUI {
 				super.paintComponent(g);
 			}
 		};
-		sl_panel_1.putConstraint(SpringLayout.NORTH, pn_img1, 10, SpringLayout.NORTH, panel_1);
-		sl_panel_1.putConstraint(SpringLayout.WEST, pn_img1, 247, SpringLayout.WEST, panel_1);
-		sl_panel_1.putConstraint(SpringLayout.EAST, pn_img1, -263, SpringLayout.EAST, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.NORTH, pn_img1, 38, SpringLayout.NORTH, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.WEST, pn_img1, 261, SpringLayout.WEST, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.SOUTH, pn_img1, -785, SpringLayout.SOUTH, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.EAST, pn_img1, -249, SpringLayout.EAST, panel_1);
 		sl_panel.putConstraint(SpringLayout.NORTH, pn_img1, 90, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.WEST, pn_img1, 116, SpringLayout.EAST, panel_1);
 		sl_panel.putConstraint(SpringLayout.EAST, pn_img1, -970, SpringLayout.EAST, panel);
 		panel_1.add(pn_img1);
 		
 		JLabel lbl_main = new JLabel("T I M E");
-		sl_panel_1.putConstraint(SpringLayout.NORTH, lbl_main, 79, SpringLayout.NORTH, panel_1);
-		sl_panel_1.putConstraint(SpringLayout.SOUTH, pn_img1, -6, SpringLayout.NORTH, lbl_main);
-		sl_panel_1.putConstraint(SpringLayout.WEST, lbl_main, 204, SpringLayout.WEST, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.NORTH, lbl_main, 191, SpringLayout.SOUTH, pn_img1);
+		sl_panel_1.putConstraint(SpringLayout.EAST, lbl_main, -220, SpringLayout.EAST, panel_1);
 		sl_panel.putConstraint(SpringLayout.SOUTH, pn_img1, -52, SpringLayout.NORTH, lbl_main);
 		sl_panel.putConstraint(SpringLayout.NORTH, lbl_main, 231, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.WEST, lbl_main, 755, SpringLayout.WEST, panel);
 		panel_1.add(lbl_main);
 		lbl_main.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_main.setFont(new Font("굴림", Font.PLAIN, 60));
+		lbl_main.setFont(new Font("a엄마의편지B", Font.PLAIN, 60));
 		
 		JLabel lblCAP = new JLabel("C A P S U L E");
 		sl_panel_1.putConstraint(SpringLayout.NORTH, lblCAP, 6, SpringLayout.SOUTH, lbl_main);
-		sl_panel_1.putConstraint(SpringLayout.WEST, lblCAP, 107, SpringLayout.WEST, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.EAST, lblCAP, -153, SpringLayout.EAST, panel_1);
 		sl_panel.putConstraint(SpringLayout.NORTH, lblCAP, 17, SpringLayout.SOUTH, lbl_main);
 		sl_panel.putConstraint(SpringLayout.WEST, lblCAP, 660, SpringLayout.WEST, panel);
 		panel_1.add(lblCAP);
 		lblCAP.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCAP.setFont(new Font("굴림", Font.PLAIN, 60));
+		lblCAP.setFont(new Font("a엄마의편지B", Font.PLAIN, 60));
 		
 		JPanel pn_img2 = new JPanel() {
 			public void paintComponent(Graphics g) {
 				
 				// Approach 1: Dispaly image at at full size
-				g.drawImage(icon2.getImage(), 0, 0, null);
+//				g.drawImage(icon2.getImage(), 0, 0, null);
 				// Approach 2: Scale image to size of component
-				// Dimension d = getSize();
-				// g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
+				 Dimension d = getSize();
+				 g.drawImage(icon2.getImage(), 0, 0, d.width, d.height, null);
 				// Approach 3: Fix the image position in the scroll pane
 				// Point p = scrollPane.getViewport().getViewPosition();
 				// g.drawImage(icon.getImage(), p.x, p.y, null);
@@ -266,10 +277,10 @@ public class MainGUI {
 				super.paintComponent(g);
 			}
 		};
-		sl_panel_1.putConstraint(SpringLayout.NORTH, pn_img2, 284, SpringLayout.SOUTH, lblCAP);
-		sl_panel_1.putConstraint(SpringLayout.WEST, pn_img2, 261, SpringLayout.WEST, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.NORTH, pn_img2, 312, SpringLayout.SOUTH, lblCAP);
+		sl_panel_1.putConstraint(SpringLayout.WEST, pn_img2, 10, SpringLayout.WEST, pn_img1);
 		sl_panel_1.putConstraint(SpringLayout.SOUTH, pn_img2, -42, SpringLayout.SOUTH, panel_1);
-		sl_panel_1.putConstraint(SpringLayout.EAST, pn_img2, 0, SpringLayout.EAST, pn_img1);
+		sl_panel_1.putConstraint(SpringLayout.EAST, pn_img2, -253, SpringLayout.EAST, panel_1);
 		sl_panel.putConstraint(SpringLayout.NORTH, pn_img2, 41, SpringLayout.SOUTH, lblCAP);
 		sl_panel.putConstraint(SpringLayout.WEST, pn_img2, 123, SpringLayout.EAST, panel_1);
 		sl_panel.putConstraint(SpringLayout.SOUTH, pn_img2, -486, SpringLayout.SOUTH, panel);
