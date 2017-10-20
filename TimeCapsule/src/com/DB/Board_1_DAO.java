@@ -13,6 +13,7 @@ import com.DTO.Board_1_DTO;
 import function.MyLocation;
 import function.MyWeather;
 import function.NowTime;
+import main.LoggedIN;
 
 public class Board_1_DAO {
 	private static Connection conn;
@@ -62,8 +63,8 @@ public class Board_1_DAO {
 			if (r > 0) {
 				String rel_sql = "INSERT INTO rel_member_board1 VALUES (SEQ_REL_MEM_BRD_ID.NEXTVAL,?,board_1_id.CURRVAL)";
 				PreparedStatement pstmt2 = conn.prepareStatement(rel_sql);
-				pstmt2.setString(1, LoggedIN.Logged_in); //Member ID
-				System.out.println(LoggedIN.Logged_in);
+				pstmt2.setString(1, LoggedIN.Logged_in_id); //Member ID
+				System.out.println(LoggedIN.Logged_in_id);
 				int r2 = pstmt2.executeUpdate();
 				if(r2>0)
 					result=true;

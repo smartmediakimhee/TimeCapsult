@@ -11,6 +11,7 @@ import java.awt.BorderLayout;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -21,6 +22,9 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.CardLayout;
+
+import com.DB.MemberDAO;
+import com.DTO.MemberDTO;
 import com.toedter.calendar.JCalendar;
 import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
@@ -29,6 +33,8 @@ import javax.swing.JToggleButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
+import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 
 public class postGUI {
    JScrollPane scrollPane;
@@ -107,16 +113,23 @@ public class postGUI {
       SpringLayout sl_panel_big = new SpringLayout();
       panel_big.setLayout(sl_panel_big);
 
-      JLabel lbl_log_id = new JLabel("__________");
-      panel_big.add(lbl_log_id);
-
       JLabel lbl_login = new JLabel("\uB2D8");
       sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_login, 10, SpringLayout.NORTH, panel_big);
-      sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_log_id, 0, SpringLayout.NORTH, lbl_login);
-      sl_panel_big.putConstraint(SpringLayout.EAST, lbl_log_id, -13, SpringLayout.WEST, lbl_login);
       panel_big.add(lbl_login);
 
       JLabel lbl_sign = new JLabel("log out");
+      lbl_sign.addMouseListener(new MouseAdapter() {
+      	@Override
+      	public void mouseClicked(MouseEvent arg0) {
+      		MainGUI main = new MainGUI();
+      		main.main(null);
+      		frame.dispose();
+      		}
+      	@Override
+      	public void mouseEntered(MouseEvent e) {
+      		lbl_sign.setCursor(new Cursor(12));
+      	}
+      });
       sl_panel_big.putConstraint(SpringLayout.EAST, lbl_login, -45, SpringLayout.WEST, lbl_sign);
       sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_sign, 10, SpringLayout.NORTH, panel_big);
       sl_panel_big.putConstraint(SpringLayout.EAST, lbl_sign, -35, SpringLayout.EAST, panel_big);
@@ -139,14 +152,15 @@ public class postGUI {
           }
        };
       sl_panel_big.putConstraint(SpringLayout.NORTH, pn_underimg, 816, SpringLayout.SOUTH, lbl_sign);
-      sl_panel_big.putConstraint(SpringLayout.WEST, pn_underimg, 17, SpringLayout.WEST, lbl_log_id);
       sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_underimg, -31, SpringLayout.SOUTH, panel_big);
-      sl_panel_big.putConstraint(SpringLayout.EAST, pn_underimg, 0, SpringLayout.EAST, lbl_sign);
+      sl_panel_big.putConstraint(SpringLayout.EAST, pn_underimg, -35, SpringLayout.EAST, panel_big);
        panel_big.add(pn_underimg);
        
        JPanel pn_small = new JPanel();
+       sl_panel_big.putConstraint(SpringLayout.EAST, pn_small, -240, SpringLayout.EAST, panel_big);
+       sl_panel_big.putConstraint(SpringLayout.WEST, pn_underimg, 54, SpringLayout.EAST, pn_small);
+       pn_small.setBorder(new LineBorder(Color.GRAY, 2));
        sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_small, -31, SpringLayout.SOUTH, panel_big);
-       sl_panel_big.putConstraint(SpringLayout.EAST, pn_small, -54, SpringLayout.WEST, pn_underimg);
        pn_small.setBackground(new Color(255,0,0,0));
        panel_big.add(pn_small);
        SpringLayout sl_pn_small = new SpringLayout();
@@ -322,6 +336,25 @@ public class postGUI {
        sl_panel_big.putConstraint(SpringLayout.NORTH, pn_logo, 89, SpringLayout.NORTH, panel_big);
        sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_logo, 280, SpringLayout.NORTH, panel_big);
        panel_big.add(pn_logo);
+       
+       JPanel pn_nickname = new JPanel();
+       pn_nickname.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+       sl_panel_big.putConstraint(SpringLayout.NORTH, pn_nickname, 3, SpringLayout.NORTH, panel_big);
+       sl_panel_big.putConstraint(SpringLayout.WEST, pn_nickname, -142, SpringLayout.WEST, lbl_login);
+       sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_nickname, 0, SpringLayout.SOUTH, lbl_login);
+       sl_panel_big.putConstraint(SpringLayout.EAST, pn_nickname, -6, SpringLayout.WEST, lbl_login);
+       panel_big.add(pn_nickname);
+       pn_nickname.setOpaque(false);
+       SpringLayout sl_pn_nickname = new SpringLayout();
+       pn_nickname.setLayout(sl_pn_nickname);
+       
+       JLabel lbl_name = new JLabel("New label");//DB에 있는 로그인한 id 불러오기
+       lbl_name.setHorizontalAlignment(SwingConstants.CENTER);
+       sl_pn_nickname.putConstraint(SpringLayout.NORTH, lbl_name, 0, SpringLayout.NORTH, pn_nickname);
+       sl_pn_nickname.putConstraint(SpringLayout.WEST, lbl_name, 0, SpringLayout.WEST, pn_nickname);
+       sl_pn_nickname.putConstraint(SpringLayout.SOUTH, lbl_name, 21, SpringLayout.NORTH, pn_nickname);
+       sl_pn_nickname.putConstraint(SpringLayout.EAST, lbl_name, 136, SpringLayout.WEST, pn_nickname);
+       pn_nickname.add(lbl_name);
 
        Date d = calendar.getDate();
        SimpleDateFormat format = new SimpleDateFormat("yy-yy-yy hh:mm:ss");

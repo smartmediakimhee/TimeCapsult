@@ -113,14 +113,14 @@ public class MemberDAO {
 		return dto;
 	}
 
-	public MemberDTO selectMember(String input_email) {
+	public MemberDTO selectMember(String input_id) {
 		MemberDTO dto = null;
 		try {
 			getConnection();
 
-			String sql = "SELECT * FROM member WHERE email = ?";
+			String sql = "SELECT * FROM member WHERE id = ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, input_email);
+			pstmt.setString(1, input_id);
 			ResultSet r = pstmt.executeQuery();
 
 			if(r.next()) {
@@ -128,7 +128,6 @@ public class MemberDAO {
 				String email = r.getString("email");
 				String pw = r.getString("pw");
 				String name = r.getString("name");
-						System.out.println(id + email + pw + name);
 				dto = new MemberDTO(id, email, pw, name);
 			}else {
 				return dto = null;
@@ -143,14 +142,43 @@ public class MemberDAO {
 		return dto;
 	}
 
-	public boolean deleteMember(String email) {
+	public MemberDTO selectMember_byEmail(String email) {
+		MemberDTO dto = null;
+		try {
+			getConnection();
+
+			String sql = "SELECT * FROM member WHERE email = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			ResultSet r = pstmt.executeQuery();
+
+			if(r.next()) {
+				String id = r.getString("id");
+				String email_read = r.getString("email");
+				String pw = r.getString("pw");
+				String name = r.getString("name");
+				dto = new MemberDTO(id, email_read, pw, name);
+			}else {
+				return dto = null;
+			}
+
+		} catch (Exception e) {
+			System.out.println("예외발생:getMember()=> " + e.getMessage());
+		} finally {
+			dbClose();
+		}
+
+		return dto;
+	}
+	
+	public boolean deleteMember(String input_id) {
 		boolean result = false;
 		try {
 			getConnection();
 
-			String sql = "DELETE FROM member WHERE email = ?";
+			String sql = "DELETE FROM member WHERE id = ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, email);
+			pstmt.setString(1, input_id);
 			int r = pstmt.executeUpdate();
 
 			if (r > 0)

@@ -27,14 +27,14 @@ import com.DTO.MemberDTO;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class MainGUI {
 	JScrollPane scrollPane;
 	ImageIcon icon;
 	ImageIcon icon2;
 	ImageIcon Mainicon;
-	ImageIcon Maintitle;
-
 	private JFrame frame;
 	private JTextField id_input;
 	private JPasswordField pw_input;
@@ -69,8 +69,6 @@ public class MainGUI {
 		Mainicon = new ImageIcon(".\\Image\\back.jpg");
 		icon = new ImageIcon(".\\Image\\1.png");
 		icon2 = new ImageIcon(".\\Image\\2.png");
-		Maintitle = new ImageIcon(".\\Image\\maintitle.png");
-
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1920, 1040);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -110,7 +108,7 @@ public class MainGUI {
 				String email = id_input.getText();
 				String pw = pw_input.getText();
 				
-				MemberDTO mt = md.selectMember(email);
+				MemberDTO mt = md.selectMember_byEmail(email);
 				
 				if(md==null) {//입력된 값이 DB 에 없을경우
 					System.out.println("입력된 값이 DB에 존재하지 않습니다");
@@ -123,7 +121,8 @@ public class MainGUI {
 					System.out.println(mt.getId());
 				}
 
-
+				System.out.println(pw);
+				System.out.println(mt.getPw());
 				if (mt.getPw().equals(pw)) {
 					bmgui.main(null);
 				} else {
@@ -167,10 +166,26 @@ public class MainGUI {
 		panel.add(lbl_sign);
 		
 		id_input = new JTextField();
+		id_input.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (id_input.getText().length()==0) {
+					id_input.setText("아이디 입력");
+				}
+			}
+		});
+		id_input.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (id_input.getText().equals("아이디 입력")) {
+					id_input.setText("");
+				}
+			}
+		});
 		sl_panel.putConstraint(SpringLayout.NORTH, id_input, 5, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.WEST, id_input, 1037, SpringLayout.WEST, panel);
 		sl_panel.putConstraint(SpringLayout.EAST, id_input, -708, SpringLayout.EAST, panel);
-		id_input.setText("hwa7444@naver.com");//아이디 입력하는곳
+		id_input.setText("\uC544\uC774\uB514 \uC785\uB825");//아이디 입력하는곳
 		
 		id_input.setOpaque(false);
 		panel.add(id_input);
@@ -257,6 +272,22 @@ public class MainGUI {
 		panel_1.add(pn_img2);
 		
 		pw_input = new JPasswordField();
+		pw_input.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (pw_input.getText().length()==0) {
+					pw_input.setText("sss");
+				}
+			}
+		});
+		pw_input.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (pw_input.getText().equals("sss")) {
+					pw_input.setText("");
+				}
+			}
+		});
 		sl_panel.putConstraint(SpringLayout.WEST, lbl_login, 6, SpringLayout.EAST, pw_input);
 		sl_panel.putConstraint(SpringLayout.WEST, pw_input, 1202, SpringLayout.WEST, panel);
 		pw_input.setText("sss");

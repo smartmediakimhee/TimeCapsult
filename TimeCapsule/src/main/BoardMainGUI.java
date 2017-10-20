@@ -231,30 +231,30 @@ public class BoardMainGUI {
 		SpringLayout sl_pn_2 = new SpringLayout();
 		pn_2.setLayout(sl_pn_2);
 
-		JLabel pn_2_lbl = new JLabel("\uC2A4\uB9C8\uD2B8\uBBF8\uB514\uC5B4\uC778\uC7AC\uAC1C\uBC1C\uC6D0");
-		sl_pn_2.putConstraint(SpringLayout.NORTH, pn_2_lbl, 31, SpringLayout.NORTH, pn_2);
-		sl_pn_2.putConstraint(SpringLayout.WEST, pn_2_lbl, 149, SpringLayout.WEST, pn_2);
-		pn_2_lbl.setHorizontalAlignment(SwingConstants.CENTER);
-		pn_2_lbl.setFont(new Font("±¼¸²", Font.PLAIN, 30));
-		pn_2.add(pn_2_lbl);
+		JLabel lbl_title = new JLabel("\uC2A4\uB9C8\uD2B8\uBBF8\uB514\uC5B4\uC778\uC7AC\uAC1C\uBC1C\uC6D0");
+		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_title, 31, SpringLayout.NORTH, pn_2);
+		sl_pn_2.putConstraint(SpringLayout.WEST, lbl_title, 149, SpringLayout.WEST, pn_2);
+		lbl_title.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_title.setFont(new Font("±¼¸²", Font.PLAIN, 30));
+		pn_2.add(lbl_title);
 
-		JLabel pn_2_lbl2 = new JLabel("18:27:00'");
-		sl_pn_2.putConstraint(SpringLayout.NORTH, pn_2_lbl2, 51, SpringLayout.SOUTH, pn_2_lbl);
-		sl_pn_2.putConstraint(SpringLayout.WEST, pn_2_lbl2, 241, SpringLayout.WEST, pn_2);
-		pn_2_lbl2.setOpaque(true);
-		pn_2_lbl2.setHorizontalAlignment(SwingConstants.CENTER);
-		pn_2_lbl2.setFont(new Font("±¼¸²", Font.PLAIN, 30));
-		pn_2_lbl2.setBackground(Color.WHITE);
-		pn_2.add(pn_2_lbl2);
+		JLabel lbl_howtime = new JLabel("18:27:00'");
+		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_howtime, 51, SpringLayout.SOUTH, lbl_title);
+		sl_pn_2.putConstraint(SpringLayout.WEST, lbl_howtime, 241, SpringLayout.WEST, pn_2);
+		lbl_howtime.setOpaque(true);
+		lbl_howtime.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_howtime.setFont(new Font("±¼¸²", Font.PLAIN, 30));
+		lbl_howtime.setBackground(Color.WHITE);
+		pn_2.add(lbl_howtime);
 
-		JLabel pn_2_lbl3 = new JLabel("\uC5F4\uB9AC\uB294 \uC2DC\uAC04");
-		sl_pn_2.putConstraint(SpringLayout.NORTH, pn_2_lbl3, 74, SpringLayout.SOUTH, pn_2_lbl2);
-		sl_pn_2.putConstraint(SpringLayout.WEST, pn_2_lbl3, 276, SpringLayout.WEST, pn_2);
-		pn_2_lbl3.setHorizontalAlignment(SwingConstants.CENTER);
-		pn_2.add(pn_2_lbl3);
+		JLabel lbl_string = new JLabel("\uC5F4\uB9AC\uB294 \uC2DC\uAC04");
+		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_string, 74, SpringLayout.SOUTH, lbl_howtime);
+		sl_pn_2.putConstraint(SpringLayout.WEST, lbl_string, 276, SpringLayout.WEST, pn_2);
+		lbl_string.setHorizontalAlignment(SwingConstants.CENTER);
+		pn_2.add(lbl_string);
 
 		JPanel pn_2_weather = new JPanel();
-		sl_pn_2.putConstraint(SpringLayout.NORTH, pn_2_weather, 33, SpringLayout.NORTH, pn_2_lbl3);
+		sl_pn_2.putConstraint(SpringLayout.NORTH, pn_2_weather, 33, SpringLayout.NORTH, lbl_string);
 		sl_pn_2.putConstraint(SpringLayout.WEST, pn_2_weather, -112, SpringLayout.EAST, pn_2);
 		sl_pn_2.putConstraint(SpringLayout.SOUTH, pn_2_weather, -10, SpringLayout.SOUTH, pn_2);
 		sl_pn_2.putConstraint(SpringLayout.EAST, pn_2_weather, -10, SpringLayout.EAST, pn_2);
@@ -395,6 +395,12 @@ public class BoardMainGUI {
 		pn_5.add(pn_5_weather);
 
 		pn_2.setOpaque(false);
+		
+		JLabel lbl_showtime = new JLabel("New label");
+		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_showtime, 17, SpringLayout.SOUTH, lbl_string);
+		sl_pn_2.putConstraint(SpringLayout.WEST, lbl_showtime, -346, SpringLayout.WEST, pn_2_weather);
+		sl_pn_2.putConstraint(SpringLayout.EAST, lbl_showtime, -71, SpringLayout.WEST, pn_2_weather);
+		pn_2.add(lbl_showtime);
 		scrollPane_1.getVerticalScrollBar().setUnitIncrement(30);
 
 		scrollPane_1.getVerticalScrollBar().setUnitIncrement(30);

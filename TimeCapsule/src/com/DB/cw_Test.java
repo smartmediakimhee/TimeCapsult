@@ -1,6 +1,11 @@
 package com.DB;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import com.DTO.FriendDTO;
+
+import main.LoggedIN;
 
 public class cw_Test {
 
@@ -21,11 +26,28 @@ public class cw_Test {
 //		b1.insertBoard_1(title, content, settime);
 		
 		//좋아요 기능 구현해보자
-		Like_DAO ld = new Like_DAO();
+//		Like_DAO ld = new Like_DAO();
+//		
+//		ld.like(LoggedIN.Logged_in, "5");
+
 		
-		ld.like(LoggedIN.Logged_in, "5");
+		//친구 기능 구현
+		Friend_DAO fd = new Friend_DAO();
 		
+		//친구 추가
+//		fd.add(LoggedIN.Logged_in, "2");
 		
+		//친구 목록
+		ArrayList<FriendDTO> list=fd.list(LoggedIN.Logged_in_id);
+		
+		for (int i = 0; i < list.size(); i++) {
+			System.out.print(list.get(1).getEmail()+" ");
+			System.out.println(list.get(1).getName());
+		}
+		
+		//현재 로그인 정보 가져오기
+		//System.out.println(LoggedIN.getInfo().getName()); // 닉네임 정보 가져오기
+		//System.out.println(LoggedIN.getInfo().getEmail()); // 이메일정보 가져오기
 	}
 
 }
