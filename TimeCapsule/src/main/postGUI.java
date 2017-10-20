@@ -46,6 +46,8 @@ public class postGUI {
    private JTextField txt_minute;
    private JTextField txt_title;
    private JTextField txt_content;
+   private JTextField textField_1;
+   private JTextField textField_2;
 
    /**
     * Launch the application.
@@ -175,9 +177,10 @@ public class postGUI {
        pn_small.add(txt_minute);
        
        txt_title = new JTextField();
+       sl_pn_small.putConstraint(SpringLayout.NORTH, textField, 43, SpringLayout.SOUTH, txt_title);
+       sl_pn_small.putConstraint(SpringLayout.SOUTH, textField, -12, SpringLayout.NORTH, txt_title);
        sl_pn_small.putConstraint(SpringLayout.SOUTH, txt_minute, -15, SpringLayout.NORTH, txt_title);
        sl_pn_small.putConstraint(SpringLayout.SOUTH, txt_hour, -13, SpringLayout.NORTH, txt_title);
-       sl_pn_small.putConstraint(SpringLayout.SOUTH, textField, -12, SpringLayout.NORTH, txt_title);
        sl_pn_small.putConstraint(SpringLayout.EAST, txt_title, -277, SpringLayout.EAST, pn_small);
        sl_pn_small.putConstraint(SpringLayout.NORTH, txt_title, 315, SpringLayout.NORTH, pn_small);
        txt_title.setHorizontalAlignment(SwingConstants.CENTER);
@@ -198,6 +201,7 @@ public class postGUI {
        JPanel panel_calendar = new JPanel();
        sl_pn_small.putConstraint(SpringLayout.NORTH, panel_calendar, 96, SpringLayout.NORTH, pn_small);
        sl_pn_small.putConstraint(SpringLayout.WEST, panel_calendar, 493, SpringLayout.WEST, pn_small);
+       sl_pn_small.putConstraint(SpringLayout.SOUTH, panel_calendar, -52, SpringLayout.NORTH, txt_title);
        sl_pn_small.putConstraint(SpringLayout.EAST, panel_calendar, 691, SpringLayout.WEST, pn_small);
        pn_small.add(panel_calendar);
        panel_calendar.setLayout(new CardLayout(0, 0));
@@ -290,15 +294,7 @@ public class postGUI {
        sl_pn_small.putConstraint(SpringLayout.WEST, panel_content, 301, SpringLayout.WEST, pn_small);
        sl_pn_small.putConstraint(SpringLayout.EAST, panel_content, -1024, SpringLayout.EAST, pn_small);
        pn_small.add(panel_content);
-       
-       JComboBox comboBox_calendar = new JComboBox();
-       sl_pn_small.putConstraint(SpringLayout.NORTH, comboBox_calendar, 269, SpringLayout.NORTH, pn_small);
-       sl_pn_small.putConstraint(SpringLayout.SOUTH, comboBox_calendar, -15, SpringLayout.NORTH, txt_title);
-       sl_pn_small.putConstraint(SpringLayout.NORTH, textField, 27, SpringLayout.SOUTH, comboBox_calendar);
-       sl_pn_small.putConstraint(SpringLayout.SOUTH, panel_calendar, -6, SpringLayout.NORTH, comboBox_calendar);
-       sl_pn_small.putConstraint(SpringLayout.WEST, comboBox_calendar, 0, SpringLayout.WEST, textField);
-       sl_pn_small.putConstraint(SpringLayout.EAST, comboBox_calendar, -12, SpringLayout.WEST, txt_hour);
-       pn_small.add(comboBox_calendar);
+;
        
        JButton btn_in = new JButton(new ImageIcon("./Image/btn.png"));
        btn_in.setBackground(new Color(240, 240, 240));
@@ -309,6 +305,20 @@ public class postGUI {
        btn_in.setBorderPainted(false);
        btn_in.setText("in");
        pn_small.add(btn_in);
+       
+       textField_1 = new JTextField();
+       textField_1.setText("hour");
+       textField_1.setHorizontalAlignment(SwingConstants.CENTER);
+       textField_1.setColumns(10);
+       pn_small.add(textField_1);
+       
+       textField_2 = new JTextField();
+       sl_pn_small.putConstraint(SpringLayout.NORTH, textField_2, 6, SpringLayout.SOUTH, panel_calendar);
+       sl_pn_small.putConstraint(SpringLayout.WEST, textField_2, -439, SpringLayout.WEST, txt_hour);
+       sl_pn_small.putConstraint(SpringLayout.SOUTH, textField_2, 39, SpringLayout.SOUTH, panel_calendar);
+       sl_pn_small.putConstraint(SpringLayout.EAST, textField_2, -15, SpringLayout.WEST, txt_hour);
+       pn_small.add(textField_2);
+       textField_2.setColumns(10);
        sl_panel_big.putConstraint(SpringLayout.NORTH, pn_logo, 89, SpringLayout.NORTH, panel_big);
        sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_logo, 280, SpringLayout.NORTH, panel_big);
        panel_big.add(pn_logo);
