@@ -10,6 +10,8 @@ import java.sql.SQLException;
 public class Like_DAO {
 	// 좋아요 기능 구현하는 DB
 	// 구성 : 좋아요 한 사람 ID, 좋아요 대상 캡슐 ID
+	// 사용법 : 객체 생성 후 name.like(사람ID, 캡슐 ID) 
+	// 중복 정보 있을시 false 반환
 
 	private static Connection conn;
 	private PreparedStatement pstmt;
