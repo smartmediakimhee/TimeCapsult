@@ -365,7 +365,7 @@ public class postGUI {
 		SpringLayout sl_pn_nickname = new SpringLayout();
 		pn_nickname.setLayout(sl_pn_nickname);
 
-		JLabel logged_in_ID = new JLabel("New label");// DB에 있는 로그인한 id 불러오기
+		JLabel logged_in_ID = new JLabel(LoggedIN.getInfo().getName());// DB에 있는 로그인한 id 불러오기
 		logged_in_ID.setHorizontalAlignment(SwingConstants.CENTER);
 		sl_pn_nickname.putConstraint(SpringLayout.NORTH, logged_in_ID, 0, SpringLayout.NORTH, pn_nickname);
 		sl_pn_nickname.putConstraint(SpringLayout.WEST, logged_in_ID, 0, SpringLayout.WEST, pn_nickname);
@@ -377,6 +377,7 @@ public class postGUI {
 		System.out.println(logged_in_ID.getName());
 		SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd hh:mm:ss");
 		
+		logged_in_ID.setText(LoggedIN.getInfo().getName());
 		txtPeriod.setText(date);
 
 	}

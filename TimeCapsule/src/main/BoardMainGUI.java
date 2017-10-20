@@ -95,7 +95,7 @@ public class BoardMainGUI implements Runnable {
 		SpringLayout sl_panel_big = new SpringLayout();
 		panel_big.setLayout(sl_panel_big);
 
-		JLabel lbl_log_id = new JLabel("__________");
+		JLabel lbl_log_id = new JLabel(LoggedIN.getInfo().getName());
 		panel_big.add(lbl_log_id);
 
 		JLabel lbl_login = new JLabel("\uB2D8");
@@ -280,6 +280,8 @@ public class BoardMainGUI implements Runnable {
 		return src;
 	}
 
+	
+	
 	@Override
 	public void run() {
 
