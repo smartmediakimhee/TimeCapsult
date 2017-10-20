@@ -16,6 +16,10 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.border.MatteBorder;
+
+import com.DB.Board_1_DAO;
+import com.DB.MemberDAO;
+
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -26,8 +30,8 @@ public class MainGUI {
 	ImageIcon icon2;
 	ImageIcon Mainicon;
 	private JFrame frame;
-	private JTextField txtHwanavercom;
-	private JPasswordField pwdSss;
+	private JTextField id_input;
+	private JPasswordField pw_input;
 
 	/**
 	 * Launch the application.
@@ -56,9 +60,9 @@ public class MainGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		Mainicon = new ImageIcon("D:\\\\박경도\\\\배경.jpg");
-		icon = new ImageIcon("D:\\\\박경도\\\\1.png");
-		icon2 = new ImageIcon("D:\\\\박경도\\\\2.png");
+		Mainicon = new ImageIcon(".\\Image\\back.jpg");
+		icon = new ImageIcon(".\\Image\\1.png");
+		icon2 = new ImageIcon(".\\Image\\2.png");
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1920, 1040);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,6 +87,30 @@ public class MainGUI {
 		panel.setLayout(sl_panel);
 
 		JLabel lbl_login = new JLabel("IN");
+		lbl_login.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				BoardMainGUI bmgui = new BoardMainGUI();
+				
+				Board_1_DAO b1 = new Board_1_DAO();
+				MemberDAO md = new MemberDAO();
+				
+				id_input.getText();
+				pw_input.getPassword();
+				
+				
+				
+				//1.입력받은 아이디 가져오기
+				//2.입력받은 비밀번호 가져오기
+				if (true) {
+					bmgui.main(null);
+				}
+				
+				
+				
+				
+			}
+		});
 		panel.add(lbl_login);
 
 		JLabel lbl_sign = new JLabel("JOIN");
@@ -99,20 +127,21 @@ public class MainGUI {
 		sl_panel.putConstraint(SpringLayout.EAST, lbl_login, -53, SpringLayout.WEST, lbl_sign);
 		panel.add(lbl_sign);
 		
-		txtHwanavercom = new JTextField();
-		sl_panel.putConstraint(SpringLayout.NORTH, txtHwanavercom, -5, SpringLayout.NORTH, lbl_login);
-		sl_panel.putConstraint(SpringLayout.WEST, txtHwanavercom, 1037, SpringLayout.WEST, panel);
-		sl_panel.putConstraint(SpringLayout.SOUTH, txtHwanavercom, 32, SpringLayout.NORTH, panel);
-		sl_panel.putConstraint(SpringLayout.EAST, txtHwanavercom, -184, SpringLayout.WEST, lbl_login);
-		txtHwanavercom.setText("hwa7444@naver.com");
-		txtHwanavercom.setOpaque(false);
-		panel.add(txtHwanavercom);
-		txtHwanavercom.setColumns(10);
-		txtHwanavercom.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.LIGHT_GRAY));
+		id_input = new JTextField();
+		sl_panel.putConstraint(SpringLayout.NORTH, id_input, -5, SpringLayout.NORTH, lbl_login);
+		sl_panel.putConstraint(SpringLayout.WEST, id_input, 1037, SpringLayout.WEST, panel);
+		sl_panel.putConstraint(SpringLayout.SOUTH, id_input, 32, SpringLayout.NORTH, panel);
+		sl_panel.putConstraint(SpringLayout.EAST, id_input, -184, SpringLayout.WEST, lbl_login);
+		id_input.setText("hwa7444@naver.com");//아이디 입력하는곳
+		
+		id_input.setOpaque(false);
+		panel.add(id_input);
+		id_input.setColumns(10);
+		id_input.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.LIGHT_GRAY));
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(192, 192, 192)));
-		sl_panel.putConstraint(SpringLayout.NORTH, panel_1, 60, SpringLayout.SOUTH, txtHwanavercom);
+		sl_panel.putConstraint(SpringLayout.NORTH, panel_1, 60, SpringLayout.SOUTH, id_input);
 		sl_panel.putConstraint(SpringLayout.WEST, panel_1, 677, SpringLayout.WEST, panel);
 		sl_panel.putConstraint(SpringLayout.SOUTH, panel_1, 734, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.EAST, panel_1, -606, SpringLayout.EAST, panel);
@@ -188,15 +217,15 @@ public class MainGUI {
 		sl_panel.putConstraint(SpringLayout.EAST, pn_img2, -995, SpringLayout.EAST, panel);
 		panel_1.add(pn_img2);
 		
-		pwdSss = new JPasswordField();
-		pwdSss.setText("sss");
-		sl_panel.putConstraint(SpringLayout.NORTH, pwdSss, 5, SpringLayout.NORTH, panel);
-		sl_panel.putConstraint(SpringLayout.WEST, pwdSss, 6, SpringLayout.EAST, txtHwanavercom);
-		sl_panel.putConstraint(SpringLayout.SOUTH, pwdSss, 32, SpringLayout.NORTH, panel);
-		sl_panel.putConstraint(SpringLayout.EAST, pwdSss, 147, SpringLayout.EAST, txtHwanavercom);
-		panel.add(pwdSss);
-		pwdSss.setOpaque(false);
-		pwdSss.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.LIGHT_GRAY));
+		pw_input = new JPasswordField();
+		pw_input.setText("sss");
+		sl_panel.putConstraint(SpringLayout.NORTH, pw_input, 5, SpringLayout.NORTH, panel);
+		sl_panel.putConstraint(SpringLayout.WEST, pw_input, 6, SpringLayout.EAST, id_input);
+		sl_panel.putConstraint(SpringLayout.SOUTH, pw_input, 32, SpringLayout.NORTH, panel);
+		sl_panel.putConstraint(SpringLayout.EAST, pw_input, 147, SpringLayout.EAST, id_input);
+		panel.add(pw_input);
+		pw_input.setOpaque(false);
+		pw_input.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.LIGHT_GRAY));
 
 	}
 }
