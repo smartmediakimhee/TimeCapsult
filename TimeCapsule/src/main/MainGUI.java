@@ -88,8 +88,7 @@ public class MainGUI {
 		SpringLayout sl_pn_all = new SpringLayout();
 		pn_all.setLayout(sl_pn_all);
 
-		JLabel lbl_login = new JLabel("IN");
-		pn_all.add(lbl_login);
+		
 
 		JLabel lbl_sign = new JLabel("JOIN");
 		lbl_sign.addMouseListener(new MouseAdapter() {
@@ -100,6 +99,7 @@ public class MainGUI {
 			
 			}
 		});
+		JLabel lbl_login = new JLabel("IN");
 		sl_pn_all.putConstraint(SpringLayout.NORTH, lbl_sign, 10, SpringLayout.NORTH, pn_all);
 		sl_pn_all.putConstraint(SpringLayout.WEST, lbl_sign, 1445, SpringLayout.WEST, pn_all);
 		sl_pn_all.putConstraint(SpringLayout.NORTH, lbl_login, 0, SpringLayout.NORTH, lbl_sign);
@@ -214,6 +214,16 @@ public class MainGUI {
 		for (int i = 0; i < pw.length; i++) {				
 			System.out.println(pw[i]);
 		}
+		
+		lbl_login.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (id_input.getText().equals("hwa")) { //id에 들어가있는 텍스트가 DB에 있는 텍스트랑 
+					System.out.println("");
+				}
+			}
+		});
+		pn_all.add(lbl_login);
 		sl_pn_all.putConstraint(SpringLayout.NORTH, pw_input, 5, SpringLayout.NORTH, pn_all);
 		sl_pn_all.putConstraint(SpringLayout.WEST, pw_input, 6, SpringLayout.EAST, id_input);
 		sl_pn_all.putConstraint(SpringLayout.SOUTH, pw_input, 32, SpringLayout.NORTH, pn_all);

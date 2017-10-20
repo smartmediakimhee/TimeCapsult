@@ -20,6 +20,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JoinGUI {
 	JScrollPane scrollPane;
@@ -195,6 +197,11 @@ public class JoinGUI {
 		panel_2.add(label_7);
 		
 		JButton btn_JOIN = new JButton("JOIN");
+		btn_JOIN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		btn_JOIN.setBorderPainted(false);
 		btn_JOIN.setBackground(Color.LIGHT_GRAY);
 		btn_JOIN.setBounds(143, 501, 269, 38);
