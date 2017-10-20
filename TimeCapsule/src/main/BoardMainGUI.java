@@ -61,9 +61,9 @@ public class BoardMainGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		icon = new ImageIcon("D:\\박경도\\배경.jpg");
-		icon2 = new ImageIcon("D:\\박경도\\1.jpg");
-		icon3 = new ImageIcon("D:\\박경도\\2.png");
+		icon = new ImageIcon("../TimeCapsule/Image/back.jpg");
+		icon2 = new ImageIcon("../TimeCapsule/Image/1.png");
+		icon3 = new ImageIcon("../TimeCapsule/Image/2.png");
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1920, 1040);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -189,14 +189,14 @@ public class BoardMainGUI {
 		pn_1.setLayout(sl_pn_1);
 
 		JLabel pn_1_lbl = new JLabel("\uC2A4\uB9C8\uD2B8\uBBF8\uB514\uC5B4\uC778\uC7AC\uAC1C\uBC1C\uC6D0");
-		sl_pn_1.putConstraint(SpringLayout.NORTH, pn_1_lbl, 34, SpringLayout.NORTH, pn_1);
-		sl_pn_1.putConstraint(SpringLayout.WEST, pn_1_lbl, 145, SpringLayout.WEST, pn_1);
+		sl_pn_1.putConstraint(SpringLayout.NORTH, pn_1_lbl, 35, SpringLayout.NORTH, pn_1);
+		sl_pn_1.putConstraint(SpringLayout.WEST, pn_1_lbl, 181, SpringLayout.WEST, pn_1);
 		pn_1_lbl.setHorizontalAlignment(SwingConstants.CENTER);
-		pn_1_lbl.setFont(new Font("굴림", Font.PLAIN, 30));
+		pn_1_lbl.setFont(new Font("조선일보명조", Font.PLAIN, 25));
 		pn_1.add(pn_1_lbl);
 
 		JLabel pn_1_lbl2 = new JLabel("18:27:00'");
-		sl_pn_1.putConstraint(SpringLayout.NORTH, pn_1_lbl2, 56, SpringLayout.SOUTH, pn_1_lbl);
+		sl_pn_1.putConstraint(SpringLayout.NORTH, pn_1_lbl2, 55, SpringLayout.SOUTH, pn_1_lbl);
 		sl_pn_1.putConstraint(SpringLayout.WEST, pn_1_lbl2, 242, SpringLayout.WEST, pn_1);
 		pn_1_lbl2.setOpaque(true);
 		pn_1_lbl2.setHorizontalAlignment(SwingConstants.CENTER);
