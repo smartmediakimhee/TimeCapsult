@@ -240,6 +240,9 @@ public class JoinGUI {
 		ArrayList<MemberDTO> container;
 		
 		String input_email = txtHwanavercom.getText();
+		
+		
+		
 		String input_password = pwInput.getText();
 		String input_name = nameInput.getText(); 
 
