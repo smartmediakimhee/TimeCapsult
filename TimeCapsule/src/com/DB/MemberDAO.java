@@ -142,6 +142,35 @@ public class MemberDAO {
 		return dto;
 	}
 
+	public MemberDTO selectMember_byEmail(String email) {
+		MemberDTO dto = null;
+		try {
+			getConnection();
+
+			String sql = "SELECT * FROM member WHERE email = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			ResultSet r = pstmt.executeQuery();
+
+			if(r.next()) {
+				String id = r.getString("id");
+				String email_read = r.getString("email");
+				String pw = r.getString("pw");
+				String name = r.getString("name");
+				dto = new MemberDTO(id, email_read, pw, name);
+			}else {
+				return dto = null;
+			}
+
+		} catch (Exception e) {
+			System.out.println("예외발생:getMember()=> " + e.getMessage());
+		} finally {
+			dbClose();
+		}
+
+		return dto;
+	}
+	
 	public boolean deleteMember(String input_id) {
 		boolean result = false;
 		try {
