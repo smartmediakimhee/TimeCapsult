@@ -33,6 +33,8 @@ public class MainGUI {
 	ImageIcon icon;
 	ImageIcon icon2;
 	ImageIcon Mainicon;
+	ImageIcon Maintitle;
+
 	private JFrame frame;
 	private JTextField id_input;
 	private JPasswordField pw_input;
@@ -67,6 +69,8 @@ public class MainGUI {
 		Mainicon = new ImageIcon(".\\Image\\back.jpg");
 		icon = new ImageIcon(".\\Image\\1.png");
 		icon2 = new ImageIcon(".\\Image\\2.png");
+		Maintitle = new ImageIcon(".\\Image\\maintitle.png");
+
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1920, 1040);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

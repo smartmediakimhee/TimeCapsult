@@ -4,5 +4,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="Jar/jsoup-1.10.3.jar"/>
 	<classpathentry kind="lib" path="Jar/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="Jar/jcalendar-1.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
