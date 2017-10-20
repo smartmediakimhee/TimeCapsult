@@ -36,6 +36,7 @@ import java.awt.event.FocusEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
 import java.awt.Font;
+import javax.swing.border.MatteBorder;
 
 public class JoinGUI {
 	JScrollPane scrollPane;
@@ -153,16 +154,6 @@ public class JoinGUI {
 		lblNewLabel.setBounds(143, 203, 57, 15);
 		panel_2.add(lblNewLabel);
 
-		JLabel label = new JLabel("________________________");
-		label.setForeground(new Color(255, 106, 77));
-		label.setBounds(143, 247, 173, 15);
-		panel_2.add(label);
-
-		JLabel label_1 = new JLabel("____________________");
-		label_1.setForeground(new Color(255, 106, 77));
-		label_1.setBounds(289, 247, 160, 15);
-		panel_2.add(label_1);
-
 		idInput = new JTextField();
 		idInput.setFont(new Font("a내손글씨L", Font.PLAIN, 24));
 		idInput.addFocusListener(new FocusAdapter() {
@@ -210,24 +201,9 @@ public class JoinGUI {
 		idInput.setColumns(10);
 		idInput.setOpaque(false);
 
-		JLabel label_2 = new JLabel("________________________");
-		label_2.setForeground(new Color(255, 106, 77));
-		label_2.setBounds(143, 351, 173, 15);
-		panel_2.add(label_2);
-
 		JLabel label_3 = new JLabel("\uBE44\uBC00\uBC88\uD638");
 		label_3.setBounds(143, 307, 57, 15);
 		panel_2.add(label_3);
-
-		JLabel label_4 = new JLabel("____________________");
-		label_4.setForeground(new Color(255, 106, 77));
-		label_4.setBounds(289, 351, 160, 15);
-		panel_2.add(label_4);
-
-		JLabel label_5 = new JLabel("________________________");
-		label_5.setForeground(new Color(255, 106, 77));
-		label_5.setBounds(143, 460, 173, 15);
-		panel_2.add(label_5);
 
 		nameInput = new JTextField();
 		nameInput.setFont(new Font("a내손글씨L", Font.PLAIN, 24));
@@ -274,11 +250,6 @@ public class JoinGUI {
 		JLabel label_6 = new JLabel("\uB2C9\uB124\uC784");
 		label_6.setBounds(143, 416, 57, 15);
 		panel_2.add(label_6);
-
-		JLabel label_7 = new JLabel("____________________");
-		label_7.setForeground(new Color(255, 106, 77));
-		label_7.setBounds(289, 460, 160, 15);
-		panel_2.add(label_7);
 
 		JButton btn_JOIN = new JButton("JOIN");
 		btn_JOIN.setFont(new Font("a바른생각", Font.PLAIN, 12));
@@ -379,6 +350,25 @@ public class JoinGUI {
 		});
 		pn_exit.setBounds(23, 580, 25, 27);
 		panel_2.add(pn_exit);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(255, 162, 162)));
+		panel_3.setBounds(143, 246, 269, 10);
+		panel_2.add(panel_3);
+		panel_3.setOpaque(false);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setOpaque(false);
+		panel_4.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(255, 162, 162)));
+		panel_4.setBounds(143, 349, 269, 10);
+		panel_2.add(panel_4);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setOpaque(false);
+		panel_5.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(255, 162, 162)));
+		panel_5.setBounds(143, 464, 269, 10);
+		panel_2.add(panel_5);
+		
 
 	}
 
