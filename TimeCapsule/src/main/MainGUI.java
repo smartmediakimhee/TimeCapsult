@@ -176,6 +176,7 @@ public class MainGUI {
 					id_input.setText("아이디 입력");
 				}
 			}
+			
 		});
 		id_input.addMouseListener(new MouseAdapter() {
 			@Override

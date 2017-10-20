@@ -31,6 +31,10 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import javax.swing.SwingConstants;
+import javax.swing.JTextArea;
 
 public class JoinGUI {
 	JScrollPane scrollPane;
@@ -64,6 +68,13 @@ public class JoinGUI {
 	 */
 	public JoinGUI() {
 		initialize();
+		idInput.setForeground(Color.gray);
+		idInput.setText("아이디는 30자 이내로 만드세요. ");
+
+		pwInput.setText("ssssssss");
+		nameInput.setForeground(Color.gray);
+		nameInput.setText("\uD2B9\uC218\uBB38\uC790\uC81C\uC6788~12\uC790\uB9AC");
+
 	}
 
 	/**
@@ -152,6 +163,40 @@ public class JoinGUI {
 		panel_2.add(label_1);
 
 		idInput = new JTextField();
+		idInput.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (idInput.getText().length() == 0) {
+					idInput.setText("아이디는 30자 이내로 만드세요. ");
+					idInput.setForeground(Color.gray);
+				}
+			}
+		});
+		idInput.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) { // id입력창 누르면 글삭제
+				if (idInput.getText().equals("아이디는 30자 이내로 만드세요. ")) {
+					idInput.setText("");
+					idInput.setForeground(Color.black);
+
+				}
+			}
+		});
+		idInput.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int i = 0;
+				while (i < 2) {
+					i++;
+					if (idInput.getText().equals("아이디는 30자 이내로 만드세요. ")) {
+						idInput.setForeground(Color.BLACK);
+						idInput.setText("");
+					}
+
+				}
+			}
+		});
+		idInput.setForeground(Color.BLACK);
 		idInput.setBackground(Color.WHITE);
 		idInput.setToolTipText("");
 		idInput.setText("hwa7444@naver.com");
@@ -183,6 +228,27 @@ public class JoinGUI {
 		panel_2.add(label_5);
 
 		nameInput = new JTextField();
+		nameInput.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				for (int i = 0; i < 1; i++) {
+					if (nameInput.getText().length()==0) {
+						nameInput.setForeground(Color.gray);
+						nameInput.setText("특수문자제외8~12자리");
+					}
+				}
+				
+			}
+		});
+		nameInput.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (nameInput.getText().equals("특수문자제외8~12자리")) {
+					nameInput.setForeground(Color.black);
+					nameInput.setText("");
+				}
+			}
+		});
 		nameInput.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
@@ -192,7 +258,7 @@ public class JoinGUI {
 			}
 		});
 		nameInput.setToolTipText("");
-		nameInput.setText("\uD2B9\uC218\uBB38\uC790 \uC81C\uC678 8 ~ 12\uC790\uB9AC");
+		
 		nameInput.setColumns(10);
 		nameInput.setBackground(Color.WHITE);
 		nameInput.setBounds(143, 441, 173, 21);
@@ -229,11 +295,50 @@ public class JoinGUI {
 		btn_JOIN.setBackground(Color.LIGHT_GRAY);
 		btn_JOIN.setBounds(143, 501, 269, 38);
 		panel_2.add(btn_JOIN);
+		JLabel lbl_pw = new JLabel("\uBE44\uBC00\uBC88\uD638\uB294 6~8\uC790\uB9AC");
+		lbl_pw.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_pw.setForeground(Color.GRAY);
+		lbl_pw.setBounds(199, 307, 117, 15);
+		panel_2.add(lbl_pw);
 
 		pwInput = new JPasswordField(); // 비밀번호 입력창
+		pwInput.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (pwInput.getText().length()==0) {
+					pwInput.setText("ssssssss");
+					lbl_pw.setText("비밀번호는 6~8자리");
+					
+				}
+			}
+		});
+		pwInput.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				for (int i = 0; i <1 ; i++) {
+					if (pwInput.getText().equals("ssssssss")) {
+						lbl_pw.setText("");
+						pwInput.setText("");
+					}
+				}
+			}
+		});
+		pwInput.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (pwInput.getText().equals("ssssssss")) {
+					lbl_pw.setText("");
+					pwInput.setText("");
+
+				}
+			}
+		});
+
+		pwInput.setForeground(new Color(255, 144, 144));
+		pwInput.setEchoChar('♥');
 		pwInput.setText("rudeh376");
 		pwInput.setBounds(143, 332, 173, 21);
-		pwInput.setDocument((new JTextFieldLimit(12)));
+		pwInput.setDocument((new JTextFieldLimit(8)));
 		pwInput.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		pwInput.setBackground(new Color(0, 0, 0, 0));
 		pwInput.setOpaque(false);
@@ -243,10 +348,10 @@ public class JoinGUI {
 		JPanel pn_exit = new JPanel() {
 			public void paintComponent(Graphics g) {
 				// Approach 1: Dispaly image at at full size
-//				g.drawImage(icon3.getImage(), 0, 0, null);
+				// g.drawImage(icon3.getImage(), 0, 0, null);
 				// Approach 2: Scale image to size of component
-				 Dimension d = getSize();
-				 g.drawImage(icon3.getImage(), 0, 0, d.width, d.height, null);
+				Dimension d = getSize();
+				g.drawImage(icon3.getImage(), 0, 0, d.width, d.height, null);
 				// Approach 3: Fix the image position in the scroll pane
 				// Point p = scrollPane.getViewport().getViewPosition();
 				// g.drawImage(icon.getImage(), p.x, p.y, null);
@@ -257,10 +362,11 @@ public class JoinGUI {
 		pn_exit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			MainGUI main = new MainGUI();
-			main.main(null);
-			frame.dispose();//원래창 끄기
+				MainGUI main = new MainGUI();
+				main.main(null);
+				frame.dispose();// 원래창 끄기
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				pn_exit.setCursor(new Cursor(12));
@@ -279,9 +385,7 @@ public class JoinGUI {
 		ArrayList<MemberDTO> container;
 
 		String input_email = idInput.getText();
-		
-		
-		
+
 		String input_password = pwInput.getText();
 		String input_name = nameInput.getText();
 
