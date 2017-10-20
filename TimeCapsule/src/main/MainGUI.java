@@ -149,7 +149,8 @@ public class MainGUI {
 			public void mouseClicked(MouseEvent arg0) {
 				
 				JoinGUI jg = new JoinGUI();
-				jg.main(null);
+				jg.main(null);//버튼누르면 회원가입창 띄우고
+				frame.dispose();//버튼누르고 창을 뛰웠을때 원래 창을 끝내는것
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
