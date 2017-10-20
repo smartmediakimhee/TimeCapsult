@@ -258,7 +258,18 @@ public class JoinGUI {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				btn_JOIN.setCursor(new Cursor(12));
+				btn_JOIN.setOpaque(true);
+				btn_JOIN.setBackground(new Color(255,160,160));
 			}
+			public void mouseExited(MouseEvent e) {
+				
+				btn_JOIN.setOpaque(false);
+				
+			}
+			
+			
+			
+			
 		});
 		btn_JOIN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
