@@ -126,6 +126,7 @@ public class MainGUI {
 				System.out.println(pw);
 				System.out.println(mt.getPw());
 				if (mt.getPw().equals(pw)) {
+					LoggedIN.Logged_in_id = (new MemberDAO().selectMember_byEmail(email).getId());
 					bmgui.main(null);
 				} else {
 					JOptionPane.showMessageDialog(null, "이메일과 패스워드를 확인하세요.");

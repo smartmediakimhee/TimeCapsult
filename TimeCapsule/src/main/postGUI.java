@@ -77,6 +77,7 @@ public class postGUI {
 	 * Create the application.
 	 */
 	public postGUI() {
+//		Logged_in_ID.setText()
 		initialize();
 	}
 
@@ -212,17 +213,6 @@ public class postGUI {
 		txt_content.setColumns(10);
 		pn_small.add(txt_content);
 
-		JPanel panel_calendar = new JPanel();
-		sl_pn_small.putConstraint(SpringLayout.NORTH, panel_calendar, 96, SpringLayout.NORTH, pn_small);
-		sl_pn_small.putConstraint(SpringLayout.WEST, panel_calendar, 493, SpringLayout.WEST, pn_small);
-		sl_pn_small.putConstraint(SpringLayout.SOUTH, panel_calendar, -52, SpringLayout.NORTH, txt_title);
-		sl_pn_small.putConstraint(SpringLayout.EAST, panel_calendar, 691, SpringLayout.WEST, pn_small);
-		pn_small.add(panel_calendar);
-		panel_calendar.setLayout(new CardLayout(0, 0));
-
-		JCalendar calendar = new JCalendar();
-		panel_calendar.add(calendar, "name_8592003866036");
-
 		JPanel pn_logo = new JPanel() {
 			public void paintComponent(Graphics g) {
 				// Approach 1: Dispaly image at at full size
@@ -344,6 +334,8 @@ public class postGUI {
 		pn_small.add(textField_1);
 
 		txtPeriod = new JTextField();
+		sl_pn_small.putConstraint(SpringLayout.NORTH, txtPeriod, 269, SpringLayout.NORTH, pn_small);
+		sl_pn_small.putConstraint(SpringLayout.SOUTH, txtPeriod, -13, SpringLayout.NORTH, txt_title);
 		txtPeriod.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
@@ -354,9 +346,7 @@ public class postGUI {
 		});
 		txtPeriod.setHorizontalAlignment(SwingConstants.CENTER);
 		txtPeriod.setText("period");
-		sl_pn_small.putConstraint(SpringLayout.NORTH, txtPeriod, 6, SpringLayout.SOUTH, panel_calendar);
 		sl_pn_small.putConstraint(SpringLayout.WEST, txtPeriod, -439, SpringLayout.WEST, txt_hour);
-		sl_pn_small.putConstraint(SpringLayout.SOUTH, txtPeriod, 39, SpringLayout.SOUTH, panel_calendar);
 		sl_pn_small.putConstraint(SpringLayout.EAST, txtPeriod, -15, SpringLayout.WEST, txt_hour);
 		pn_small.add(txtPeriod);
 		txtPeriod.setColumns(10);
@@ -375,15 +365,16 @@ public class postGUI {
 		SpringLayout sl_pn_nickname = new SpringLayout();
 		pn_nickname.setLayout(sl_pn_nickname);
 
-		JLabel lbl_name = new JLabel("New label");// DB에 있는 로그인한 id 불러오기
-		lbl_name.setHorizontalAlignment(SwingConstants.CENTER);
-		sl_pn_nickname.putConstraint(SpringLayout.NORTH, lbl_name, 0, SpringLayout.NORTH, pn_nickname);
-		sl_pn_nickname.putConstraint(SpringLayout.WEST, lbl_name, 0, SpringLayout.WEST, pn_nickname);
-		sl_pn_nickname.putConstraint(SpringLayout.SOUTH, lbl_name, 21, SpringLayout.NORTH, pn_nickname);
-		sl_pn_nickname.putConstraint(SpringLayout.EAST, lbl_name, 136, SpringLayout.WEST, pn_nickname);
-		pn_nickname.add(lbl_name);
-
-		Date d = calendar.getDate();
+		JLabel logged_in_ID = new JLabel("New label");// DB에 있는 로그인한 id 불러오기
+		logged_in_ID.setHorizontalAlignment(SwingConstants.CENTER);
+		sl_pn_nickname.putConstraint(SpringLayout.NORTH, logged_in_ID, 0, SpringLayout.NORTH, pn_nickname);
+		sl_pn_nickname.putConstraint(SpringLayout.WEST, logged_in_ID, 0, SpringLayout.WEST, pn_nickname);
+		sl_pn_nickname.putConstraint(SpringLayout.SOUTH, logged_in_ID, 21, SpringLayout.NORTH, pn_nickname);
+		sl_pn_nickname.putConstraint(SpringLayout.EAST, logged_in_ID, 136, SpringLayout.WEST, pn_nickname);
+		pn_nickname.add(logged_in_ID);
+		
+		logged_in_ID.setText(logged_in_ID.getName());
+		System.out.println(logged_in_ID.getName());
 		SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd hh:mm:ss");
 		
 		txtPeriod.setText(date);
