@@ -29,6 +29,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MainGUI {
 	JScrollPane scrollPane;
@@ -166,6 +168,7 @@ public class MainGUI {
 		panel.add(lbl_sign);
 		
 		id_input = new JTextField();
+
 		id_input.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -272,11 +275,18 @@ public class MainGUI {
 		panel_1.add(pn_img2);
 		
 		pw_input = new JPasswordField();
+
 		pw_input.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (pw_input.getText().length()==0) {
 					pw_input.setText("sss");
+				}
+			}
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				if (pw_input.getText().equals("sss")) {
+					pw_input.setText("");
 				}
 			}
 		});
