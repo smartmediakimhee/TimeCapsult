@@ -13,6 +13,7 @@ import java.awt.BorderLayout;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -90,6 +91,9 @@ public class MainGUI {
 		panel.setLayout(sl_panel);
 
 		JLabel lbl_login = new JLabel("IN");
+		sl_panel.putConstraint(SpringLayout.NORTH, lbl_login, 10, SpringLayout.NORTH, panel);
+		sl_panel.putConstraint(SpringLayout.SOUTH, lbl_login, -970, SpringLayout.SOUTH, panel);
+		lbl_login.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_login.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -128,10 +132,18 @@ public class MainGUI {
 				
 				
 			}
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				lbl_login.setCursor(new Cursor(12));			}
+			
 		});
 		panel.add(lbl_login);
 
 		JLabel lbl_sign = new JLabel("JOIN");
+		sl_panel.putConstraint(SpringLayout.EAST, lbl_login, -22, SpringLayout.WEST, lbl_sign);
+		sl_panel.putConstraint(SpringLayout.SOUTH, lbl_sign, 0, SpringLayout.SOUTH, lbl_login);
+		lbl_sign.setHorizontalAlignment(SwingConstants.CENTER);
+		sl_panel.putConstraint(SpringLayout.EAST, lbl_sign, 1504, SpringLayout.WEST, panel);
 		lbl_sign.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -139,18 +151,20 @@ public class MainGUI {
 				JoinGUI jg = new JoinGUI();
 				jg.main(null);
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lbl_sign.setCursor(new Cursor(12));
+			}
+			
 		});
 		sl_panel.putConstraint(SpringLayout.NORTH, lbl_sign, 10, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.WEST, lbl_sign, 1445, SpringLayout.WEST, panel);
-		sl_panel.putConstraint(SpringLayout.NORTH, lbl_login, 0, SpringLayout.NORTH, lbl_sign);
-		sl_panel.putConstraint(SpringLayout.EAST, lbl_login, -53, SpringLayout.WEST, lbl_sign);
 		panel.add(lbl_sign);
 		
 		id_input = new JTextField();
-		sl_panel.putConstraint(SpringLayout.NORTH, id_input, -5, SpringLayout.NORTH, lbl_login);
+		sl_panel.putConstraint(SpringLayout.NORTH, id_input, 5, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.WEST, id_input, 1037, SpringLayout.WEST, panel);
-		sl_panel.putConstraint(SpringLayout.SOUTH, id_input, 32, SpringLayout.NORTH, panel);
-		sl_panel.putConstraint(SpringLayout.EAST, id_input, -184, SpringLayout.WEST, lbl_login);
+		sl_panel.putConstraint(SpringLayout.EAST, id_input, -708, SpringLayout.EAST, panel);
 		id_input.setText("hwa7444@naver.com");//아이디 입력하는곳
 		
 		id_input.setOpaque(false);
@@ -159,8 +173,9 @@ public class MainGUI {
 		id_input.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.LIGHT_GRAY));
 		
 		JPanel panel_1 = new JPanel();
+		sl_panel.putConstraint(SpringLayout.NORTH, panel_1, 92, SpringLayout.NORTH, panel);
+		sl_panel.putConstraint(SpringLayout.SOUTH, id_input, -60, SpringLayout.NORTH, panel_1);
 		panel_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(192, 192, 192)));
-		sl_panel.putConstraint(SpringLayout.NORTH, panel_1, 60, SpringLayout.SOUTH, id_input);
 		sl_panel.putConstraint(SpringLayout.WEST, panel_1, 677, SpringLayout.WEST, panel);
 		sl_panel.putConstraint(SpringLayout.SOUTH, panel_1, 734, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.EAST, panel_1, -606, SpringLayout.EAST, panel);
@@ -237,9 +252,10 @@ public class MainGUI {
 		panel_1.add(pn_img2);
 		
 		pw_input = new JPasswordField();
+		sl_panel.putConstraint(SpringLayout.WEST, lbl_login, 6, SpringLayout.EAST, pw_input);
+		sl_panel.putConstraint(SpringLayout.WEST, pw_input, 1202, SpringLayout.WEST, panel);
 		pw_input.setText("sss");
 		sl_panel.putConstraint(SpringLayout.NORTH, pw_input, 5, SpringLayout.NORTH, panel);
-		sl_panel.putConstraint(SpringLayout.WEST, pw_input, 6, SpringLayout.EAST, id_input);
 		sl_panel.putConstraint(SpringLayout.SOUTH, pw_input, 32, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.EAST, pw_input, 147, SpringLayout.EAST, id_input);
 		panel.add(pw_input);
