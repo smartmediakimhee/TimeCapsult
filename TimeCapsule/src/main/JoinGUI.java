@@ -95,10 +95,10 @@ public class JoinGUI {
 		JPanel panel = new JPanel() {
 			public void paintComponent(Graphics g) {
 				// Approach 1: Dispaly image at at full size
-				g.drawImage(icon.getImage(), 0, 0, null);
+//				g.drawImage(icon.getImage(), 0, 0, null);
 				// Approach 2: Scale image to size of component
-				// Dimension d = getSize();
-				// g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
+				 Dimension d = getSize();
+				 g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
 				// Approach 3: Fix the image position in the scroll pane
 				// Point p = scrollPane.getViewport().getViewPosition();
 				// g.drawImage(icon.getImage(), p.x, p.y, null);
@@ -252,7 +252,8 @@ public class JoinGUI {
 		panel_2.add(label_6);
 
 		JButton btn_JOIN = new JButton("JOIN");
-		btn_JOIN.setFont(new Font("a바른생각", Font.PLAIN, 12));
+		btn_JOIN.setOpaque(false);
+		btn_JOIN.setFont(new Font("a서당개", Font.PLAIN, 17));
 		btn_JOIN.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
