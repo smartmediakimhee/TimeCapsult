@@ -57,6 +57,7 @@ public class postGUI {
 	private JTextField txtPeriod;
 
 	public static String date = "";
+
 	/**
 	 * Launch the application.
 	 */
@@ -77,7 +78,7 @@ public class postGUI {
 	 * Create the application.
 	 */
 	public postGUI() {
-//		Logged_in_ID.setText()
+		// Logged_in_ID.setText()
 		initialize();
 	}
 
@@ -248,7 +249,7 @@ public class postGUI {
 				super.paintComponent(g);
 			}
 		};
-		
+
 		sl_pn_small.putConstraint(SpringLayout.WEST, textField, 26, SpringLayout.EAST, panel_period);
 		sl_pn_small.putConstraint(SpringLayout.SOUTH, panel_period, -582, SpringLayout.SOUTH, pn_small);
 		sl_pn_small.putConstraint(SpringLayout.WEST, panel_period, 301, SpringLayout.WEST, pn_small);
@@ -312,7 +313,6 @@ public class postGUI {
 				String title = txt_title.getText();
 				String content = txt_content.getText();
 
-
 				String settime = date + " " + hour + ":" + minute + ":00";
 				b1.insertBoard_1(title, content, settime);
 
@@ -372,11 +372,11 @@ public class postGUI {
 		sl_pn_nickname.putConstraint(SpringLayout.SOUTH, logged_in_ID, 21, SpringLayout.NORTH, pn_nickname);
 		sl_pn_nickname.putConstraint(SpringLayout.EAST, logged_in_ID, 136, SpringLayout.WEST, pn_nickname);
 		pn_nickname.add(logged_in_ID);
-		
+
 		logged_in_ID.setText(logged_in_ID.getName());
 		System.out.println(logged_in_ID.getName());
 		SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd hh:mm:ss");
-		
+
 		logged_in_ID.setText(LoggedIN.getInfo().getName());
 		txtPeriod.setText(date);
 

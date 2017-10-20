@@ -1,6 +1,7 @@
 package VO;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -19,6 +20,7 @@ public class MyPanel2 extends JPanel {
 	public JPanel pn_2_weather;
 	public JLabel lbl_showtime;
 	public ImageIcon icon;
+	private JLabel likecount;
 
 	public MyPanel2(SpringLayout sl_pn_scroll, JPanel pn_1) {
 		setBorder(new MatteBorder(1, 0, 1, 0, (Color) Color.LIGHT_GRAY));
@@ -38,29 +40,30 @@ public class MyPanel2 extends JPanel {
 		lbl_title.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_title.setFont(new Font("±¼¸²", Font.PLAIN, 30));
 		this.add(lbl_title);
+		
 
 		lbl_howtime = new JLabel("18:27:00'");
-		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_howtime, 51, SpringLayout.SOUTH, lbl_title);
-		sl_pn_2.putConstraint(SpringLayout.WEST, lbl_howtime, 241, SpringLayout.WEST, this);
-		lbl_howtime.setOpaque(true);
+		
+		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_howtime, 23, SpringLayout.SOUTH, lbl_title);
+		sl_pn_2.putConstraint(SpringLayout.WEST, lbl_howtime, 30, SpringLayout.WEST, this);
+		sl_pn_2.putConstraint(SpringLayout.SOUTH, lbl_howtime, 186, SpringLayout.SOUTH, lbl_title);
+		lbl_howtime.setOpaque(false);
 		lbl_howtime.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_howtime.setFont(new Font("±¼¸²", Font.PLAIN, 30));
 		lbl_howtime.setBackground(Color.WHITE);
 		this.add(lbl_howtime);
 
 		lbl_string = new JLabel("\uC5F4\uB9AC\uB294 \uC2DC\uAC04");
-		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_string, 74, SpringLayout.SOUTH, lbl_howtime);
-		sl_pn_2.putConstraint(SpringLayout.WEST, lbl_string, 276, SpringLayout.WEST, this);
 		lbl_string.setHorizontalAlignment(SwingConstants.CENTER);
 		this.add(lbl_string);
 
 		pn_2_weather = new JPanel() {
 			public void paintComponent(Graphics g) {
 				// Approach 1: Dispaly image at at full size
-				g.drawImage(icon.getImage(), 0, 0, null);
+//				g.drawImage(icon.getImage(), 0, 0, null);
 				// Approach 2: Scale image to size of component
-				// Dimension d = getSize();
-				// g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
+				 Dimension d = getSize();
+				 g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
 				// Approach 3: Fix the image position in the scroll pane
 				// Point p = scrollPane.getViewport().getViewPosition();
 				// g.drawImage(icon.getImage(), p.x, p.y, null);
@@ -68,18 +71,27 @@ public class MyPanel2 extends JPanel {
 				super.paintComponent(g);
 			}
 		};
-		sl_pn_2.putConstraint(SpringLayout.NORTH, pn_2_weather, 33, SpringLayout.NORTH, lbl_string);
-		sl_pn_2.putConstraint(SpringLayout.WEST, pn_2_weather, -112, SpringLayout.EAST, this);
-		sl_pn_2.putConstraint(SpringLayout.SOUTH, pn_2_weather, -10, SpringLayout.SOUTH, this);
+		sl_pn_2.putConstraint(SpringLayout.EAST, lbl_howtime, -55, SpringLayout.EAST, pn_2_weather);
+		sl_pn_2.putConstraint(SpringLayout.EAST, lbl_string, -248, SpringLayout.WEST, pn_2_weather);
+		sl_pn_2.putConstraint(SpringLayout.NORTH, pn_2_weather, 274, SpringLayout.NORTH, this);
+		sl_pn_2.putConstraint(SpringLayout.SOUTH, pn_2_weather, -30, SpringLayout.SOUTH, this);
+		sl_pn_2.putConstraint(SpringLayout.WEST, pn_2_weather, -53, SpringLayout.EAST, this);
 		sl_pn_2.putConstraint(SpringLayout.EAST, pn_2_weather, -10, SpringLayout.EAST, this);
 		this.add(pn_2_weather);
 
 		lbl_showtime = new JLabel();
-		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_showtime, 17, SpringLayout.SOUTH, lbl_string);
-		sl_pn_2.putConstraint(SpringLayout.WEST, lbl_showtime, -346, SpringLayout.WEST, pn_2_weather);
-		sl_pn_2.putConstraint(SpringLayout.EAST, lbl_showtime, -71, SpringLayout.WEST, pn_2_weather);
+		sl_pn_2.putConstraint(SpringLayout.WEST, lbl_showtime, 184, SpringLayout.WEST, this);
+		sl_pn_2.putConstraint(SpringLayout.EAST, lbl_showtime, -136, SpringLayout.WEST, pn_2_weather);
+		sl_pn_2.putConstraint(SpringLayout.SOUTH, lbl_string, -6, SpringLayout.NORTH, lbl_showtime);
+		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_showtime, 301, SpringLayout.NORTH, this);
 		lbl_string.setHorizontalAlignment(SwingConstants.CENTER);
 		this.add(lbl_showtime);
+		
+		likecount = new JLabel("1000");
+		sl_pn_2.putConstraint(SpringLayout.NORTH, likecount, 6, SpringLayout.SOUTH, pn_2_weather);
+		sl_pn_2.putConstraint(SpringLayout.WEST, likecount, 6, SpringLayout.WEST, pn_2_weather);
+		likecount.setHorizontalAlignment(SwingConstants.CENTER);
+		add(likecount);
 	}
 
 	public void get_icon(String str) {

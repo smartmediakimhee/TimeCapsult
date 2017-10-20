@@ -2,9 +2,12 @@ package main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -109,6 +112,18 @@ public class BoardMainGUI implements Runnable {
 		sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_sign, 10, SpringLayout.NORTH, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.EAST, lbl_sign, -35, SpringLayout.EAST, panel_big);
 		panel_big.add(lbl_sign);
+		lbl_sign.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MainGUI main = new MainGUI();
+				main.main(null);
+				frame.dispose();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lbl_sign.setCursor(new Cursor(12));
+			}
+		});
 
 		JPanel pn_img1 = new JPanel() {
 			public void paintComponent(Graphics g) {
