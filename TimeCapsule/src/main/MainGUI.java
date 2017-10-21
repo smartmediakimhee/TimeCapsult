@@ -243,10 +243,10 @@ public class MainGUI {
 				super.paintComponent(g);
 			}
 		};
-		sl_panel_1.putConstraint(SpringLayout.NORTH, pn_img1, 38, SpringLayout.NORTH, panel_1);
-		sl_panel_1.putConstraint(SpringLayout.WEST, pn_img1, 261, SpringLayout.WEST, panel_1);
-		sl_panel_1.putConstraint(SpringLayout.SOUTH, pn_img1, -785, SpringLayout.SOUTH, panel_1);
-		sl_panel_1.putConstraint(SpringLayout.EAST, pn_img1, -249, SpringLayout.EAST, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.NORTH, pn_img1, 69, SpringLayout.NORTH, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.WEST, pn_img1, 252, SpringLayout.WEST, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.SOUTH, pn_img1, -757, SpringLayout.SOUTH, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.EAST, pn_img1, -252, SpringLayout.EAST, panel_1);
 		sl_panel.putConstraint(SpringLayout.NORTH, pn_img1, 90, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.WEST, pn_img1, 116, SpringLayout.EAST, panel_1);
 		sl_panel.putConstraint(SpringLayout.EAST, pn_img1, -970, SpringLayout.EAST, panel);
@@ -267,10 +267,9 @@ public class MainGUI {
 				super.paintComponent(g);
 			}
 		};
-		sl_panel_1.putConstraint(SpringLayout.NORTH, pn_img2, 649, SpringLayout.SOUTH, pn_img1);
-		sl_panel_1.putConstraint(SpringLayout.WEST, pn_img2, 10, SpringLayout.WEST, pn_img1);
-		sl_panel_1.putConstraint(SpringLayout.SOUTH, pn_img2, -42, SpringLayout.SOUTH, panel_1);
-		sl_panel_1.putConstraint(SpringLayout.EAST, pn_img2, -253, SpringLayout.EAST, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.WEST, pn_img2, 253, SpringLayout.WEST, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.SOUTH, pn_img2, -90, SpringLayout.SOUTH, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.EAST, pn_img2, 0, SpringLayout.EAST, pn_img1);
 		sl_panel.putConstraint(SpringLayout.WEST, pn_img2, 123, SpringLayout.EAST, panel_1);
 		sl_panel.putConstraint(SpringLayout.SOUTH, pn_img2, -486, SpringLayout.SOUTH, panel);
 		sl_panel.putConstraint(SpringLayout.EAST, pn_img2, -995, SpringLayout.EAST, panel);
@@ -291,10 +290,11 @@ public class MainGUI {
 				super.paintComponent(g);
 			}
 		};
-		sl_panel_1.putConstraint(SpringLayout.NORTH, pn_title, 196, SpringLayout.SOUTH, pn_img1);
-		sl_panel_1.putConstraint(SpringLayout.WEST, pn_title, -114, SpringLayout.WEST, pn_img1);
-		sl_panel_1.putConstraint(SpringLayout.SOUTH, pn_title, 386, SpringLayout.SOUTH, pn_img1);
-		sl_panel_1.putConstraint(SpringLayout.EAST, pn_title, -116, SpringLayout.EAST, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.NORTH, pn_img2, 256, SpringLayout.SOUTH, pn_title);
+		sl_panel_1.putConstraint(SpringLayout.NORTH, pn_title, 109, SpringLayout.SOUTH, pn_img1);
+		sl_panel_1.putConstraint(SpringLayout.WEST, pn_title, 138, SpringLayout.WEST, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.SOUTH, pn_title, -448, SpringLayout.SOUTH, panel_1);
+		sl_panel_1.putConstraint(SpringLayout.EAST, pn_title, -125, SpringLayout.EAST, panel_1);
 		panel_1.add(pn_title);
 
 		pw_input = new JPasswordField();
