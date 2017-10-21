@@ -2,9 +2,12 @@ package main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -68,9 +71,9 @@ public class BoardMainGUI implements Runnable {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		icon = new ImageIcon("D:\\¹Ú°æµµ\\¹è°æ.jpg");
-		icon2 = new ImageIcon("D:\\¹Ú°æµµ\\1.jpg");
-		icon3 = new ImageIcon("D:\\¹Ú°æµµ\\2.png");
+		icon = new ImageIcon("Image\\back.jpg");
+		icon2 = new ImageIcon("Image\\1.png");
+		icon3 = new ImageIcon("Image\\icon2.png");
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1920, 1040);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -109,6 +112,18 @@ public class BoardMainGUI implements Runnable {
 		sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_sign, 10, SpringLayout.NORTH, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.EAST, lbl_sign, -35, SpringLayout.EAST, panel_big);
 		panel_big.add(lbl_sign);
+		lbl_sign.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MainGUI main = new MainGUI();
+				main.main(null);
+				frame.dispose();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lbl_sign.setCursor(new Cursor(12));
+			}
+		});
 
 		JPanel pn_img1 = new JPanel() {
 			public void paintComponent(Graphics g) {
@@ -148,6 +163,18 @@ public class BoardMainGUI implements Runnable {
 
 			}
 		};
+		pn_img2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				postGUI post = new postGUI();
+				post.main(null);
+				frame.dispose();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pn_img2.setCursor(new Cursor(12));
+			}
+		});
 
 		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_img2, 813, SpringLayout.NORTH, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.WEST, pn_img2, 0, SpringLayout.WEST, lbl_login);
@@ -268,13 +295,13 @@ public class BoardMainGUI implements Runnable {
 	private String whereIconsrc(String weather) {
 		String src = "";
 		if(weather.equals("¸¼À½")) {
-			src = "image\\sun.png";
+			src = "Image\\sun.png";
 		}else if(weather.equals("Èå¸²")) {
-			src = "image\\cloud.png";
+			src = "Image\\cloud.png";
 		}else if(weather.equals("ºñ¿È")) {
-			src = "image\\rain.png";
+			src = "Image\\rain.png";
 		}else if(weather.equals("´«")) {
-			src = "image\\snow.png";
+			src = "Image\\snow.png";
 		}
 		System.out.println(src);
 		return src;
