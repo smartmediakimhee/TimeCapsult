@@ -9,15 +9,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.DTO.Board_1_DTO;
-import com.DTO.FriendDTO;
 
-public class Friend_DAO {
+import function.MyLocation;
+import function.MyWeather;
+import function.NowTime;
+import main.LoggedIN;
+
+public class Rel_Mem_Cap {
 	private static Connection conn;
 	private PreparedStatement pstmt;
+	private PreparedStatement pstmt2;
 	private CallableStatement cstmt;
 	private ResultSet rs;
-	boolean result = false;
-	
 	private void getConnection() throws ClassNotFoundException, SQLException {
 		if (conn == null) { // dbConn이 null이면 Connection 객체 얻어오기..
 			// 접속정보
@@ -29,6 +32,7 @@ public class Friend_DAO {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			// 오라클(DBMS)에 연결하여 Connection 객체 얻기.
 			conn = DriverManager.getConnection(url, user, pw);
+			System.out.println("DB연결완료");
 		}
 	}
 	
@@ -69,57 +73,25 @@ public class Friend_DAO {
 		conn = null;
 	}
 
-	public boolean add(String User_ID, String Friend_ID) { //친구추가
-
+	public ArrayList<String> membersCapsule(String member_id) {
+		ArrayList<String> capsuleList = new ArrayList<String>();
 		try {
 			getConnection();
 			
-			String sql = "INSERT INTO FRIEND VALUES (?,?)";
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, User_ID);
-			pstmt.setString(2, Friend_ID);
-			
-			int r = pstmt.executeUpdate();
-			
-			if(r>0) result = true;
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			dbClose();
-		}
-		
-		return result;
 
-	}
-
-	public ArrayList<FriendDTO> list(String logged_in) { //친구 목록 불러오기
-		
-		ArrayList<FriendDTO> friendList = new ArrayList<>();
-		
-		try {
-			getConnection();
-			String sql = "SELECT TARGET_ID FROM FRIEND WHERE SHOOT_ID=?";
+			String sql = "SELECT * FROM REL_MEMBER_BOARD1 WHERE MEMBER_ID = ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, logged_in);
+
+			pstmt.setString(1, member_id);
+			
 			ResultSet r = pstmt.executeQuery();
 			
-			while(r.next()) {
-				//유저 아이디를 입력받아 친구 목록 객체를 어레이리스트로 반환하기
-				String get_id = r.getString("TARGET_ID");
-				MemberDAO md = new MemberDAO();
-				
-				String para_id = get_id;
-				String para_email = md.selectMember(get_id).getEmail();
-				String para_name = md.selectMember(get_id).getName();
-				friendList.add(new FriendDTO(para_id,para_email,para_name));
-				
+				System.out.println();
+
+			while (r.next()) {
+				capsuleList.add(r.getString("BOARD1_ID"));
 			}
+			
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -127,28 +99,13 @@ public class Friend_DAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
+		}finally {
 			dbClose();
 		}
-		
-		return friendList;
-	};
 
-	public String[] Friends_Capsules_ID(String User_ID) { //친구들의 캡슐 아이디를 반환하기
-		//유저 아이를 입력받아 친구들의 ID 가져오기
 		
-		ArrayList<FriendDTO> fList = this.list(User_ID);
-		
-		for (int i = 0; i < fList.size(); i++) {
 
-			Board_1_DAO b1 = new Board_1_DAO();
-			Board_1_DTO selectedBoard = b1.selectBoard_1_DTO(fList.get(i).getId());
-			selectedBoard.getId();
-			
-		}
 		
-		
-			
-		return null;
+		return capsuleList;
 	}
 }

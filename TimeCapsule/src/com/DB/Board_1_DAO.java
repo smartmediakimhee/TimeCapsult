@@ -171,14 +171,14 @@ public class Board_1_DAO {
 		return dto;
 	}
 
-	public Board_1_DTO selectBoard_1_DTO(String id) {
+	public Board_1_DTO selectBoard_1_DTO(String board_id) {
 		Board_1_DTO dto = null;
 		try {
 			getConnection();
 
 			String sql = "SELECT * FROM member WHERE id = ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
+			pstmt.setString(1, board_id);
 			ResultSet r = pstmt.executeQuery();
 
 			if(r.next()) {
@@ -196,6 +196,7 @@ public class Board_1_DAO {
 
 		return dto;
 	}
+
 
 	public boolean deleteBoard_1(String id) {
 		boolean result = false;
