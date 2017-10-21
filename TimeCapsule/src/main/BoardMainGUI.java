@@ -105,7 +105,8 @@ public class BoardMainGUI implements Runnable {
 				thread.interrupt();
 			}
 		});
-
+		viewCaseNum = 0;
+		member_id = LoggedIN.getInfo().getId();
 		JPanel panel_big = new JPanel() {
 			public void paintComponent(Graphics g) {
 				// Approach 1: Dispaly image at at full size
@@ -432,6 +433,7 @@ public class BoardMainGUI implements Runnable {
 					panelArr.get(i - 1).lbl_howtime.setText(board_Arr.get(i).getContent());
 				}
 				panelArr.get(i - 1).get_icon(whereIconsrc("비옴"));
+				panelArr.get(i-1).lbl_num.setText(Integer.toString(board_Arr.get(i).getId()));
 			}
 		}
 	}
@@ -456,7 +458,7 @@ public class BoardMainGUI implements Runnable {
 			while (!Thread.currentThread().isInterrupted()) {
 				Show();
 				System.out.println("##스레드 동작중##");
-				Thread.sleep(100);
+				Thread.sleep(1000);
 			}
 
 		} catch (InterruptedException e) {
