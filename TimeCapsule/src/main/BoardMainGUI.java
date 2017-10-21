@@ -6,6 +6,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.ScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -281,6 +283,7 @@ public class BoardMainGUI implements Runnable {
 		pn_scroll.setOpaque(false);
 		scrollPane_1.setOpaque(false);
 		panel_big.setOpaque(false);
+		
 		// 스크롤팬 생성
 		JPanel panel_ex = new JPanel();// 스크롤팬에 붙일 패널 생성
 		size = new Dimension();// 사이즈를 지정하기 위한 객체 생성
@@ -291,6 +294,59 @@ public class BoardMainGUI implements Runnable {
 		pn_scroll.setSize(450, 200);
 		sl_pn_scroll = new SpringLayout();
 		pn_scroll.setLayout(sl_pn_scroll);
+		
+		JScrollPane scroll_pn_friend = new JScrollPane();
+		
+	
+		sl_panel_big.putConstraint(SpringLayout.NORTH, scroll_pn_friend, 100, SpringLayout.NORTH, panel_big);
+		sl_panel_big.putConstraint(SpringLayout.SOUTH, scroll_pn_friend, 600, SpringLayout.NORTH, scroll_pn_friend);
+		sl_panel_big.putConstraint(SpringLayout.WEST, scroll_pn_friend, 1420, SpringLayout.WEST, panel_big);
+		sl_panel_big.putConstraint(SpringLayout.EAST, scroll_pn_friend, 475, SpringLayout.WEST, scroll_pn_friend);
+		panel_big.add(scroll_pn_friend);
+		scroll_pn_friend.setBackground(Color.black);
+		
+		JPanel pn_friend = new JPanel();
+		
+		
+	
+		ArrayList<JPanel> f_info_list = new ArrayList<JPanel>();
+		
+		pn_friend.setOpaque(true);
+		
+		scroll_pn_friend.setViewportView(pn_friend);
+		pn_friend.setLayout(null);
+		
+		pn_friend.setBackground(Color.GREEN);
+		
+		for (int i = 0; i < 10; i++) {
+			f_info_list.add(new JPanel());
+			f_info_list.get(i).setBounds(10, i*60, 475, 60);
+			f_info_list.get(i).setBackground(Color.gray);
+			scroll_pn_friend.add(f_info_list.get(i));
+			System.out.println(i);
+		}
+		
+		
+		
+//		f_info_list.add(new pn_friend)
+		
+		
+		
+
+//		
+		 size.setSize(10, 6000);// 객체의 사이즈를 지정
+//				size.setSize(10, panelsHeightSize(4)); // panelHeightSize(int count) 에서 count 는 페널들이 담긴 ArrayList의 size 값이다.
+//				pn_friend.setPreferredSize(size);// 사이즈 정보를 가지고 있는 객체를 이용해 패널의 사이즈 지정
+//				scroll_pn_friend.setViewportView(pn_friend);
+//				pn_friend.setSize(450, 50);
+				scroll_pn_friend.getVerticalScrollBar().setUnitIncrement(30);
+//		
+//		
+		
+		
+		
+
+		
 
 		///// 게시판1시작
 

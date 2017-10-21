@@ -57,6 +57,8 @@ public class MyPanel2 extends JPanel {
 		setLayout(null);
 
 		lbl_string = new JLabel("\uC5F4\uB9AC\uB294 \uC2DC\uAC04");
+		lbl_string.setForeground(Color.GRAY);
+		lbl_string.setFont(new Font("a엄마의편지B", Font.BOLD, 12));
 		lbl_string.setBounds(0, 315, 99, 18);
 		lbl_string.setHorizontalAlignment(SwingConstants.LEFT);
 		this.add(lbl_string);
@@ -79,11 +81,14 @@ public class MyPanel2 extends JPanel {
 		this.add(pn_2_weather);
 
 		lbl_showtime = new JLabel();
+		lbl_showtime.setForeground(Color.GRAY);
+		lbl_showtime.setFont(new Font("a엄마의편지B", Font.BOLD, 12));
 		lbl_showtime.setBounds(111, 315, 223, 18);
 		lbl_string.setHorizontalAlignment(SwingConstants.CENTER);
 		this.add(lbl_showtime);
 
 		likecount = new JLabel("1000");
+		likecount.setFont(new Font("a엄마의편지B", Font.BOLD, 12));
 		likecount.setBounds(491, 317, 43, 15);
 		likecount.setHorizontalAlignment(SwingConstants.CENTER);
 		add(likecount);
@@ -153,8 +158,13 @@ public class MyPanel2 extends JPanel {
 		panel_2.setOpaque(false);
 		FlowLayout flowLayout = (FlowLayout) panel_2.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
-		panel_2.setBounds(15, 12, 131, 25);
+		panel_2.setBounds(15, 11, 131, 25);
 		add(panel_2);
+		
+		JLabel lblNo = new JLabel("No_");
+		lblNo.setForeground(Color.GRAY);
+		lblNo.setFont(new Font("a엄마의편지B", Font.BOLD, 12));
+		panel_2.add(lblNo);
 
 		lbl_num = new JLabel("No_1");
 		panel_2.add(lbl_num);

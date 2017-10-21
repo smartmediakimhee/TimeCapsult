@@ -190,7 +190,7 @@ public class MainGUI {
 				}
 			}
 		});
-
+	
 		id_input.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
