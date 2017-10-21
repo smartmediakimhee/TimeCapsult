@@ -161,10 +161,12 @@ public class postGUI {
 		panel_big.setLayout(sl_panel_big);
 
 		JLabel lbl_login = new JLabel("\uB2D8");
-		sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_login, 10, SpringLayout.NORTH, panel_big);
+		sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_login, 3, SpringLayout.NORTH, panel_big);
 		panel_big.add(lbl_login);
 
 		JLabel lbl_sign = new JLabel("log out");
+		sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_sign, -2, SpringLayout.NORTH, lbl_login);
+		sl_panel_big.putConstraint(SpringLayout.WEST, lbl_sign, 23, SpringLayout.EAST, lbl_login);
 		lbl_sign.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -177,9 +179,6 @@ public class postGUI {
 				lbl_sign.setCursor(new Cursor(12));
 			}
 		});
-		sl_panel_big.putConstraint(SpringLayout.EAST, lbl_login, -45, SpringLayout.WEST, lbl_sign);
-		sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_sign, 10, SpringLayout.NORTH, panel_big);
-		sl_panel_big.putConstraint(SpringLayout.EAST, lbl_sign, -35, SpringLayout.EAST, panel_big);
 		panel_big.add(lbl_sign);
 
 		JPanel pn_underimg = new JPanel() {
@@ -197,7 +196,8 @@ public class postGUI {
 				super.paintComponent(g);
 			}
 		};
-		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_underimg, 816, SpringLayout.SOUTH, lbl_sign);
+		sl_panel_big.putConstraint(SpringLayout.SOUTH, lbl_login, -823, SpringLayout.NORTH, pn_underimg);
+		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_underimg, 841, SpringLayout.NORTH, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_underimg, -31, SpringLayout.SOUTH, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.EAST, pn_underimg, -35, SpringLayout.EAST, panel_big);
 		panel_big.add(pn_underimg);
@@ -452,23 +452,24 @@ public class postGUI {
 		panel_big.add(pn_logo);
 
 		JPanel pn_nickname = new JPanel();
-		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_small, 64, SpringLayout.SOUTH, pn_nickname);
-		sl_panel_big.putConstraint(SpringLayout.WEST, pn_nickname, -121, SpringLayout.WEST, lbl_login);
-		pn_nickname.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+		sl_panel_big.putConstraint(SpringLayout.WEST, lbl_login, 6, SpringLayout.EAST, pn_nickname);
 		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_nickname, 3, SpringLayout.NORTH, panel_big);
-		sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_nickname, 0, SpringLayout.SOUTH, lbl_login);
-		sl_panel_big.putConstraint(SpringLayout.EAST, pn_nickname, -6, SpringLayout.WEST, lbl_login);
+		sl_panel_big.putConstraint(SpringLayout.WEST, pn_nickname, 1653, SpringLayout.WEST, panel_big);
+		sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_nickname, -977, SpringLayout.SOUTH, panel_big);
+		sl_panel_big.putConstraint(SpringLayout.EAST, pn_nickname, -136, SpringLayout.EAST, panel_big);
+		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_small, 64, SpringLayout.SOUTH, pn_nickname);
+		pn_nickname.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(0, 0, 0)));
 		panel_big.add(pn_nickname);
 		pn_nickname.setOpaque(false);
 		SpringLayout sl_pn_nickname = new SpringLayout();
 		pn_nickname.setLayout(sl_pn_nickname);
 
-		JLabel logged_in_ID = new JLabel(LoggedIN.getInfo().getName());// DB에 있는 로그인한 id 불러오기
-		logged_in_ID.setHorizontalAlignment(SwingConstants.CENTER);
+		JLabel logged_in_ID = new JLabel(LoggedIN.getInfo().getName());
 		sl_pn_nickname.putConstraint(SpringLayout.NORTH, logged_in_ID, 0, SpringLayout.NORTH, pn_nickname);
-		sl_pn_nickname.putConstraint(SpringLayout.WEST, logged_in_ID, 0, SpringLayout.WEST, pn_nickname);
-		sl_pn_nickname.putConstraint(SpringLayout.SOUTH, logged_in_ID, 21, SpringLayout.NORTH, pn_nickname);
-		sl_pn_nickname.putConstraint(SpringLayout.EAST, logged_in_ID, 136, SpringLayout.WEST, pn_nickname);
+		sl_pn_nickname.putConstraint(SpringLayout.WEST, logged_in_ID, 24, SpringLayout.WEST, pn_nickname);
+		sl_pn_nickname.putConstraint(SpringLayout.SOUTH, logged_in_ID, -8, SpringLayout.SOUTH, pn_nickname);
+		sl_pn_nickname.putConstraint(SpringLayout.EAST, logged_in_ID, -10, SpringLayout.EAST, pn_nickname);
+		logged_in_ID.setHorizontalAlignment(SwingConstants.RIGHT);
 		pn_nickname.add(logged_in_ID);
 
 		logged_in_ID.setText(logged_in_ID.getName());

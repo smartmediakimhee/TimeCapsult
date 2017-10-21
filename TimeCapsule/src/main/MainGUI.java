@@ -113,12 +113,12 @@ public class MainGUI {
 
 				String email = id_input.getText();
 				String pw = pw_input.getText();
-
+				
+				
 				MemberDTO mt = md.selectMember_byEmail(email);
-
-				if (md == null) {// 입력된 값이 DB 에 없을경우
-					System.out.println("입력된 값이 DB에 존재하지 않습니다");
-
+				
+				if (mt == null) {// 입력된 값이 DB 에 없을경우
+					JOptionPane.showMessageDialog(null, "이메일이 존재하지 않습니다. 이메일을 확인해주세요.");
 				} else {
 					System.out.println();
 					System.out.println(mt.getEmail());
@@ -127,15 +127,15 @@ public class MainGUI {
 					System.out.println(mt.getId());
 				}
 
-				System.out.println(pw);
-				System.out.println(mt.getPw());
 				if (mt.getPw().equals(pw)) {
 					BoardMainGUI bmgui = null;
 					LoggedIN.Logged_in_id = (new MemberDAO().selectMember_byEmail(email).getId());
 					bmgui.main(null);
 					frame.dispose();
 					
-				} else {
+					
+				}  else {
+					
 					JOptionPane.showMessageDialog(null, "이메일과 패스워드를 확인하세요.");
 
 				}

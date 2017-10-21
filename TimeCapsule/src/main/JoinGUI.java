@@ -223,6 +223,7 @@ public class JoinGUI {
 			@Override
 			public void focusGained(FocusEvent arg0) {
 				if (nameInput.getText().equals("특수문자제외8~12자리")) {
+					nameInput.setForeground(Color.black);
 					nameInput.setText("");
 				}
 			}
