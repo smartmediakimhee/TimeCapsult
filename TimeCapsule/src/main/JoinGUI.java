@@ -95,10 +95,10 @@ public class JoinGUI {
 		JPanel panel = new JPanel() {
 			public void paintComponent(Graphics g) {
 				// Approach 1: Dispaly image at at full size
-//				g.drawImage(icon.getImage(), 0, 0, null);
+				// g.drawImage(icon.getImage(), 0, 0, null);
 				// Approach 2: Scale image to size of component
-				 Dimension d = getSize();
-				 g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
+				Dimension d = getSize();
+				g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
 				// Approach 3: Fix the image position in the scroll pane
 				// Point p = scrollPane.getViewport().getViewPosition();
 				// g.drawImage(icon.getImage(), p.x, p.y, null);
@@ -218,6 +218,7 @@ public class JoinGUI {
 				}
 
 			}
+
 			@Override
 			public void focusGained(FocusEvent arg0) {
 				if (nameInput.getText().equals("특수문자제외8~12자리")) {
@@ -265,25 +266,15 @@ public class JoinGUI {
 			public void mouseEntered(MouseEvent e) {
 				btn_JOIN.setCursor(new Cursor(12));
 				btn_JOIN.setOpaque(true);
-				btn_JOIN.setBackground(new Color(255,160,160));
+				btn_JOIN.setBackground(new Color(255, 160, 160));
 			}
+
 			public void mouseExited(MouseEvent e) {
-				
+
 				btn_JOIN.setOpaque(false);
-				
+
 			}
-			
-			
-			
-			
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				btn_JOIN.setBackground(new Color(255,160,160));
-			}
-			@Override
-			public void mousePressed(MouseEvent e) {
-				btn_JOIN.setBackground(new Color(255,160,160));
-			}
+
 		});
 		btn_JOIN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -313,6 +304,7 @@ public class JoinGUI {
 
 				}
 			}
+
 			@Override
 			public void focusGained(FocusEvent e) {
 				if (pwInput.getText().equals("ssssssss")) {
