@@ -39,8 +39,8 @@ public class MyPanel2 extends JPanel {
 	private JPanel panel_3;
 
 	public MyPanel2(SpringLayout sl_pn_scroll, JPanel pn_1) {
-		like = new ImageIcon(".\\Image\\blue.png");
-		like2 = new ImageIcon(".\\Image\\blackheart.png");
+		like = new ImageIcon(".\\Image\\grayheart.png");
+		like2 = new ImageIcon(".\\Image\\redheart.png");
 		setBorder(new MatteBorder(1, 0, 1, 0, (Color) Color.LIGHT_GRAY));
 		sl_pn_scroll.putConstraint(SpringLayout.NORTH, this, 38, SpringLayout.SOUTH, pn_1);
 		sl_pn_scroll.putConstraint(SpringLayout.WEST, this, 0, SpringLayout.WEST, pn_1);
@@ -69,7 +69,7 @@ public class MyPanel2 extends JPanel {
 				super.paintComponent(g);
 			}
 		};
-		pn_2_weather.setBounds(587, 305, 43, 36);
+		pn_2_weather.setBounds(560, 257, 75, 76);
 		this.add(pn_2_weather);
 
 		lbl_showtime = new JLabel();
@@ -78,7 +78,7 @@ public class MyPanel2 extends JPanel {
 		this.add(lbl_showtime);
 		
 		likecount = new JLabel("1000");
-		likecount.setBounds(500, 317, 43, 15);
+		likecount.setBounds(491, 317, 43, 15);
 		likecount.setHorizontalAlignment(SwingConstants.CENTER);
 		add(likecount);
 		
@@ -97,7 +97,7 @@ public class MyPanel2 extends JPanel {
 				super.paintComponent(g);
 			}
 		};
-		pn_like.setBounds(555, 315, 20, 18);
+		pn_like.setBounds(531, 310, 25, 23);
 		pn_like.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
