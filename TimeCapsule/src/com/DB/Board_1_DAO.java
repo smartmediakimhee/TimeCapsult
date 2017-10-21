@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.DTO.Board_1_DTO;
+import com.DTO.MemberDTO;
 
 import function.MyLocation;
 import function.MyWeather;
@@ -170,6 +171,55 @@ public class Board_1_DAO {
 		}
 		return dto;
 	}
+	
+	public ArrayList<Board_1_DTO> selectMembersCapsules(String member_id){
+		ArrayList<Board_1_DTO> dto = new ArrayList<>();		
+		
+		try {
+			getConnection();
+			
+			Rel_Mem_Cap rmc = new Rel_Mem_Cap();
+			
+			ArrayList<String> capsuleIdList = rmc.membersCapsule(member_id);
+			
+			for (int i = 0; i < capsuleIdList.size(); i++) {
+				
+				String sql = "SELECT * FROM board_type1	WHERE ID = ?";
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				
+				System.out.println(capsuleIdList.get(i));
+				pstmt.setString(1, capsuleIdList.get(i));
+						
+				ResultSet r = pstmt.executeQuery();
+				
+				while (r.next()) {
+					String title = r.getString("title");
+					String content = r.getString("content");
+					String maketime = r.getString("maketime");
+					String settime = r.getString("settime");
+					int id = r.getInt("id");
+							
+					dto.add(new Board_1_DTO(title, content, maketime, settime, id));
+					System.out.println(title+"Ãß°¡");
+				}
+			}
+			
+			
+			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			dbClose();
+		}
+		
+		return dto; 
+	}
+	
 
 	public Board_1_DTO selectBoard_1_DTO(String board_id) {
 		Board_1_DTO dto = null;

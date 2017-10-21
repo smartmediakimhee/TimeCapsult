@@ -59,11 +59,7 @@ public class cw_Test {
 		
 		//특정 유저가 쓴 캡슐 가져오기 반환형 : ArrayList<Board_1_DTO>
 		
-		Rel_Mem_Cap rmc = new Rel_Mem_Cap();
-		ArrayList<String> cl = rmc.membersCapsule("1");
-		for (int j = 0; j < cl.size(); j++) {
-			System.out.println(cl.get(j));	
-		}
+		b1.selectMembersCapsules("1");
 		
 	}
 
