@@ -397,6 +397,10 @@ public class postGUI {
                String settime = date + " " + hour + ":" + minute + ":00";
                if (b1.insertBoard_1(title, content, settime)) {
                   frame.dispose();
+                  BoardMainGUI bgui = null;
+                  bgui.main(null);
+               }else {
+            	   JOptionPane.showMessageDialog(null, "DB에 게시글 삽입중 오류발생.");
                }
             } else {
                System.out.println("날짜를 선택하라고 ㅋㅋㅋ");
