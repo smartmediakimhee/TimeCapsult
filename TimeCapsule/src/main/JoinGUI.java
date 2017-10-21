@@ -155,7 +155,8 @@ public class JoinGUI {
 		panel_2.add(lblNewLabel);
 
 		idInput = new JTextField();
-		idInput.setFont(new Font("a내손글씨L", Font.PLAIN, 24));
+		idInput.setFont(new Font(".\\font\\A서당개.TTF", Font.PLAIN, 24));
+//		".\\Image\\exitarrow.png"
 		idInput.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {

@@ -31,6 +31,9 @@ import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.border.LineBorder;
+import javax.swing.JList;
+import java.awt.Choice;
+import java.awt.List;
 
 public class MainGUI {
 	JScrollPane scrollPane;
