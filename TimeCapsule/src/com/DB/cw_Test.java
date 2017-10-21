@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.DTO.Board_1_DTO;
 import com.DTO.FriendDTO;
 
+import function.MyWeather;
 import main.LoggedIN;
 
 public class cw_Test {
@@ -62,8 +63,14 @@ public class cw_Test {
 //		b1.selectMembersCapsules("1");
 		
 		//좋아요 수 가져오기
-		System.out.println(likeDao.countLike("2"));
+//		System.out.println(likeDao.countLike(2));
+//		
+//		MyWeather mw = new MyWeather();
+//		System.out.println(mw.getWeather());
 		
+		
+		//멤버 아이디로 캡슐정보(어레이리스트) 조회
+		b1.selectMembersCapsules("47").get(0).getContent();
 		
 	}
 

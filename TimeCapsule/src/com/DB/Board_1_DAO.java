@@ -197,7 +197,6 @@ public class Board_1_DAO {
 				String sql = "SELECT * FROM board_type1	WHERE ID = ?";
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				
-				System.out.println(capsuleIdList.get(i));
 				pstmt.setString(1, capsuleIdList.get(i));
 						
 				ResultSet r = pstmt.executeQuery();
@@ -210,7 +209,6 @@ public class Board_1_DAO {
 					int id = r.getInt("id");
 							
 					dto.add(new Board_1_DTO(title, content, maketime, settime, id));
-					System.out.println(title+"Ãß°¡");
 				}
 			}
 			
