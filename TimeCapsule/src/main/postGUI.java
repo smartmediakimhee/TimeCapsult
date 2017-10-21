@@ -511,7 +511,7 @@ public class postGUI {
 				txt.addFocusListener(new FocusAdapter() {
 					@Override
 					public void focusGained(FocusEvent e) {
-						if (txt.getText().equals("게시물의 내용은 200자 내외로 작성하시오.")) {
+						if (txt.getText().equals("게시물의 내용은 200자 내로 작성하시오.")) {
 							txt.setForeground(Color.black);
 							txt.setText("");
 
@@ -521,7 +521,7 @@ public class postGUI {
 					@Override
 					public void focusLost(FocusEvent e) {
 						if (txt.getText().length() == 0) {
-							txt.setText("게시물의 내용은 200자 내외로 작성하시오.");
+							txt.setText("게시물의 내용은 200자 내로 작성하시오.");
 							txt.setForeground(Color.gray);
 						}
 					}
@@ -529,14 +529,14 @@ public class postGUI {
 				txt.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
-						if (txt.getText().equals("게시물의 내용은 200자 내외로 작성하시오.")) {
+						if (txt.getText().equals("게시물의 내용은 200자 내로 작성하시오.")) {
 							txt.setForeground(Color.black);
 							txt.setText("");
 						}
 					}
 				});
 				txt.setFont(new Font("a엄마의편지L", Font.PLAIN, 20));
-				txt.setText("\uAC8C\uC2DC\uBB3C\uC758 \uB0B4\uC6A9\uC740 200\uC790 \uB0B4\uC678\uB85C \uC791\uC131\uD558\uC2DC\uC624.");
+				txt.setText("\uAC8C\uC2DC\uBB3C\uC758 \uB0B4\uC6A9\uC740 200\uC790 \uB0B4\uB85C \uC791\uC131\uD558\uC2DC\uC624.");
 	}
 
 	public static void getDate(String date2) {
