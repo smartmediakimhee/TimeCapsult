@@ -202,7 +202,7 @@ public class JoinGUI {
 		panel_2.add(idInput);
 		idInput.setColumns(10);
 		idInput.setOpaque(false);
-		System.out.println(idInput.getText());
+	
 		JLabel label_3 = new JLabel("\uBE44\uBC00\uBC88\uD638");
 		label_3.setBounds(143, 307, 57, 15);
 		panel_2.add(label_3);
