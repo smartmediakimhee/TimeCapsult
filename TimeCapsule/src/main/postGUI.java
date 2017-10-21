@@ -112,6 +112,7 @@ public class postGUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		timebox = new JComboBox();
+		((JLabel)timebox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 		timebox.setBackground(Color.WHITE);
 		timebox.setOpaque(false);
 		timebox.addItemListener(new ItemListener(){
@@ -125,6 +126,7 @@ public class postGUI {
 			  });
 
 		minbox = new JComboBox();
+		((JLabel)minbox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 		minbox.setBackground(Color.WHITE);
 		minbox.setOpaque(false);
 		minbox.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
@@ -451,9 +453,9 @@ public class postGUI {
 
 		JPanel pn_nickname = new JPanel();
 		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_small, 64, SpringLayout.SOUTH, pn_nickname);
+		sl_panel_big.putConstraint(SpringLayout.WEST, pn_nickname, -121, SpringLayout.WEST, lbl_login);
 		pn_nickname.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
 		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_nickname, 3, SpringLayout.NORTH, panel_big);
-		sl_panel_big.putConstraint(SpringLayout.WEST, pn_nickname, -142, SpringLayout.WEST, lbl_login);
 		sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_nickname, 0, SpringLayout.SOUTH, lbl_login);
 		sl_panel_big.putConstraint(SpringLayout.EAST, pn_nickname, -6, SpringLayout.WEST, lbl_login);
 		panel_big.add(pn_nickname);
