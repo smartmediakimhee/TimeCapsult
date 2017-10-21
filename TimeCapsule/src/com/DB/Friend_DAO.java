@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import com.DTO.Board_1_DTO;
 import com.DTO.FriendDTO;
+import com.DTO.MemberDTO;
 
 public class Friend_DAO {
 	private static Connection conn;
@@ -134,21 +135,4 @@ public class Friend_DAO {
 		return friendList;
 	};
 
-	public String[] Friends_Capsules_ID(String User_ID) { //친구들의 캡슐 아이디를 반환하기
-		//유저 아이를 입력받아 친구들의 ID 가져오기
-		
-		ArrayList<FriendDTO> fList = this.list(User_ID);
-		
-		for (int i = 0; i < fList.size(); i++) {
-
-			Board_1_DAO b1 = new Board_1_DAO();
-			Board_1_DTO selectedBoard = b1.selectBoard_1_DTO(fList.get(i).getId());
-			selectedBoard.getId();
-			
-		}
-		
-		
-			
-		return null;
-	}
 }
