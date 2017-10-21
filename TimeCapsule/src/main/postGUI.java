@@ -387,7 +387,21 @@ public class postGUI {
 		pn_small.add(panel_content);
 		;
 
-		JButton btn_in = new JButton(new ImageIcon("./Image/btn.png"));
+		JButton btn_in = new JButton();
+		btn_in.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btn_in.setOpaque(true);
+				btn_in.setBackground(new Color(255,160,160));
+				btn_in.setCursor(new Cursor(12));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btn_in.setOpaque(false);
+			}
+		});
+		btn_in.setOpaque(false);
+		btn_in.setFont(new Font("a엄마의편지B", Font.PLAIN, 20));
 		btn_in.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -409,7 +423,7 @@ public class postGUI {
 		sl_pn_small.putConstraint(SpringLayout.SOUTH, btn_in, 108, SpringLayout.SOUTH, txt_content);
 		sl_pn_small.putConstraint(SpringLayout.EAST, btn_in, -530, SpringLayout.EAST, pn_small);
 		btn_in.setBorderPainted(false);
-		btn_in.setText("in");
+		btn_in.setText("Create");
 		pn_small.add(btn_in);
 
 		txtPeriod = new JTextField();
