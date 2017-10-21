@@ -86,7 +86,7 @@ public class JoinGUI {
 	private void initialize() {
 		icon = new ImageIcon(".\\\\Image\\\\back.jpg");
 		icon2 = new ImageIcon(".\\\\Image\\\\back.jpg");
-		icon3 = new ImageIcon(".\\Image\\exitarrow.png");
+		icon3 = new ImageIcon(".\\Image\\exitleft.png");
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1294, 764);
@@ -363,6 +363,7 @@ public class JoinGUI {
 				super.paintComponent(g);
 			}
 		};
+		pn_exit.setToolTipText("\uB85C\uADF8\uC778\uD654\uBA74\uC73C\uB85C \uB3CC\uC544\uAC00\uAE30");
 		pn_exit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -376,7 +377,7 @@ public class JoinGUI {
 				pn_exit.setCursor(new Cursor(12));
 			}
 		});
-		pn_exit.setBounds(23, 580, 30, 30);
+		pn_exit.setBounds(23, 565, 60, 60);
 		panel_2.add(pn_exit);
 
 		JPanel panel_3 = new JPanel();
@@ -422,16 +423,22 @@ public class JoinGUI {
 			System.out.println(container.get(i).getName());
 			if (container.get(i).getEmail().equals(input_email)) {
 				System.out.println("중복된 이메일을 사용하는 사람이 있습니다.");
-				JOptionPane.showMessageDialog(null, "중복된 이메일을 사용하는 사람이 있습니다. false 리턴하고 종료합니다.");
+				JOptionPane.showMessageDialog(null, "중복된 이메일을 사용하는 사람이 있습니다.");
 				return false;
 			}
 		}
+		
+		
 
 		if (md.insertMember(input_email, input_password, input_name)) {
 			System.out.println("ID생성완료");
+			JOptionPane.showMessageDialog(null, "ID 생성이 완료되셨습니다. 로그인 해주세요.");
+			frame.dispose();
+			new MainGUI().main(null);
 			return true;
 		} else {
 			System.out.println("ID생성실패");
+			JOptionPane.showMessageDialog(null, "ID 생성을 실패했습니다. ");
 			return false;
 		}
 	}
