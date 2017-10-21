@@ -48,16 +48,17 @@ public class MyPanel2 extends JPanel {
 		lbl_title = new JLabel("\uC2A4\uB9C8\uD2B8\uBBF8\uB514\uC5B4\uC778\uC7AC\uAC1C\uBC1C\uC6D0");
 		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_title, 50, SpringLayout.NORTH, this);
 		sl_pn_2.putConstraint(SpringLayout.WEST, lbl_title, 270, SpringLayout.WEST, this);
-		sl_pn_2.putConstraint(SpringLayout.EAST, lbl_title, 611, SpringLayout.WEST, this);
 		lbl_title.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_title.setFont(new Font("aÆæ±Û¾¾B", Font.PLAIN, 30));
 		this.add(lbl_title);
 		
 
 		lbl_howtime = new JLabel("18:27:00'");
-		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_howtime, 22, SpringLayout.SOUTH, lbl_title);
 		lbl_howtime.setForeground(Color.GRAY);
+		
+		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_howtime, 23, SpringLayout.SOUTH, lbl_title);
 		sl_pn_2.putConstraint(SpringLayout.WEST, lbl_howtime, 30, SpringLayout.WEST, this);
+		sl_pn_2.putConstraint(SpringLayout.SOUTH, lbl_howtime, 186, SpringLayout.SOUTH, lbl_title);
 		lbl_howtime.setOpaque(false);
 		lbl_howtime.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_howtime.setFont(new Font("a¾ö¸¶ÀÇÆíÁöB", Font.ITALIC, 18));
@@ -65,7 +66,6 @@ public class MyPanel2 extends JPanel {
 		this.add(lbl_howtime);
 
 		lbl_string = new JLabel("\uC5F4\uB9AC\uB294 \uC2DC\uAC04");
-		sl_pn_2.putConstraint(SpringLayout.SOUTH, lbl_howtime, -8, SpringLayout.NORTH, lbl_string);
 		lbl_string.setHorizontalAlignment(SwingConstants.CENTER);
 		this.add(lbl_string);
 
