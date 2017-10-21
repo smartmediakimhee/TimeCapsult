@@ -48,23 +48,24 @@ public class MyPanel2 extends JPanel {
 		lbl_title = new JLabel("\uC2A4\uB9C8\uD2B8\uBBF8\uB514\uC5B4\uC778\uC7AC\uAC1C\uBC1C\uC6D0");
 		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_title, 50, SpringLayout.NORTH, this);
 		sl_pn_2.putConstraint(SpringLayout.WEST, lbl_title, 270, SpringLayout.WEST, this);
+		sl_pn_2.putConstraint(SpringLayout.EAST, lbl_title, 611, SpringLayout.WEST, this);
 		lbl_title.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_title.setFont(new Font("a펜글씨B", Font.PLAIN, 25));
+		lbl_title.setFont(new Font("a펜글씨B", Font.PLAIN, 30));
 		this.add(lbl_title);
 		
 
 		lbl_howtime = new JLabel("18:27:00'");
-		
-		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_howtime, 23, SpringLayout.SOUTH, lbl_title);
+		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_howtime, 22, SpringLayout.SOUTH, lbl_title);
+		lbl_howtime.setForeground(Color.GRAY);
 		sl_pn_2.putConstraint(SpringLayout.WEST, lbl_howtime, 30, SpringLayout.WEST, this);
-		sl_pn_2.putConstraint(SpringLayout.SOUTH, lbl_howtime, 186, SpringLayout.SOUTH, lbl_title);
 		lbl_howtime.setOpaque(false);
 		lbl_howtime.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_howtime.setFont(new Font("a펜글씨B", Font.PLAIN, 15));
+		lbl_howtime.setFont(new Font("a엄마의편지B", Font.ITALIC, 18));
 		lbl_howtime.setBackground(Color.WHITE);
 		this.add(lbl_howtime);
 
 		lbl_string = new JLabel("\uC5F4\uB9AC\uB294 \uC2DC\uAC04");
+		sl_pn_2.putConstraint(SpringLayout.SOUTH, lbl_howtime, -8, SpringLayout.NORTH, lbl_string);
 		lbl_string.setHorizontalAlignment(SwingConstants.CENTER);
 		this.add(lbl_string);
 
@@ -141,17 +142,19 @@ public class MyPanel2 extends JPanel {
 		add(pn_like);
 		
 		lbl_num = new JLabel("No_1");
+		lbl_num.setHorizontalAlignment(SwingConstants.LEFT);
 		lbl_num.setForeground(Color.GRAY);
-		lbl_num.setFont(new Font("a엄마의편지B", Font.PLAIN, 12));
+		lbl_num.setFont(new Font("a엄마의편지B", Font.BOLD, 12));
 		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_num, 10, SpringLayout.NORTH, this);
 		sl_pn_2.putConstraint(SpringLayout.WEST, lbl_num, 15, SpringLayout.WEST, this);
 		add(lbl_num);
 		
 		lbl_name = new JLabel("\uC784\uC1A1\uD558");
+		lbl_name.setHorizontalAlignment(SwingConstants.RIGHT);
 		lbl_name.setForeground(Color.GRAY);
 		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_name, 10, SpringLayout.NORTH, this);
 		sl_pn_2.putConstraint(SpringLayout.EAST, lbl_name, -15, SpringLayout.EAST, this);
-		lbl_name.setFont(new Font("a엄마의편지B", Font.PLAIN, 12));
+		lbl_name.setFont(new Font("a엄마의편지B", Font.BOLD, 12));
 		add(lbl_name);
 	}
 
