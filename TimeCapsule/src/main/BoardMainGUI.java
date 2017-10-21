@@ -190,7 +190,7 @@ public class BoardMainGUI implements Runnable {
 
 		JLabel lbl_sort = new JLabel("이걸 누르면 정렬이 될껄?");
 		sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_sort, 800, SpringLayout.NORTH, panel_big);
-		sl_panel_big.putConstraint(SpringLayout.WEST, lbl_sort, 200, SpringLayout.WEST, panel_big);
+		sl_panel_big.putConstraint(SpringLayout.WEST, lbl_sort,1600 , SpringLayout.WEST, panel_big);
 
 		lbl_sort.addMouseListener(new MouseAdapter() {
 			@Override
@@ -202,6 +202,10 @@ public class BoardMainGUI implements Runnable {
 					init_boardArr();
 					isSortboardArr = true;
 				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lbl_sort.setCursor(new Cursor(12));
 			}
 		});
 		/*
@@ -249,6 +253,10 @@ public class BoardMainGUI implements Runnable {
 				thread.interrupt();
 				postGUI post = null;
 				post.main(null);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pn_img2.setCursor(new Cursor(12));
 			}
 		});
 
