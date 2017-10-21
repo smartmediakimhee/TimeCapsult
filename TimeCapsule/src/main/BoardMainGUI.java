@@ -13,6 +13,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 import javax.swing.ImageIcon;
@@ -25,12 +27,13 @@ import javax.swing.border.LineBorder;
 
 import com.DB.Board_1_DAO;
 import com.DTO.Board_1_DTO;
+import com.DTO.MemberDTO;
 
 import VO.MyPanel;
 import VO.MyPanel2;
 import function.Mytimer;
 
-public class BoardMainGUI implements Runnable{
+public class BoardMainGUI implements Runnable {
 	JScrollPane scrollPane;
 	private ImageIcon icon;
 	private ImageIcon icon2;
@@ -45,6 +48,10 @@ public class BoardMainGUI implements Runnable{
 	private static Board_1_DAO board_1_DAO = new Board_1_DAO();
 	private static Mytimer timer = new Mytimer();
 	MyPanel pn_1;
+	private boolean isSortboardArr = false;
+	private Date setDate = null;
+	private String member_id = "1";
+	private static int viewCaseNum = 1;
 
 	/**
 	 * Launch the application.
@@ -66,8 +73,8 @@ public class BoardMainGUI implements Runnable{
 	 * Create the application.
 	 */
 	public BoardMainGUI() {
-		initialize();
 
+		initialize();
 	}
 
 	/**
@@ -79,12 +86,12 @@ public class BoardMainGUI implements Runnable{
 		icon3 = new ImageIcon("Image\\icon2.png");
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1920, 1040);
-		frame.addWindowListener(new WindowAdapter(){
-            public void windowClosing(WindowEvent e) { 
-            	System.out.println("진짜종료한다..");
-            	thread.interrupt();
-            }
-    });
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.out.println("진짜종료한다..");
+				thread.interrupt();
+			}
+		});
 
 		JPanel panel_big = new JPanel() {
 			public void paintComponent(Graphics g) {
@@ -175,9 +182,11 @@ public class BoardMainGUI implements Runnable{
 		pn_img2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				/*
-				 * postGUI post = new postGUI(); post.main(null); thread.interrupt();
-				 */
+
+				postGUI post = new postGUI();
+				post.main(null);
+				thread.interrupt();
+
 			}
 
 			@Override
@@ -227,18 +236,25 @@ public class BoardMainGUI implements Runnable{
 		scrollPane_1.getVerticalScrollBar().setUnitIncrement(30);
 		JPanel target = pn_1;
 
-		if(!panelArr.isEmpty()) {
+		// 재생성오류해결
+		if (!panelArr.isEmpty()) {
 			panelArr.clear();
 		}
-		///// // 게시판 2..
-		board_Arr = board_1_DAO.selectAllBoard1();
-		System.out.println(board_Arr.size() + "" + " 보드불러왓음 사이즈는");
-		for (int i = 0; i < board_Arr.size(); i++) {
+
+		// 보드arr초기화
+		init_boardArr();
+
+		// 정렬
+		sortBoardArrtime(board_Arr);
+
+		///// 게시판 2..
+		System.out.println("##########" + board_Arr.size() + "" + " 보드불러왓음 사이즈는");
+		for (int i = 0; i < board_Arr.size() - 1; i++) {
 			panelArr.add(new MyPanel2(sl_pn_scroll, target));
 			pn_scroll.add(panelArr.get(i));
 			target = panelArr.get(i);
 		}
-
+		System.out.println("##########" + panelArr.size() + "" + " 판넬어레이 사이즈는");
 		size.setSize(10, panelsHeightSize(board_Arr.size()));
 
 		// pn_2.setOpaque(false);
@@ -246,12 +262,46 @@ public class BoardMainGUI implements Runnable{
 
 		scrollPane_1.getVerticalScrollBar().setUnitIncrement(30);
 
-		System.out.println("boardgui 초기화 실행!!!!!!!!!!");
+		System.out.println("boardgui 초기화 실행 완료!!!!!!!!!!");
 		thread = new Thread(this);
 		thread.start();
 	}
-	
-	
+
+	private void sortBoardArrtime(ArrayList<Board_1_DTO> board_Arr2) {
+		Date nowDate = new Date();
+		ArrayList<Board_1_DTO> tempArr = new ArrayList<>();
+
+		Collections.sort(board_Arr2, new Comparator() {
+			@Override
+			public int compare(Object o1, Object o2) {
+				Board_1_DTO b1 = (Board_1_DTO) o1;
+				Board_1_DTO b2 = (Board_1_DTO) o2;
+				return b1.getSettime().compareTo(b2.getSettime());
+			}
+		});
+
+		for (Board_1_DTO board : board_Arr) {
+			System.out.println("소트테스트 : " + board.getSettime());
+		}
+
+		board_Arr = board_Arr2;
+	}
+
+	private void init_boardArr() {
+		// board_Arr의 초기화 선택
+		// 0.모든글보기 1.나의글보기 2.선택한 유저의 글모음
+		if (viewCaseNum == 0) {
+			board_Arr = board_1_DAO.selectAllBoard1();
+		} else if (viewCaseNum == 1) {
+			board_Arr = board_1_DAO.selectMembersCapsules(member_id);
+		} else {
+			System.out.println("============Error!! Error!! Error!! Error!!===========");
+			System.out.println("board 초기화넘버오류 발생 -> 현재 들어온 viewCaseNum = " + viewCaseNum);
+			System.out.println("board_gui 호출시 파라메터 viewCaseNum값 입력과 호출을 다시살펴볼것");
+			System.out.println("======================================================");
+		}
+	}
+
 	private int panelsHeightSize(int count) {
 
 		return count * 382;
@@ -261,7 +311,6 @@ public class BoardMainGUI implements Runnable{
 		Date nowDate = new Date();
 
 		for (int i = 0; i < board_Arr.size(); i++) {
-			Date setDate = null;
 			StringBuffer sb = new StringBuffer(board_Arr.get(i).getContent());
 
 			try {
@@ -322,7 +371,6 @@ public class BoardMainGUI implements Runnable{
 		} else if (weather.equals("눈")) {
 			src = "Image\\snow.png";
 		}
-		System.out.println(src);
 		return src;
 	}
 
@@ -331,8 +379,7 @@ public class BoardMainGUI implements Runnable{
 		try {
 			while (!Thread.currentThread().isInterrupted()) {
 				Show();
-				System.out.println("스레드 동작중");
-
+				System.out.println("##스레드 동작중##");
 				Thread.sleep(1000);
 			}
 
@@ -340,7 +387,7 @@ public class BoardMainGUI implements Runnable{
 			// 예상된 스레드 예외
 		} finally {
 			frame.dispose();
-			System.out.println("스레드는 정상종료되었습니다");
+			System.out.println("############스레드는 정상종료되었습니다##############");
 		}
 	}
 
