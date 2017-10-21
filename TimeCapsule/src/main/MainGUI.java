@@ -103,7 +103,7 @@ public class MainGUI {
 		lbl_login.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				BoardMainGUI bmgui = new BoardMainGUI();
+				
 
 				Board_1_DAO b1 = new Board_1_DAO();
 				MemberDAO md = new MemberDAO();
@@ -127,8 +127,11 @@ public class MainGUI {
 				System.out.println(pw);
 				System.out.println(mt.getPw());
 				if (mt.getPw().equals(pw)) {
+					BoardMainGUI bmgui = null;
 					LoggedIN.Logged_in_id = (new MemberDAO().selectMember_byEmail(email).getId());
 					bmgui.main(null);
+					frame.dispose();
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "이메일과 패스워드를 확인하세요.");
 

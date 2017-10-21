@@ -32,22 +32,28 @@ public class cw_Test {
 
 		
 		//친구 기능 구현
-		Friend_DAO fd = new Friend_DAO();
+//		Friend_DAO fd = new Friend_DAO();
 		
 		//친구 추가
 //		fd.add(LoggedIN.Logged_in, "2");
 		
 		//친구 목록
-		ArrayList<FriendDTO> list=fd.list(LoggedIN.Logged_in_id);
-		
-		for (int i = 0; i < list.size(); i++) {
-			System.out.print(list.get(1).getEmail()+" ");
-			System.out.println(list.get(1).getName());
-		}
+//		ArrayList<FriendDTO> list=fd.list(LoggedIN.Logged_in_id);
+//		
+//		for (int i = 0; i < list.size(); i++) {
+//			System.out.print(list.get(1).getEmail()+" ");
+//			System.out.println(list.get(1).getName());
+//		}
 		
 		//현재 로그인 정보 가져오기
 		//System.out.println(LoggedIN.getInfo().getName()); // 닉네임 정보 가져오기
 		//System.out.println(LoggedIN.getInfo().getEmail()); // 이메일정보 가져오기
+		
+		//내가 좋아요 한 글인지 판단
+		//사용법 : 객체 생성 후 객체의 메소드 중 isLike(유저아이디, 캡슐 아이디) 를 호출하면 그 유저가 그 캡슐을 좋아요 했는지 true, false 로 반환한다. 
+		Like_DAO likeDao = new Like_DAO();
+		System.out.println(likeDao.isLike("1","4"));
+		
 	}
 
 }
