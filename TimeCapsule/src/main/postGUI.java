@@ -415,7 +415,9 @@ public class postGUI {
 				String content = txt_content.getText();
 
 				String settime = date + " " + hour + ":" + minute + ":00";
-				b1.insertBoard_1(title, content, settime);
+				if(b1.insertBoard_1(title, content, settime)) {
+					frame.dispose();
+				}
 
 			}
 		});

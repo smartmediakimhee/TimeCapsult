@@ -185,8 +185,6 @@ public class BoardMainGUI implements Runnable {
 
 				postGUI post = new postGUI();
 				post.main(null);
-				thread.interrupt();
-
 			}
 
 			@Override
