@@ -187,7 +187,7 @@ public class postGUI {
 			public void paintComponent(Graphics g) {
 
 				// Approach 1: Dispaly image at at full size
-				g.drawImage(icon.getImage(), 0, 0, null);
+				g.drawImage(icon2.getImage(), 0, 0, null);
 				// Approach 2: Scale image to size of component
 				// Dimension d = getSize();
 				// g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
