@@ -58,8 +58,11 @@ public class cw_Test {
 //		System.out.println(likeDao.isLike("1","4"));
 		
 		//특정 유저가 쓴 캡슐 가져오기 반환형 : ArrayList<Board_1_DTO>
+//		
+//		b1.selectMembersCapsules("1");
 		
-		b1.selectMembersCapsules("1");
+		System.out.println(likeDao.countLike("2"));
+		
 		
 	}
 

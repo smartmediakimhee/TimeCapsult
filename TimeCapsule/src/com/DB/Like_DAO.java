@@ -134,4 +134,35 @@ public class Like_DAO {
 		return result;
 	}
 
+	public String countLike(String Capsule_ID) {
+		String result = null;
+		try {
+			getConnection();
+			String sql = "SELECT COUNT(*) FROM BOARD01_LIKE WHERE BOARD1_ID = ?";
+
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, Capsule_ID);
+
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {	
+				result = rs.getString("COUNT(*)");
+			}
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			dbClose();
+		}
+		return result;
+	}
+
+	
 }
