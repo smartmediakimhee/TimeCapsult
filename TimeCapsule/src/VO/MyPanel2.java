@@ -28,6 +28,8 @@ public class MyPanel2 extends JPanel {
 	private ImageIcon like;
 	private ImageIcon like2;
 	private Dimension liked;
+	private JLabel lbl_num;
+	private JLabel lbl_name;
 
 	public MyPanel2(SpringLayout sl_pn_scroll, JPanel pn_1) {
 		like = new ImageIcon(".\\Image\\blue.png");
@@ -44,10 +46,10 @@ public class MyPanel2 extends JPanel {
 		setLayout(sl_pn_2);
 
 		lbl_title = new JLabel("\uC2A4\uB9C8\uD2B8\uBBF8\uB514\uC5B4\uC778\uC7AC\uAC1C\uBC1C\uC6D0");
-		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_title, 31, SpringLayout.NORTH, this);
-		sl_pn_2.putConstraint(SpringLayout.WEST, lbl_title, 149, SpringLayout.WEST, this);
+		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_title, 50, SpringLayout.NORTH, this);
+		sl_pn_2.putConstraint(SpringLayout.WEST, lbl_title, 270, SpringLayout.WEST, this);
 		lbl_title.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_title.setFont(new Font("±¼¸²", Font.PLAIN, 30));
+		lbl_title.setFont(new Font("aÆæ±Û¾¾B", Font.PLAIN, 25));
 		this.add(lbl_title);
 		
 
@@ -58,7 +60,7 @@ public class MyPanel2 extends JPanel {
 		sl_pn_2.putConstraint(SpringLayout.SOUTH, lbl_howtime, 186, SpringLayout.SOUTH, lbl_title);
 		lbl_howtime.setOpaque(false);
 		lbl_howtime.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_howtime.setFont(new Font("aÆæ±Û¾¾B", Font.PLAIN, 30));
+		lbl_howtime.setFont(new Font("aÆæ±Û¾¾B", Font.PLAIN, 15));
 		lbl_howtime.setBackground(Color.WHITE);
 		this.add(lbl_howtime);
 
@@ -137,6 +139,20 @@ public class MyPanel2 extends JPanel {
 
 
 		add(pn_like);
+		
+		lbl_num = new JLabel("No_1");
+		lbl_num.setForeground(Color.GRAY);
+		lbl_num.setFont(new Font("a¾ö¸¶ÀÇÆíÁöB", Font.PLAIN, 12));
+		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_num, 10, SpringLayout.NORTH, this);
+		sl_pn_2.putConstraint(SpringLayout.WEST, lbl_num, 15, SpringLayout.WEST, this);
+		add(lbl_num);
+		
+		lbl_name = new JLabel("\uC784\uC1A1\uD558");
+		lbl_name.setForeground(Color.GRAY);
+		sl_pn_2.putConstraint(SpringLayout.NORTH, lbl_name, 10, SpringLayout.NORTH, this);
+		sl_pn_2.putConstraint(SpringLayout.EAST, lbl_name, -15, SpringLayout.EAST, this);
+		lbl_name.setFont(new Font("a¾ö¸¶ÀÇÆíÁöB", Font.PLAIN, 12));
+		add(lbl_name);
 	}
 
 	public void get_icon(String str) {
