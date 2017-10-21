@@ -36,6 +36,7 @@ import java.awt.Choice;
 import java.awt.List;
 
 public class MainGUI {
+	
 	JScrollPane scrollPane;
 	ImageIcon icon;
 	ImageIcon icon2;
@@ -133,6 +134,7 @@ public class MainGUI {
 					LoggedIN.Logged_in_id = (new MemberDAO().selectMember_byEmail(email).getId());
 					bmgui.main(null);
 					frame.dispose();
+					
 					
 					
 				}  else {

@@ -178,7 +178,6 @@ public class BoardMainGUI implements Runnable {
 				super.paintComponent(g);
 			}
 		};
-		
 
 		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_img1, 28, SpringLayout.NORTH, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.WEST, pn_img1, 10, SpringLayout.WEST, panel_big);
@@ -188,7 +187,7 @@ public class BoardMainGUI implements Runnable {
 
 		JLabel lbl_sort = new JLabel("이걸 누르면 정렬이 될껄?");
 		sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_sort, 800, SpringLayout.NORTH, panel_big);
-		sl_panel_big.putConstraint(SpringLayout.WEST, lbl_sort,1600 , SpringLayout.WEST, panel_big);
+		sl_panel_big.putConstraint(SpringLayout.WEST, lbl_sort, 1600, SpringLayout.WEST, panel_big);
 
 		lbl_sort.addMouseListener(new MouseAdapter() {
 			@Override
@@ -201,6 +200,7 @@ public class BoardMainGUI implements Runnable {
 					isSortboardArr = true;
 				}
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lbl_sort.setCursor(new Cursor(12));
@@ -252,6 +252,7 @@ public class BoardMainGUI implements Runnable {
 				postGUI post = null;
 				post.main(null);
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				pn_img2.setCursor(new Cursor(12));
@@ -301,7 +302,10 @@ public class BoardMainGUI implements Runnable {
 
 		// 보드arr초기화
 		init_boardArr();
-
+		pn_1.lbl_title.setText("여기는 이제 광고판입니다");
+		pn_1.pn_1_howtime.setText("광고비 시간당 3천만원부터");
+		pn_1.lbl_showtime.setText("광고를해보아요~");
+		pn_1.get_icon(whereIconsrc("맑음"));
 		// 정렬
 		// sortBoardArrtime(board_Arr);
 
@@ -311,13 +315,13 @@ public class BoardMainGUI implements Runnable {
 			panelArr.clear();
 		}
 		System.out.println("##########" + board_Arr.size() + "" + " 보드불러왓음 사이즈는");
-		for (int i = 0; i < board_Arr.size() - 1; i++) {
+		for (int i = 0; i < board_Arr.size(); i++) {
 			panelArr.add(new MyPanel2(sl_pn_scroll, target));
 			pn_scroll.add(panelArr.get(i));
 			target = panelArr.get(i);
 		}
 		System.out.println("##########" + panelArr.size() + "" + " 판넬어레이 사이즈는");
-		size.setSize(10, panelsHeightSize(board_Arr.size()));
+		size.setSize(10, panelsHeightSize(board_Arr.size()+1));
 
 		// pn_2.setOpaque(false);
 		scrollPane_1.getVerticalScrollBar().setUnitIncrement(30);
@@ -340,13 +344,13 @@ public class BoardMainGUI implements Runnable {
 		target = pn_1;
 		init_boardArr();
 		System.out.println("##########" + board_Arr.size() + "" + " 보드불러왓음 사이즈는");
-		for (int i = 0; i < board_Arr.size() - 1; i++) {
+		for (int i = 0; i < board_Arr.size(); i++) {
 			panelArr.add(new MyPanel2(sl_pn_scroll, target));
 			pn_scroll.add(panelArr.get(i));
 			target = panelArr.get(i);
 		}
 		System.out.println("##########" + panelArr.size() + "" + " 판넬어레이 사이즈는");
-		size.setSize(10, panelsHeightSize(board_Arr.size()));
+		size.setSize(10, panelsHeightSize(board_Arr.size()+1));
 		// pn_2.setOpaque(false);
 		scrollPane_1.getVerticalScrollBar().setUnitIncrement(30);
 		scrollPane_1.getVerticalScrollBar().setUnitIncrement(30);
@@ -395,69 +399,61 @@ public class BoardMainGUI implements Runnable {
 
 	private synchronized void Show() {
 		Date nowDate = new Date();
-		if(board_Arr.size() <= 0) {
-			System.out.println("표시할글이 존재하지 않습니다.");
-			pn_1.lbl_title.setText("아니.. 아직도 작성한 글이 없어요..?");
-			pn_1.pn_1_howtime.setText("해당 아이디로 작성한 글이 없습니다!");
-			pn_1.lbl_showtime.setText("글을 작성해 보세요~");
+		if (board_Arr.size() <= 0) {
+			pn_1.lbl_title.setText("여기는 이제 광고판입니다");
+			pn_1.pn_1_howtime.setText("광고비 시간당 3천만원부터");
+			pn_1.lbl_showtime.setText("광고를해보아요~");
 			pn_1.get_icon(whereIconsrc("맑음"));
-		}else {
-		for (int i = 0; i < board_Arr.size(); i++) {
-			StringBuffer sb = new StringBuffer(board_Arr.get(i).getContent());
+			target = pn_1;
+			panelArr.add(new MyPanel2(sl_pn_scroll, target));
+			pn_scroll.add(panelArr.get(0));
+			System.out.println("표시할글이 존재하지 않습니다.");
+			panelArr.get(0).lbl_title.setText("아니.. 아직도 작성한 글이 없어요..?");
+			panelArr.get(0).lbl_howtime.setText("해당 아이디로 작성한 글이 없습니다!");
+			panelArr.get(0).lbl_showtime.setText("글을 작성해 보세요~");
+			panelArr.get(0).get_icon(whereIconsrc("맑음"));
+		} else {
+			pn_1.lbl_title.setText("여기는 이제 광고판입니다");
+			pn_1.pn_1_howtime.setText("광고비 시간당 3천만원부터");
+			pn_1.lbl_showtime.setText("광고를해보아요~");
+			pn_1.get_icon(whereIconsrc("맑음"));
+			size.setSize(10, panelsHeightSize(board_Arr.size()+1));
+			// pn_2.setOpaque(false);
+			scrollPane_1.getVerticalScrollBar().setUnitIncrement(30);
+			scrollPane_1.getVerticalScrollBar().setUnitIncrement(30);
+			for (int i = 0; i < board_Arr.size(); i++) {
+				StringBuffer sb = new StringBuffer(board_Arr.get(i).getContent());
 
-			try {
-				setDate = timer.stringToDate(board_Arr.get(i).getSettime());
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if (i == 0) {
-				pn_1.lbl_title.setText(board_Arr.get(i).getTitle());
-
-				if (!timer.isOpen(nowDate, setDate)) {
-					pn_1.pn_1_howtime.setText(timer.howOpen(nowDate, setDate));
-				} else {
-					for (int j = 0; j < sb.length(); j++) {
-						if (j == 0) {
-							sb.insert(0, "<html>");
-						}
-						if (j % 25 == 0 && j != 0) {
-							sb.insert(j, "<br>");
-						}
-						if (j == sb.length()) {
-							sb.insert(j - 1, "</html>");
-						}
+				try {
+					setDate = timer.stringToDate(board_Arr.get(i).getSettime());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (board_Arr.size() > 0) {
+					
+					
+					System.out.println("다른보드게시판생성중 " + i);
+					System.out.println(panelArr.size());
+					System.out.println(board_Arr.get(i).getTitle());
+					panelArr.get(i).lbl_title.setText(board_Arr.get(i).getTitle());
+					panelArr.get(i).lbl_showtime.setText(board_Arr.get(i).getSettime());
+					if (!timer.isOpen(nowDate, setDate)) {
+						panelArr.get(i).lbl_howtime.setText(timer.howOpen(nowDate, setDate));
+					} else {
+						panelArr.get(i).lbl_howtime.setText(board_Arr.get(i).getContent());
 					}
-					System.out.println(sb.toString());
-					pn_1.pn_1_howtime.setText(sb.toString());
+					panelArr.get(i).get_icon(whereIconsrc("비옴"));
+					panelArr.get(i).lbl_num.setText(Integer.toString(board_Arr.get(i).getId()));
+					panelArr.get(i).lbl_name.setText(new Rel_Mem_Cap().membersCapsule(board_Arr.get(i).getId()));
+					panelArr.get(i).likecount.setText(new Like_DAO().countLike(board_Arr.get(i).getId()));
+					if (new Like_DAO().isLike(LoggedIN.Logged_in_id, panelArr.get(i).lbl_num.getText())) {
+						panelArr.get(i).like.setImage(panelArr.get(i).like2.getImage());
+						panelArr.get(i).pn_like.repaint();
+					}
 
-					// pn_1.pn_1_howtime.setText(board_Arr.get(i).getContent());
 				}
-				pn_1.lbl_showtime.setText(board_Arr.get(i).getSettime());
-				pn_1.get_icon(whereIconsrc("비옴"));
-
-			} else if (board_Arr.size() > 1) {
-				System.out.println("다른보드게시판생성중 " + i);
-				System.out.println(panelArr.size());
-				System.out.println(board_Arr.get(i).getTitle());
-				panelArr.get(i - 1).lbl_title.setText(board_Arr.get(i).getTitle());
-				panelArr.get(i - 1).lbl_showtime.setText(board_Arr.get(i).getSettime());
-				if (!timer.isOpen(nowDate, setDate)) {
-					panelArr.get(i - 1).lbl_howtime.setText(timer.howOpen(nowDate, setDate));
-				} else {
-					panelArr.get(i - 1).lbl_howtime.setText(board_Arr.get(i).getContent());
-				}
-				panelArr.get(i - 1).get_icon(whereIconsrc("비옴"));
-				panelArr.get(i - 1).lbl_num.setText(Integer.toString(board_Arr.get(i).getId()));
-				panelArr.get(i - 1).lbl_name.setText(new Rel_Mem_Cap().membersCapsule(board_Arr.get(i).getId()));
-				panelArr.get(i - 1).likecount.setText(new Like_DAO().countLike(board_Arr.get(i).getId()));
-				if(new Like_DAO().isLike(LoggedIN.Logged_in_id,panelArr.get(i - 1).lbl_num.getText())) {
-					panelArr.get(i - 1).like.setImage(panelArr.get(i-1).like2.getImage());
-					panelArr.get(i - 1).pn_like.repaint();
-				}
-				
 			}
-		}
 		}
 	}
 
