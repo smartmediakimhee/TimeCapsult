@@ -8,6 +8,7 @@ import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -52,7 +53,7 @@ public class BoardMainGUI implements Runnable {
 	private boolean isSortboardArr = false;
 	private Date setDate = null;
 	private String member_id = "1";
-	private static int viewCaseNum = 1;
+	private static int viewCaseNum = 0;
 
 	/**
 	 * Launch the application.
@@ -116,6 +117,14 @@ public class BoardMainGUI implements Runnable {
 		panel_big.setLayout(sl_panel_big);
 
 		JLabel lbl_log_id = new JLabel(LoggedIN.getInfo().getName());
+		lbl_log_id.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				viewCaseNum = 1;
+				member_id = LoggedIN.getInfo().getId();
+				System.out.println("멤버로보기선택함");
+			}
+		});
 		panel_big.add(lbl_log_id);
 
 		JLabel lbl_login = new JLabel("\uB2D8");
@@ -123,7 +132,6 @@ public class BoardMainGUI implements Runnable {
 		sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_log_id, 0, SpringLayout.NORTH, lbl_login);
 		sl_panel_big.putConstraint(SpringLayout.EAST, lbl_log_id, -13, SpringLayout.WEST, lbl_login);
 		panel_big.add(lbl_login);
-
 		JLabel lbl_sign = new JLabel("log out");
 		sl_panel_big.putConstraint(SpringLayout.EAST, lbl_login, -45, SpringLayout.WEST, lbl_sign);
 		sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_sign, 10, SpringLayout.NORTH, panel_big);
@@ -132,9 +140,9 @@ public class BoardMainGUI implements Runnable {
 		lbl_sign.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				thread.interrupt();
 				MainGUI main = null;
 				main.main(null);
-				thread.interrupt();
 			}
 
 			@Override
@@ -162,34 +170,36 @@ public class BoardMainGUI implements Runnable {
 		sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_img1, -867, SpringLayout.SOUTH, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.EAST, pn_img1, -1759, SpringLayout.EAST, panel_big);
 		panel_big.add(pn_img1);
-		
-		JPanel pn_img11 = new JPanel() {
-			public void paintComponent(Graphics g) {
-				// Approach 1: Dispaly image at at full size
-				g.drawImage(icon3.getImage(), 0, 0, null);
-				// Approach 2: Scale image to size of component
-//				 Dimension d = getSize();
-//				 g.drawImage(icon3.getImage(), 0, 0, d.width, d.height, null);
-				// Approach 3: Fix the image position in the scroll pane
-				// Point p = scrollPane.getViewport().getViewPosition();
-				// g.drawImage(icon.getImage(), p.x, p.y, null);
-				setOpaque(false); // 그림을 표시하게 설정,투명하게 조절
-				super.paintComponent(g);
-			}
-		};
-		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_img11, 800, SpringLayout.NORTH, panel_big);
-		sl_panel_big.putConstraint(SpringLayout.WEST, pn_img11, 200, SpringLayout.WEST, panel_big);
-		sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_img11, -82, SpringLayout.SOUTH, panel_big);
-		sl_panel_big.putConstraint(SpringLayout.EAST, pn_img11, -60, SpringLayout.EAST, panel_big);
-		panel_big.add(pn_img11);
-		
-//		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_img2, 813, SpringLayout.NORTH, panel_big);
-//		sl_panel_big.putConstraint(SpringLayout.WEST, pn_img2, 0, SpringLayout.WEST, lbl_login);
-//		sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_img2, -82, SpringLayout.SOUTH, panel_big);
-//		sl_panel_big.putConstraint(SpringLayout.EAST, pn_img2, -40, SpringLayout.EAST, panel_big);
-//		panel_big.add(pn_img2);
 
-	
+		JLabel lbl_sort = new JLabel("이걸 누르면 정렬이 될껄?");
+		sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_sort, 800, SpringLayout.NORTH, panel_big);
+		sl_panel_big.putConstraint(SpringLayout.WEST, lbl_sort, 200, SpringLayout.WEST, panel_big);
+		
+		lbl_sort.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (isSortboardArr) {
+					isSortboardArr = false;
+				}else {
+					isSortboardArr = true;
+				}
+			}
+		});
+/*    	sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_sort, 800, SpringLayout.NORTH, panel_big);
+		sl_panel_big.putConstraint(SpringLayout.WEST, lbl_sort, 200, SpringLayout.WEST, panel_big);
+		sl_panel_big.putConstraint(SpringLayout.SOUTH, lbl_sort, -82, SpringLayout.SOUTH, panel_big);
+		sl_panel_big.putConstraint(SpringLayout.EAST, lbl_sort, -60, SpringLayout.EAST, panel_big);*/
+		panel_big.add(lbl_sort);
+
+		// sl_panel_big.putConstraint(SpringLayout.NORTH, pn_img2, 813,
+		// SpringLayout.NORTH, panel_big);
+		// sl_panel_big.putConstraint(SpringLayout.WEST, pn_img2, 0, SpringLayout.WEST,
+		// lbl_login);
+		// sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_img2, -82,
+		// SpringLayout.SOUTH, panel_big);
+		// sl_panel_big.putConstraint(SpringLayout.EAST, pn_img2, -40,
+		// SpringLayout.EAST, panel_big);
+		// panel_big.add(pn_img2);
 
 		JPanel pn_img2 = new JPanel() {
 			public void paintComponent(Graphics g) {
@@ -209,17 +219,13 @@ public class BoardMainGUI implements Runnable {
 
 			}
 		};
+
 		pn_img2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-				postGUI post = new postGUI();
+				thread.interrupt();
+				postGUI post = null;
 				post.main(null);
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				pn_img2.setCursor(new Cursor(12));
 			}
 		});
 
@@ -264,18 +270,16 @@ public class BoardMainGUI implements Runnable {
 		scrollPane_1.getVerticalScrollBar().setUnitIncrement(30);
 		JPanel target = pn_1;
 
-		// 재생성오류해결
-		if (!panelArr.isEmpty()) {
-			panelArr.clear();
-		}
-
 		// 보드arr초기화
 		init_boardArr();
 
 		// 정렬
-		sortBoardArrtime(board_Arr);
+		// sortBoardArrtime(board_Arr);
 
-		///// 게시판 2..
+		// 재생성오류해결
+		if (!panelArr.isEmpty()) {
+			panelArr.clear();
+		}
 		System.out.println("##########" + board_Arr.size() + "" + " 보드불러왓음 사이즈는");
 		for (int i = 0; i < board_Arr.size() - 1; i++) {
 			panelArr.add(new MyPanel2(sl_pn_scroll, target));
@@ -295,11 +299,11 @@ public class BoardMainGUI implements Runnable {
 		thread.start();
 	}
 
-	private void sortBoardArrtime(ArrayList<Board_1_DTO> board_Arr2) {
+	private void sortBoardArrtime() {
 		Date nowDate = new Date();
 		ArrayList<Board_1_DTO> tempArr = new ArrayList<>();
 
-		Collections.sort(board_Arr2, new Comparator() {
+		Collections.sort(board_Arr, new Comparator() {
 			@Override
 			public int compare(Object o1, Object o2) {
 				Board_1_DTO b1 = (Board_1_DTO) o1;
@@ -312,10 +316,9 @@ public class BoardMainGUI implements Runnable {
 			System.out.println("소트테스트 : " + board.getSettime());
 		}
 
-		board_Arr = board_Arr2;
 	}
 
-	private void init_boardArr() {
+	private  synchronized void init_boardArr() {
 		// board_Arr의 초기화 선택
 		// 0.모든글보기 1.나의글보기 2.선택한 유저의 글모음
 		if (viewCaseNum == 0) {
@@ -335,7 +338,7 @@ public class BoardMainGUI implements Runnable {
 		return count * 382;
 	}
 
-	private void Show() {
+	private synchronized void Show() {
 		Date nowDate = new Date();
 
 		for (int i = 0; i < board_Arr.size(); i++) {
@@ -406,6 +409,12 @@ public class BoardMainGUI implements Runnable {
 	public void run() {
 		try {
 			while (!Thread.currentThread().isInterrupted()) {
+				if (isSortboardArr) {
+					sortBoardArrtime();
+				} else {
+					init_boardArr();
+				}
+				
 				Show();
 				System.out.println("##스레드 동작중##");
 				Thread.sleep(1000);

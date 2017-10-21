@@ -111,7 +111,7 @@ public class postGUI {
 		bnt = new ImageIcon("../TimeCapsule/Image/bnt.png");
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1920, 1040);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		timebox = new JComboBox();
 		((JLabel) timebox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
@@ -421,7 +421,12 @@ public class postGUI {
 					String settime = date + " " + hour + ":" + minute + ":00";
 					if (b1.insertBoard_1(title, content, settime)) {
 						frame.dispose();
+						BoardMainGUI bgui = null;
+						bgui.main(null);
+					}else {
+						JOptionPane.showMessageDialog(null, "DB에 삽입중 오류가 발생함");
 					}
+					
 				} else {
 					System.out.println("날짜를 선택하라고 ㅋㅋㅋ");
 					JOptionPane.showMessageDialog(null, "글이 열릴 날짜를 정확히 선택해주세요.");
