@@ -203,6 +203,10 @@ public class BoardMainGUI implements Runnable {
 					isSortboardArr = true;
 				}
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lbl_sort.setCursor(new Cursor(12));
+			}
 		});
 		/*
 		 * sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_sort, 800,
@@ -249,6 +253,10 @@ public class BoardMainGUI implements Runnable {
 				thread.interrupt();
 				postGUI post = null;
 				post.main(null);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pn_img2.setCursor(new Cursor(12));
 			}
 		});
 
