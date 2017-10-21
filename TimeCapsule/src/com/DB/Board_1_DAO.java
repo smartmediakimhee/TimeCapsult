@@ -35,7 +35,44 @@ public class Board_1_DAO {
 			System.out.println("DB연결완료");
 		}
 	}
-	//*추가코드
+	
+	public void dbClose() {
+
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				System.out.println("예외:ResultSet객체 close():" + e.getMessage());
+			}
+		}
+
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println("예외:PreparedStatement객체 close():" + e.getMessage());
+			}
+		}
+
+		if (cstmt != null) {
+			try {
+				cstmt.close();
+			} catch (SQLException e) {
+				System.out.println("예외:CallableStatement객체 close():" + e.getMessage());
+			}
+		}
+
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				System.out.println("예외:Connection객체 close():" + e.getMessage());
+			}
+		}
+
+		conn = null;
+	}
+	
 	public boolean insertBoard_1(String title,String content,String settime) {
 
 		boolean result = false;
@@ -82,8 +119,7 @@ public class Board_1_DAO {
 		return result;
 	}
 
-	//구현안됨
-	public boolean updateBoard_1(String name) {
+	public boolean updateBoard_1(String name) { //업데이트 보드 (구현안됨)
 
 		boolean result = false;
 		try {
@@ -161,7 +197,6 @@ public class Board_1_DAO {
 		return dto;
 	}
 
-	//ㅇ
 	public boolean deleteBoard_1(String id) {
 		boolean result = false;
 		try {
@@ -183,41 +218,4 @@ public class Board_1_DAO {
 		return result;
 	}
 
-	/** DB연결 해제(닫기) */
-	public void dbClose() {
-
-		if (rs != null) {
-			try {
-				rs.close();
-			} catch (SQLException e) {
-				System.out.println("예외:ResultSet객체 close():" + e.getMessage());
-			}
-		}
-
-		if (pstmt != null) {
-			try {
-				pstmt.close();
-			} catch (SQLException e) {
-				System.out.println("예외:PreparedStatement객체 close():" + e.getMessage());
-			}
-		}
-
-		if (cstmt != null) {
-			try {
-				cstmt.close();
-			} catch (SQLException e) {
-				System.out.println("예외:CallableStatement객체 close():" + e.getMessage());
-			}
-		}
-
-		if (conn != null) {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				System.out.println("예외:Connection객체 close():" + e.getMessage());
-			}
-		}
-
-		conn = null;
-	}
 }
