@@ -19,6 +19,7 @@ import java.beans.PropertyChangeListener;
 
 public class JCal {
    private JFrame frame;
+   String Month;
 
    /**
     * Launch the application.
@@ -48,6 +49,7 @@ public class JCal {
     * Initialize the contents of the frame.
     */
    private void initialize() {
+	  
       frame = new JFrame();
       frame.setBounds(100, 100, 302, 247);
       frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -75,7 +77,13 @@ public class JCal {
               SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
               postGUI.date = format.format(d);
    
-              String date =(d.getYear()+1900)+""+(d.getMonth()+1)+""+d.getDate();
+              if(d.getMonth()<9) {
+            	  Month = "0"+(d.getMonth()+1);
+              } else {
+            	  Month = d.getMonth()+1+"";
+              }
+              String date =(d.getYear()+1900)+""+Month+""+d.getDate();
+              
               System.out.println(date);
               postGUI.getDate(date);
          }

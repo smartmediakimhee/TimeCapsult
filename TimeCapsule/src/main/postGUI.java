@@ -346,7 +346,6 @@ public class postGUI {
 				JCal cal = new JCal();
 				cal.main(null);
 				txtPeriod.setText(calendarDate);
-				System.out.println(calendarDate + "asdfasdf");
 			}
 		});
 		txtPeriod.setHorizontalAlignment(SwingConstants.CENTER);
@@ -389,7 +388,7 @@ public class postGUI {
 	public static void getDate(String date2) {
 		calendarDate = date2;
 		txtPeriod.setText(calendarDate);
-		System.out.println(calendarDate);
+		
 	}
 
 }
