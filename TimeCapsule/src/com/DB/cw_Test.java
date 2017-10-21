@@ -62,7 +62,7 @@ public class cw_Test {
 //		b1.selectMembersCapsules("1");
 		
 		//좋아요 수 가져오기
-		System.out.println(likeDao.countLike("2"));
+//		System.out.println(likeDao.countLike("2"));
 		
 		
 	}
