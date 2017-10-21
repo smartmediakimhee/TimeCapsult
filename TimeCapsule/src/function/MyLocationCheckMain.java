@@ -10,7 +10,7 @@ public class MyLocationCheckMain {
 		//주소 중에 "시" 정보만 반환 : 광주
 		
 		MyWeather mw = new MyWeather();
-		System.out.println(mw.getWeather(city));
+		System.out.println(mw.getWeather());
 		//"시" 정보 전달하면 해당 시의 날씨를 String 타입으로 반환 : 구름조금
 		
 		NowTime nt = new NowTime();

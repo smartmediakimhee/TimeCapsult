@@ -20,6 +20,7 @@ public class Board_1_DAO {
 	private static Connection conn;
 	private PreparedStatement pstmt;
 	private PreparedStatement pstmt2;
+	private PreparedStatement pstmt3;
 	private CallableStatement cstmt;
 	private ResultSet rs;
 	private void getConnection() throws ClassNotFoundException, SQLException {
@@ -82,7 +83,7 @@ public class Board_1_DAO {
 			MyLocation ml = new MyLocation(); 
 			MyWeather mw = new MyWeather();
 			NowTime nt = new NowTime(); 
-			String weather=mw.getWeather(ml.getLocation()); 
+			String weather = mw.getWeather(); 
 			String nowTime = nt.getTime();
 			
 			
@@ -104,8 +105,17 @@ public class Board_1_DAO {
 				pstmt2.setString(1, LoggedIN.Logged_in_id); //Member ID
 				System.out.println(LoggedIN.Logged_in_id);
 				int r2 = pstmt2.executeUpdate();
-				if(r2>0)
+				
+				String weather_sql = "INSERT INTO TABLE_WEATHER VALUES(BOARD_1_ID.CURRVAL,?)";
+				PreparedStatement pstmt3 = conn.prepareStatement(weather_sql);
+				pstmt3.setString(1, weather);
+				int r3 = pstmt3.executeUpdate();
+				
+				
+				if(r2>0 && r3>0)
 					result=true;
+				
+				
 			}
 				
 			
@@ -219,6 +229,7 @@ public class Board_1_DAO {
 		
 		return dto; 
 	}
+	
 	
 
 	public Board_1_DTO selectBoard_1_DTO(String board_id) {
