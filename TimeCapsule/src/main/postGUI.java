@@ -112,23 +112,6 @@ public class postGUI {
       txtPeriod.setText("마우스를 클릭하면 달력이 나타납니다.");
    }
 
-<<<<<<< HEAD
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		calendar = new JCalendar();
-		back = new ImageIcon("../TimeCapsule/Image/back.jpg");
-		icon = new ImageIcon("../TimeCapsule/Image/1.png");
-		icon2 = new ImageIcon("../TimeCapsule/Image/2.png");
-		period = new ImageIcon("../TimeCapsule/Image/period.png");
-		title = new ImageIcon("../TimeCapsule/Image/title.png");
-		content = new ImageIcon("../TimeCapsule/Image/content.png");
-		bnt = new ImageIcon("../TimeCapsule/Image/bnt.png");
-		frame = new JFrame();
-		frame.setBounds(0, 0, 1920, 1040);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-=======
    /**
     * Initialize the contents of the frame.
     */
@@ -144,7 +127,6 @@ public class postGUI {
       frame = new JFrame();
       frame.setBounds(0, 0, 1920, 1040);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
->>>>>>> branch 'master' of https://github.com/smartmediakimhee/TimeCapsult.git
 
       timebox = new JComboBox();
       ((JLabel) timebox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
@@ -415,6 +397,10 @@ public class postGUI {
                String settime = date + " " + hour + ":" + minute + ":00";
                if (b1.insertBoard_1(title, content, settime)) {
                   frame.dispose();
+                  BoardMainGUI bgui = null;
+                  bgui.main(null);
+               }else {
+            	   JOptionPane.showMessageDialog(null, "DB에 게시글 삽입중 오류발생.");
                }
             } else {
                System.out.println("날짜를 선택하라고 ㅋㅋㅋ");
@@ -466,31 +452,6 @@ public class postGUI {
       SpringLayout sl_pn_nickname = new SpringLayout();
       pn_nickname.setLayout(sl_pn_nickname);
 
-<<<<<<< HEAD
-					String settime = date + " " + hour + ":" + minute + ":00";
-					if (b1.insertBoard_1(title, content, settime)) {
-						frame.dispose();
-						BoardMainGUI bgui = null;
-						bgui.main(null);
-					}else {
-						JOptionPane.showMessageDialog(null, "DB에 삽입중 오류가 발생함");
-					}
-					
-				} else {
-					System.out.println("날짜를 선택하라고 ㅋㅋㅋ");
-					JOptionPane.showMessageDialog(null, "글이 열릴 날짜를 정확히 선택해주세요.");
-				}
-			}
-		});
-		btn_in.setBackground(new Color(240, 240, 240));
-		sl_pn_small.putConstraint(SpringLayout.NORTH, btn_in, 69, SpringLayout.SOUTH, txt_content);
-		sl_pn_small.putConstraint(SpringLayout.WEST, btn_in, 638, SpringLayout.WEST, pn_small);
-		sl_pn_small.putConstraint(SpringLayout.SOUTH, btn_in, 108, SpringLayout.SOUTH, txt_content);
-		sl_pn_small.putConstraint(SpringLayout.EAST, btn_in, -530, SpringLayout.EAST, pn_small);
-		btn_in.setBorderPainted(false);
-		btn_in.setText("Create");
-		pn_small.add(btn_in);
-=======
       JLabel logged_in_ID = new JLabel(LoggedIN.getInfo().getName());
       sl_pn_nickname.putConstraint(SpringLayout.NORTH, logged_in_ID, 0, SpringLayout.NORTH, pn_nickname);
       sl_pn_nickname.putConstraint(SpringLayout.WEST, logged_in_ID, 24, SpringLayout.WEST, pn_nickname);
@@ -498,7 +459,6 @@ public class postGUI {
       sl_pn_nickname.putConstraint(SpringLayout.EAST, logged_in_ID, -10, SpringLayout.EAST, pn_nickname);
       logged_in_ID.setHorizontalAlignment(SwingConstants.RIGHT);
       pn_nickname.add(logged_in_ID);
->>>>>>> branch 'master' of https://github.com/smartmediakimhee/TimeCapsult.git
 
       logged_in_ID.setText(logged_in_ID.getName());
       SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd hh:mm:ss");
