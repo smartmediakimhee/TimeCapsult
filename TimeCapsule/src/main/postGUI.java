@@ -190,6 +190,7 @@ public class postGUI {
          public void mouseClicked(MouseEvent arg0) {
             MainGUI main = new MainGUI();
             main.main(null);
+            frame.dispose();
          }
 
          @Override
