@@ -6,6 +6,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
+import java.awt.Panel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -44,8 +45,8 @@ public class BoardMainGUI implements Runnable {
 	private Boolean b = false;
 	private Thread thread;
 
-	private static ArrayList<Board_1_DTO> board_Arr = new ArrayList<>();
-	private static ArrayList<MyPanel2> panelArr = new ArrayList<>();
+	private ArrayList<Board_1_DTO> board_Arr = new ArrayList<>();
+	private ArrayList<MyPanel2> panelArr = new ArrayList<>();
 
 	private static Board_1_DAO board_1_DAO = new Board_1_DAO();
 	private static Mytimer timer = new Mytimer();
@@ -53,8 +54,17 @@ public class BoardMainGUI implements Runnable {
 	private boolean isSortboardArr = false;
 	private Date setDate = null;
 	private String member_id = "1";
+	private static boolean isok = false;
 	private static int viewCaseNum = 0;
 
+	//
+	static Dimension size;
+	static JScrollPane scrollPane_1;
+	static JPanel pn_scroll;
+	static SpringLayout sl_pn_scroll;
+	static JPanel target;
+
+	//
 	/**
 	 * Launch the application.
 	 */
@@ -82,7 +92,7 @@ public class BoardMainGUI implements Runnable {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private synchronized void initialize() {
 		icon = new ImageIcon("Image\\back.jpg");
 		icon2 = new ImageIcon("Image\\1.png");
 		icon3 = new ImageIcon("Image\\icon2.png");
@@ -119,10 +129,14 @@ public class BoardMainGUI implements Runnable {
 		JLabel lbl_log_id = new JLabel(LoggedIN.getInfo().getName());
 		lbl_log_id.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public synchronized void mouseClicked(MouseEvent e) {
 				viewCaseNum = 1;
 				member_id = LoggedIN.getInfo().getId();
-				System.out.println("멤버로보기선택함");
+				System.out.println("멤버로보기선택함" + member_id + "##################################");
+				init_boardArr();
+				initPanelArr();
+				// target = pn_1;
+				// initPanelArr(scrollPane_1, pn_scroll, size, sl_pn_scroll, target);
 			}
 		});
 		panel_big.add(lbl_log_id);
@@ -174,21 +188,27 @@ public class BoardMainGUI implements Runnable {
 		JLabel lbl_sort = new JLabel("이걸 누르면 정렬이 될껄?");
 		sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_sort, 800, SpringLayout.NORTH, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.WEST, lbl_sort, 200, SpringLayout.WEST, panel_big);
-		
+
 		lbl_sort.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (isSortboardArr) {
+					sortBoardArrtime();
 					isSortboardArr = false;
-				}else {
+				} else {
+					init_boardArr();
 					isSortboardArr = true;
 				}
 			}
 		});
-/*    	sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_sort, 800, SpringLayout.NORTH, panel_big);
-		sl_panel_big.putConstraint(SpringLayout.WEST, lbl_sort, 200, SpringLayout.WEST, panel_big);
-		sl_panel_big.putConstraint(SpringLayout.SOUTH, lbl_sort, -82, SpringLayout.SOUTH, panel_big);
-		sl_panel_big.putConstraint(SpringLayout.EAST, lbl_sort, -60, SpringLayout.EAST, panel_big);*/
+		/*
+		 * sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_sort, 800,
+		 * SpringLayout.NORTH, panel_big); sl_panel_big.putConstraint(SpringLayout.WEST,
+		 * lbl_sort, 200, SpringLayout.WEST, panel_big);
+		 * sl_panel_big.putConstraint(SpringLayout.SOUTH, lbl_sort, -82,
+		 * SpringLayout.SOUTH, panel_big); sl_panel_big.putConstraint(SpringLayout.EAST,
+		 * lbl_sort, -60, SpringLayout.EAST, panel_big);
+		 */
 		panel_big.add(lbl_sort);
 
 		// sl_panel_big.putConstraint(SpringLayout.NORTH, pn_img2, 813,
@@ -235,7 +255,7 @@ public class BoardMainGUI implements Runnable {
 		sl_panel_big.putConstraint(SpringLayout.EAST, pn_img2, -40, SpringLayout.EAST, panel_big);
 		panel_big.add(pn_img2);
 
-		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1 = new JScrollPane();
 		sl_panel_big.putConstraint(SpringLayout.NORTH, scrollPane_1, 0, SpringLayout.NORTH, pn_img1);
 		sl_panel_big.putConstraint(SpringLayout.WEST, scrollPane_1, -1300, SpringLayout.EAST, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.SOUTH, scrollPane_1, 992, SpringLayout.NORTH, panel_big);
@@ -244,7 +264,7 @@ public class BoardMainGUI implements Runnable {
 		scrollPane_1.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		scrollPane_1.getViewport().setOpaque(false);
 
-		JPanel pn_scroll = new JPanel();
+		pn_scroll = new JPanel();
 		pn_scroll.setBorder(new LineBorder(new Color(192, 192, 192), 0, true));
 		scrollPane_1.setViewportView(pn_scroll);
 
@@ -253,13 +273,13 @@ public class BoardMainGUI implements Runnable {
 		panel_big.setOpaque(false);
 		// 스크롤팬 생성
 		JPanel panel_ex = new JPanel();// 스크롤팬에 붙일 패널 생성
-		Dimension size = new Dimension();// 사이즈를 지정하기 위한 객체 생성
+		size = new Dimension();// 사이즈를 지정하기 위한 객체 생성
 		// size.setSize(10, 382*4);// 객체의 사이즈를 지정
 		size.setSize(10, panelsHeightSize(4)); // panelHeightSize(int count) 에서 count 는 페널들이 담긴 ArrayList의 size 값이다.
 		pn_scroll.setPreferredSize(size);// 사이즈 정보를 가지고 있는 객체를 이용해 패널의 사이즈 지정
 		scrollPane_1.setViewportView(pn_scroll);
 		pn_scroll.setSize(450, 200);
-		SpringLayout sl_pn_scroll = new SpringLayout();
+		sl_pn_scroll = new SpringLayout();
 		pn_scroll.setLayout(sl_pn_scroll);
 
 		///// 게시판1시작
@@ -278,6 +298,7 @@ public class BoardMainGUI implements Runnable {
 
 		// 재생성오류해결
 		if (!panelArr.isEmpty()) {
+			System.out.println("패널초기화");
 			panelArr.clear();
 		}
 		System.out.println("##########" + board_Arr.size() + "" + " 보드불러왓음 사이즈는");
@@ -299,6 +320,29 @@ public class BoardMainGUI implements Runnable {
 		thread.start();
 	}
 
+	private void initPanelArr() {
+
+		panelArr.clear();
+		pn_scroll.removeAll();
+
+		pn_1 = new MyPanel(pn_scroll, sl_pn_scroll);
+		pn_scroll.add(pn_1); // 스크롤패널에 패널1을 위에 조건값으로 추가
+		scrollPane_1.getVerticalScrollBar().setUnitIncrement(30);
+		target = pn_1;
+		init_boardArr();
+		System.out.println("##########" + board_Arr.size() + "" + " 보드불러왓음 사이즈는");
+		for (int i = 0; i < board_Arr.size() - 1; i++) {
+			panelArr.add(new MyPanel2(sl_pn_scroll, target));
+			pn_scroll.add(panelArr.get(i));
+			target = panelArr.get(i);
+		}
+		System.out.println("##########" + panelArr.size() + "" + " 판넬어레이 사이즈는");
+		size.setSize(10, panelsHeightSize(board_Arr.size()));
+		// pn_2.setOpaque(false);
+		scrollPane_1.getVerticalScrollBar().setUnitIncrement(30);
+		scrollPane_1.getVerticalScrollBar().setUnitIncrement(30);
+	}
+
 	private void sortBoardArrtime() {
 		Date nowDate = new Date();
 		ArrayList<Board_1_DTO> tempArr = new ArrayList<>();
@@ -318,9 +362,10 @@ public class BoardMainGUI implements Runnable {
 
 	}
 
-	private  synchronized void init_boardArr() {
+	private synchronized void init_boardArr() {
 		// board_Arr의 초기화 선택
 		// 0.모든글보기 1.나의글보기 2.선택한 유저의 글모음
+		board_Arr.clear();
 		if (viewCaseNum == 0) {
 			board_Arr = board_1_DAO.selectAllBoard1();
 		} else if (viewCaseNum == 1) {
@@ -331,6 +376,7 @@ public class BoardMainGUI implements Runnable {
 			System.out.println("board_gui 호출시 파라메터 viewCaseNum값 입력과 호출을 다시살펴볼것");
 			System.out.println("======================================================");
 		}
+
 	}
 
 	private int panelsHeightSize(int count) {
@@ -340,7 +386,6 @@ public class BoardMainGUI implements Runnable {
 
 	private synchronized void Show() {
 		Date nowDate = new Date();
-
 		for (int i = 0; i < board_Arr.size(); i++) {
 			StringBuffer sb = new StringBuffer(board_Arr.get(i).getContent());
 
@@ -375,7 +420,7 @@ public class BoardMainGUI implements Runnable {
 				pn_1.lbl_showtime.setText(board_Arr.get(i).getSettime());
 				pn_1.get_icon(whereIconsrc("비옴"));
 
-			} else {
+			} else if (board_Arr.size() > 1) {
 				System.out.println("다른보드게시판생성중 " + i);
 				System.out.println(panelArr.size());
 				System.out.println(board_Arr.get(i).getTitle());
@@ -409,15 +454,9 @@ public class BoardMainGUI implements Runnable {
 	public void run() {
 		try {
 			while (!Thread.currentThread().isInterrupted()) {
-				if (isSortboardArr) {
-					sortBoardArrtime();
-				} else {
-					init_boardArr();
-				}
-				
 				Show();
 				System.out.println("##스레드 동작중##");
-				Thread.sleep(1000);
+				Thread.sleep(100);
 			}
 
 		} catch (InterruptedException e) {
