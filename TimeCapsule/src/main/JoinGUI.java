@@ -86,7 +86,7 @@ public class JoinGUI {
 	private void initialize() {
 		icon = new ImageIcon(".\\\\Image\\\\back.jpg");
 		icon2 = new ImageIcon(".\\\\Image\\\\back.jpg");
-		icon3 = new ImageIcon(".\\Image\\exit.png");
+		icon3 = new ImageIcon(".\\Image\\exitarrow.png");
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1294, 764);
@@ -276,6 +276,14 @@ public class JoinGUI {
 			
 			
 			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				btn_JOIN.setBackground(new Color(255,160,160));
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				btn_JOIN.setBackground(new Color(255,160,160));
+			}
 		});
 		btn_JOIN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -373,7 +381,7 @@ public class JoinGUI {
 				pn_exit.setCursor(new Cursor(12));
 			}
 		});
-		pn_exit.setBounds(23, 580, 25, 27);
+		pn_exit.setBounds(23, 580, 30, 30);
 		panel_2.add(pn_exit);
 
 		JPanel panel_3 = new JPanel();
