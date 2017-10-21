@@ -8,7 +8,7 @@ import java.util.Date;
 public class Mytimer {
 	
 	private DateFormat dateToStringFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
-	private SimpleDateFormat stringToDateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+	private static SimpleDateFormat stringToDateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
 
 	// String exstr = "2017-10-19 12:27:10";
 	private double time;
@@ -49,7 +49,7 @@ public class Mytimer {
 		return str;
 	}
 
-	public Date stringToDate(String getStr) throws ParseException {
+	public static synchronized Date stringToDate(String getStr) throws ParseException {
 		Date date = stringToDateFormat.parse(getStr);
 		return date;
 	}

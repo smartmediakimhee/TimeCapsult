@@ -8,6 +8,9 @@ import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,7 +30,7 @@ import VO.MyPanel;
 import VO.MyPanel2;
 import function.Mytimer;
 
-public class BoardMainGUI implements Runnable {
+public class BoardMainGUI implements Runnable{
 	JScrollPane scrollPane;
 	private ImageIcon icon;
 	private ImageIcon icon2;
@@ -76,7 +79,12 @@ public class BoardMainGUI implements Runnable {
 		icon3 = new ImageIcon("Image\\icon2.png");
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1920, 1040);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.addWindowListener(new WindowAdapter(){
+            public void windowClosing(WindowEvent e) { 
+            	System.out.println("진짜종료한다..");
+            	thread.interrupt();
+            }
+    });
 
 		JPanel panel_big = new JPanel() {
 			public void paintComponent(Graphics g) {
@@ -115,10 +123,11 @@ public class BoardMainGUI implements Runnable {
 		lbl_sign.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				MainGUI main = new MainGUI();
+				MainGUI main = null;
 				main.main(null);
-				frame.dispose();
+				thread.interrupt();
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lbl_sign.setCursor(new Cursor(12));
@@ -166,10 +175,11 @@ public class BoardMainGUI implements Runnable {
 		pn_img2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				postGUI post = new postGUI();
-				post.main(null);
-				frame.dispose();
+				/*
+				 * postGUI post = new postGUI(); post.main(null); thread.interrupt();
+				 */
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				pn_img2.setCursor(new Cursor(12));
@@ -217,8 +227,12 @@ public class BoardMainGUI implements Runnable {
 		scrollPane_1.getVerticalScrollBar().setUnitIncrement(30);
 		JPanel target = pn_1;
 
+		if(!panelArr.isEmpty()) {
+			panelArr.clear();
+		}
 		///// // 게시판 2..
 		board_Arr = board_1_DAO.selectAllBoard1();
+		System.out.println(board_Arr.size() + "" + " 보드불러왓음 사이즈는");
 		for (int i = 0; i < board_Arr.size(); i++) {
 			panelArr.add(new MyPanel2(sl_pn_scroll, target));
 			pn_scroll.add(panelArr.get(i));
@@ -232,10 +246,12 @@ public class BoardMainGUI implements Runnable {
 
 		scrollPane_1.getVerticalScrollBar().setUnitIncrement(30);
 
+		System.out.println("boardgui 초기화 실행!!!!!!!!!!");
 		thread = new Thread(this);
 		thread.start();
 	}
-
+	
+	
 	private int panelsHeightSize(int count) {
 
 		return count * 382;
@@ -261,14 +277,14 @@ public class BoardMainGUI implements Runnable {
 					pn_1.pn_1_howtime.setText(timer.howOpen(nowDate, setDate));
 				} else {
 					for (int j = 0; j < sb.length(); j++) {
-						if(j==0) {
+						if (j == 0) {
 							sb.insert(0, "<html>");
 						}
 						if (j % 25 == 0 && j != 0) {
 							sb.insert(j, "<br>");
 						}
-						if (j==sb.length()) {
-							sb.insert(j-1, "</html>");
+						if (j == sb.length()) {
+							sb.insert(j - 1, "</html>");
 						}
 					}
 					System.out.println(sb.toString());
@@ -278,8 +294,11 @@ public class BoardMainGUI implements Runnable {
 				}
 				pn_1.lbl_showtime.setText(board_Arr.get(i).getSettime());
 				pn_1.get_icon(whereIconsrc("비옴"));
-				
+
 			} else {
+				System.out.println("다른보드게시판생성중 " + i);
+				System.out.println(panelArr.size());
+				System.out.println(board_Arr.get(i).getTitle());
 				panelArr.get(i - 1).lbl_title.setText(board_Arr.get(i).getTitle());
 				panelArr.get(i - 1).lbl_showtime.setText(board_Arr.get(i).getSettime());
 				if (!timer.isOpen(nowDate, setDate)) {
@@ -291,38 +310,38 @@ public class BoardMainGUI implements Runnable {
 			}
 		}
 	}
-	
+
 	private String whereIconsrc(String weather) {
 		String src = "";
-		if(weather.equals("맑음")) {
+		if (weather.equals("맑음")) {
 			src = "Image\\sun.png";
-		}else if(weather.equals("흐림")) {
+		} else if (weather.equals("흐림")) {
 			src = "Image\\cloud.png";
-		}else if(weather.equals("비옴")) {
+		} else if (weather.equals("비옴")) {
 			src = "Image\\rain.png";
-		}else if(weather.equals("눈")) {
+		} else if (weather.equals("눈")) {
 			src = "Image\\snow.png";
 		}
 		System.out.println(src);
 		return src;
 	}
 
-	
-	
 	@Override
 	public void run() {
+		try {
+			while (!Thread.currentThread().isInterrupted()) {
+				Show();
+				System.out.println("스레드 동작중");
 
-		while (true) {
-
-			if (b)
-				break;
-			Show();
-			System.out.println("스레드 동작중");
-			try {
 				Thread.sleep(1000);
-			} catch (Exception e) {
 			}
-		}
 
+		} catch (InterruptedException e) {
+			// 예상된 스레드 예외
+		} finally {
+			frame.dispose();
+			System.out.println("스레드는 정상종료되었습니다");
+		}
 	}
+
 }
