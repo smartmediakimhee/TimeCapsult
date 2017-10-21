@@ -6,13 +6,10 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
-import java.awt.Panel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,16 +19,15 @@ import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SpringLayout;
 import javax.swing.border.LineBorder;
 
 import com.DB.Board_1_DAO;
+import com.DB.Like_DAO;
 import com.DB.Rel_Mem_Cap;
 import com.DTO.Board_1_DTO;
-import com.DTO.MemberDTO;
 
 import VO.MyPanel;
 import VO.MyPanel2;
@@ -182,6 +178,8 @@ public class BoardMainGUI implements Runnable {
 				super.paintComponent(g);
 			}
 		};
+		
+
 		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_img1, 28, SpringLayout.NORTH, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.WEST, pn_img1, 10, SpringLayout.WEST, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_img1, -867, SpringLayout.SOUTH, panel_big);
@@ -452,6 +450,12 @@ public class BoardMainGUI implements Runnable {
 				panelArr.get(i - 1).get_icon(whereIconsrc("ºñ¿È"));
 				panelArr.get(i - 1).lbl_num.setText(Integer.toString(board_Arr.get(i).getId()));
 				panelArr.get(i - 1).lbl_name.setText(new Rel_Mem_Cap().membersCapsule(board_Arr.get(i).getId()));
+				panelArr.get(i - 1).likecount.setText(new Like_DAO().countLike(board_Arr.get(i).getId()));
+				if(new Like_DAO().isLike(LoggedIN.Logged_in_id,panelArr.get(i - 1).lbl_num.getText())) {
+					panelArr.get(i - 1).like.setImage(panelArr.get(i-1).like2.getImage());
+					panelArr.get(i - 1).pn_like.repaint();
+				}
+				
 			}
 		}
 		}

@@ -134,7 +134,7 @@ public class Like_DAO {
 		return result;
 	}
 
-	public String countLike(String Capsule_ID) {
+	public String countLike(int Capsule_ID) {
 		String result = null;
 		try {
 			getConnection();
@@ -142,7 +142,7 @@ public class Like_DAO {
 
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, Capsule_ID);
+			pstmt.setInt(1, Capsule_ID);
 
 			rs = pstmt.executeQuery();
 			
