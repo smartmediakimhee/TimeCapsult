@@ -104,7 +104,7 @@ public class postGUI {
 		calendar = new JCalendar();
 		back = new ImageIcon("../TimeCapsule/Image/back.jpg");
 		icon = new ImageIcon("../TimeCapsule/Image/1.png");
-		icon2 = new ImageIcon("../TimeCapsule/Image/2.png");
+		icon2 = new ImageIcon("../TimeCapsule/Image/icon2.png");
 		period = new ImageIcon("../TimeCapsule/Image/period.png");
 		title = new ImageIcon("../TimeCapsule/Image/title.png");
 		content = new ImageIcon("../TimeCapsule/Image/content.png");
