@@ -65,9 +65,9 @@ public class postGUI {
 	private JCalendar calerdar;
 	private JComboBox timebox;
 	public static String date = "";
-	private String temp2;
+	private String temp2 = "선택안함";
 	private JComboBox minbox;
-	private String temp3;
+	private String temp3 = "선택안함";
 
 	/**
 	 * Launch the application.
@@ -410,7 +410,7 @@ public class postGUI {
 		btn_in.setFont(new Font("a엄마의편지B", Font.PLAIN, 20));
 		btn_in.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (!txtPeriod.getText().equals("마우스를 클릭하면 달력이 나타납니다.")) {
+				if (!txtPeriod.getText().equals("마우스를 클릭하면 달력이 나타납니다.") && !temp2.equals("선택안함")&&!temp3.equals("선택안함")) {
 					Board_1_DAO b1 = new Board_1_DAO();
 
 					String hour = temp2;
