@@ -91,6 +91,8 @@ public class postGUI {
 		initialize();
 		txtPeriod.setForeground(Color.gray);
 		txtPeriod.setText("마우스를 클릭하면 달력이 나타납니다.");
+		txt_content.setForeground(Color.gray);
+		txt_content.setText("게시물의 내용은 200자 내외로 작성하시오.");
 	}
 
 	/**
@@ -260,6 +262,32 @@ public class postGUI {
 		pn_small.add(txt_title);
 
 		txt_content = new JTextField();
+		txt_content.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (txt_content.getText().equals("게시물의 내용은 200자 내외로 작성하시오.")) {
+					txt_content.setForeground(Color.black);
+					txt_content.setText("");
+					
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txt_content.getText().length()==0) {
+					txt_content.setText("게시물의 내용은 200자 내외로 작성하시오.");
+					txt_content.setForeground(Color.gray);
+				}
+			}
+		});
+		txt_content.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (txt_content.getText().equals("게시물의 내용은 200자 내외로 작성하시오.")) {
+					txt_content.setForeground(Color.black);
+					txt_content.setText("");
+				}
+			}
+		});
 		txt_content.setBorder(new LineBorder(new Color(192, 192, 192), 2, true));
 		txt_content.setFont(new Font("a엄마의편지B", Font.PLAIN, 20));
 		sl_pn_small.putConstraint(SpringLayout.EAST, txt_content, -277, SpringLayout.EAST, pn_small);
@@ -269,8 +297,9 @@ public class postGUI {
 		txt_content.setText("content");
 		txt_content.setHorizontalAlignment(SwingConstants.CENTER);
 		txt_content.setColumns(10);
-		txt_content.setDocument((new JTextFieldLimit(100)));
+		txt_content.setDocument((new JTextFieldLimit(200)));
 		pn_small.add(txt_content);
+		
 
 		JPanel pn_logo = new JPanel() {
 			public void paintComponent(Graphics g) {
