@@ -1,6 +1,7 @@
 package VO;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -12,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MyPanel2 extends JPanel {
 	public JLabel lbl_title;
@@ -23,9 +26,12 @@ public class MyPanel2 extends JPanel {
 	private JLabel likecount;
 	private JPanel pn_like;
 	private ImageIcon like;
+	private ImageIcon like2;
+	private Dimension liked;
 
 	public MyPanel2(SpringLayout sl_pn_scroll, JPanel pn_1) {
 		like = new ImageIcon(".\\Image\\blue.png");
+		like2 = new ImageIcon(".\\Image\\blackheart.png");
 		setBorder(new MatteBorder(1, 0, 1, 0, (Color) Color.LIGHT_GRAY));
 		sl_pn_scroll.putConstraint(SpringLayout.NORTH, this, 38, SpringLayout.SOUTH, pn_1);
 		sl_pn_scroll.putConstraint(SpringLayout.WEST, this, 0, SpringLayout.WEST, pn_1);
@@ -96,13 +102,14 @@ public class MyPanel2 extends JPanel {
 		likecount.setHorizontalAlignment(SwingConstants.CENTER);
 		add(likecount);
 		
+		
 		pn_like = new JPanel() {
 			public void paintComponent(Graphics g) {
 				// Approach 1: Dispaly image at at full size
 //				g.drawImage(like.getImage(), 0, 0, null);
 				// Approach 2: Scale image to size of component
-				Dimension d = getSize();
-				g.drawImage(like.getImage(), 0, 0, d.width, d.height, null);
+				liked = getSize();
+				g.drawImage(like.getImage(), 0, 0, liked.width, liked.height, null);
 				// Approach 3: Fix the image position in the scroll pane
 				// Point p = scrollPane.getViewport().getViewPosition();
 				// g.drawImage(icon.getImage(), p.x, p.y, null);
@@ -110,6 +117,19 @@ public class MyPanel2 extends JPanel {
 				super.paintComponent(g);
 			}
 		};
+		pn_like.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pn_like.setCursor(new Cursor(12));
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				like.setImage(like2.getImage());
+			}
+		});
+		
+		
+		
 		sl_pn_2.putConstraint(SpringLayout.NORTH, pn_like, 5, SpringLayout.SOUTH, pn_2_weather);
 		sl_pn_2.putConstraint(SpringLayout.WEST, pn_like, 7, SpringLayout.EAST, likecount);
 		sl_pn_2.putConstraint(SpringLayout.SOUTH, pn_like, 23, SpringLayout.SOUTH, pn_2_weather);
