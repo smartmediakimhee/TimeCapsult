@@ -13,10 +13,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
+import java.awt.dnd.Autoscroll;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -32,18 +36,31 @@ import com.toedter.calendar.JCalendar;
 import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import javax.swing.JToggleButton;
+import javax.swing.ScrollPaneConstants;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
+
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTextPane;
+import javax.swing.JTextArea;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JEditorPane;
 
 public class postGUI {
 	JScrollPane scrollPane;
@@ -54,12 +71,12 @@ public class postGUI {
 	ImageIcon content;
 	ImageIcon bnt;
 	JCalendar calendar;
+	JEditorPane txt;
 
 	ImageIcon back;
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField txt_title;
-	private JTextField txt_content;
 	private static JTextField txtPeriod;
 	private static String calendarDate;
 	private JCalendar calerdar;
@@ -93,8 +110,6 @@ public class postGUI {
 		initialize();
 		txtPeriod.setForeground(Color.gray);
 		txtPeriod.setText("마우스를 클릭하면 달력이 나타납니다.");
-		txt_content.setForeground(Color.gray);
-		txt_content.setText("게시물의 내용은 200자 내외로 작성하시오.");
 	}
 
 	/**
@@ -226,6 +241,7 @@ public class postGUI {
 		textField.setColumns(10);
 
 		txt_title = new JTextField();
+		sl_pn_small.putConstraint(SpringLayout.SOUTH, txt_title, -532, SpringLayout.SOUTH, pn_small);
 		txt_title.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
@@ -260,51 +276,10 @@ public class postGUI {
 		sl_pn_small.putConstraint(SpringLayout.NORTH, textField, 43, SpringLayout.SOUTH, txt_title);
 		sl_pn_small.putConstraint(SpringLayout.SOUTH, textField, -12, SpringLayout.NORTH, txt_title);
 		sl_pn_small.putConstraint(SpringLayout.EAST, txt_title, -277, SpringLayout.EAST, pn_small);
-		sl_pn_small.putConstraint(SpringLayout.NORTH, txt_title, 315, SpringLayout.NORTH, pn_small);
 		txt_title.setHorizontalAlignment(SwingConstants.CENTER);
 		txt_title.setText("title");
 		txt_title.setColumns(10);
 		pn_small.add(txt_title);
-
-		txt_content = new JTextField();
-		txt_content.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				if (txt_content.getText().equals("게시물의 내용은 200자 내외로 작성하시오.")) {
-					txt_content.setForeground(Color.black);
-					txt_content.setText("");
-
-				}
-			}
-
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (txt_content.getText().length() == 0) {
-					txt_content.setText("게시물의 내용은 200자 내외로 작성하시오.");
-					txt_content.setForeground(Color.gray);
-				}
-			}
-		});
-		txt_content.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				if (txt_content.getText().equals("게시물의 내용은 200자 내외로 작성하시오.")) {
-					txt_content.setForeground(Color.black);
-					txt_content.setText("");
-				}
-			}
-		});
-		txt_content.setBorder(new LineBorder(new Color(192, 192, 192), 2, true));
-		txt_content.setFont(new Font("a엄마의편지B", Font.PLAIN, 20));
-		sl_pn_small.putConstraint(SpringLayout.EAST, txt_content, -277, SpringLayout.EAST, pn_small);
-		sl_pn_small.putConstraint(SpringLayout.SOUTH, txt_title, -15, SpringLayout.NORTH, txt_content);
-		sl_pn_small.putConstraint(SpringLayout.NORTH, txt_content, 361, SpringLayout.NORTH, pn_small);
-		sl_pn_small.putConstraint(SpringLayout.SOUTH, txt_content, -289, SpringLayout.SOUTH, pn_small);
-		txt_content.setText("content");
-		txt_content.setHorizontalAlignment(SwingConstants.CENTER);
-		txt_content.setColumns(10);
-		txt_content.setDocument((new JTextFieldLimit(200)));
-		pn_small.add(txt_content);
 
 		JPanel pn_logo = new JPanel() {
 			public void paintComponent(Graphics g) {
@@ -383,16 +358,17 @@ public class postGUI {
 				super.paintComponent(g);
 			}
 		};
-		sl_pn_small.putConstraint(SpringLayout.SOUTH, panel_title, -15, SpringLayout.NORTH, panel_content);
-		sl_pn_small.putConstraint(SpringLayout.WEST, txt_content, 26, SpringLayout.EAST, panel_content);
+		sl_pn_small.putConstraint(SpringLayout.NORTH, panel_content, 361, SpringLayout.NORTH, pn_small);
 		sl_pn_small.putConstraint(SpringLayout.SOUTH, panel_content, -490, SpringLayout.SOUTH, pn_small);
-		sl_pn_small.putConstraint(SpringLayout.NORTH, panel_content, 0, SpringLayout.NORTH, txt_content);
+		sl_pn_small.putConstraint(SpringLayout.SOUTH, panel_title, -15, SpringLayout.NORTH, panel_content);
 		sl_pn_small.putConstraint(SpringLayout.WEST, panel_content, 301, SpringLayout.WEST, pn_small);
 		sl_pn_small.putConstraint(SpringLayout.EAST, panel_content, -1024, SpringLayout.EAST, pn_small);
 		pn_small.add(panel_content);
 		;
 
 		JButton btn_in = new JButton();
+		sl_pn_small.putConstraint(SpringLayout.NORTH, btn_in, 312, SpringLayout.SOUTH, txt_title);
+		sl_pn_small.putConstraint(SpringLayout.SOUTH, btn_in, -181, SpringLayout.SOUTH, pn_small);
 		btn_in.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -416,7 +392,7 @@ public class postGUI {
 					String hour = temp2;
 					String minute = temp3;
 					String title = txt_title.getText();
-					String content = txt_content.getText();
+					String content = txt.getText();
 
 					String settime = date + " " + hour + ":" + minute + ":00";
 					if (b1.insertBoard_1(title, content, settime)) {
@@ -429,21 +405,20 @@ public class postGUI {
 			}
 		});
 		btn_in.setBackground(new Color(240, 240, 240));
-		sl_pn_small.putConstraint(SpringLayout.NORTH, btn_in, 69, SpringLayout.SOUTH, txt_content);
 		sl_pn_small.putConstraint(SpringLayout.WEST, btn_in, 638, SpringLayout.WEST, pn_small);
-		sl_pn_small.putConstraint(SpringLayout.SOUTH, btn_in, 108, SpringLayout.SOUTH, txt_content);
 		sl_pn_small.putConstraint(SpringLayout.EAST, btn_in, -530, SpringLayout.EAST, pn_small);
 		btn_in.setBorderPainted(false);
 		btn_in.setText("Create");
 		pn_small.add(btn_in);
 
 		txtPeriod = new JTextField();
+		sl_pn_small.putConstraint(SpringLayout.SOUTH, txtPeriod, -576, SpringLayout.SOUTH, pn_small);
+		sl_pn_small.putConstraint(SpringLayout.NORTH, txt_title, 13, SpringLayout.SOUTH, txtPeriod);
 		sl_pn_small.putConstraint(SpringLayout.WEST, txtPeriod, 28, SpringLayout.EAST, panel_period);
 		sl_pn_small.putConstraint(SpringLayout.EAST, txtPeriod, -16, SpringLayout.WEST, timebox);
 		txtPeriod.setFont(new Font("a엄마의편지B", Font.PLAIN, 15));
 		txtPeriod.setBorder(new LineBorder(Color.LIGHT_GRAY, 2, true));
 		sl_pn_small.putConstraint(SpringLayout.NORTH, txtPeriod, 269, SpringLayout.NORTH, pn_small);
-		sl_pn_small.putConstraint(SpringLayout.SOUTH, txtPeriod, -13, SpringLayout.NORTH, txt_title);
 		txtPeriod.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
@@ -502,6 +477,66 @@ public class postGUI {
 						"29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44",
 						"45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
 		pn_small.add(minbox);
+		
+		JPanel panel = new JPanel();
+		sl_pn_small.putConstraint(SpringLayout.NORTH, panel, 0, SpringLayout.NORTH, panel_content);
+		sl_pn_small.putConstraint(SpringLayout.WEST, panel, 0, SpringLayout.WEST, textField);
+		sl_pn_small.putConstraint(SpringLayout.SOUTH, panel, 308, SpringLayout.NORTH, txtPeriod);
+		sl_pn_small.putConstraint(SpringLayout.EAST, panel, -277, SpringLayout.EAST, pn_small);
+		pn_small.add(panel);
+		panel.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		txt = new JEditorPane();
+		panel.add(txt);
+		sl_pn_small.putConstraint(SpringLayout.NORTH, txt, 21, SpringLayout.SOUTH, txt_title);
+		sl_pn_small.putConstraint(SpringLayout.SOUTH, txt, 231, SpringLayout.NORTH, txtPeriod);
+		sl_pn_small.putConstraint(SpringLayout.EAST, txt, 1158, SpringLayout.WEST, pn_small);
+		
+				JScrollPane scroll=new JScrollPane(txt);
+				panel.add(scroll);
+						
+				
+				
+				txt.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+				txt.setDocument((new JTextFieldLimit(200)));
+				
+				txt.setForeground(Color.GRAY);
+				
+				txt.addKeyListener(new KeyAdapter() {
+					@Override
+					public void keyTyped(KeyEvent e) {
+						
+					}
+				});
+				txt.addFocusListener(new FocusAdapter() {
+					@Override
+					public void focusGained(FocusEvent e) {
+						if (txt.getText().equals("게시물의 내용은 200자 내로 작성하시오.")) {
+							txt.setForeground(Color.black);
+							txt.setText("");
+
+						}
+					}
+
+					@Override
+					public void focusLost(FocusEvent e) {
+						if (txt.getText().length() == 0) {
+							txt.setText("게시물의 내용은 200자 내로 작성하시오.");
+							txt.setForeground(Color.gray);
+						}
+					}
+				});
+				txt.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						if (txt.getText().equals("게시물의 내용은 200자 내로 작성하시오.")) {
+							txt.setForeground(Color.black);
+							txt.setText("");
+						}
+					}
+				});
+				txt.setFont(new Font("a엄마의편지L", Font.PLAIN, 20));
+				txt.setText("\uAC8C\uC2DC\uBB3C\uC758 \uB0B4\uC6A9\uC740 200\uC790 \uB0B4\uB85C \uC791\uC131\uD558\uC2DC\uC624.");
 	}
 
 	public static void getDate(String date2) {
