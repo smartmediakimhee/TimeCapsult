@@ -72,6 +72,7 @@ public class postGUI {
    ImageIcon bnt;
    JCalendar calendar;
    JEditorPane txt;
+   Dimension d;
 
    ImageIcon back;
    private JFrame frame;
@@ -163,7 +164,7 @@ public class postGUI {
             g.drawImage(back.getImage(), 0, 0, null);
             // Approach 2: Scale image to size of component
 
-            Dimension d = getSize();
+            d = getSize();
             g.drawImage(back.getImage(), 0, 0, d.width, d.height, null);
             // Approach 3: Fix the image position in the scroll pane
             // Point p = scrollPane.getViewport().getViewPosition();
