@@ -44,6 +44,7 @@ public class MainGUI {
 	private JFrame frame;
 	private JTextField id_input;
 	private JPasswordField pw_input;
+	Dimension d;
 
 	/**
 	 * Launch the application.
@@ -85,7 +86,7 @@ public class MainGUI {
 				// Approach 1: Dispaly image at at full size
 				g.drawImage(Mainicon.getImage(), 0, 0, null);
 				// Approach 2: Scale image to size of component
-				Dimension d = getSize();
+				d = getSize();
 				g.drawImage(Mainicon.getImage(), 0, 0, d.width, d.height, null);
 				// Approach 3: Fix the image position in the scroll pane
 				// Point p = scrollPane.getViewport().getViewPosition();
@@ -231,7 +232,7 @@ public class MainGUI {
 				// Approach 1: Dispaly image at at full size
 				// g.drawImage(icon.getImage(), 0, 0, null);
 				// Approach 2: Scale image to size of component
-				Dimension d = getSize();
+				 d = getSize();
 				g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
 				// Approach 3: Fix the image position in the scroll pane
 				// Point p = scrollPane.getViewport().getViewPosition();
@@ -255,7 +256,7 @@ public class MainGUI {
 				// Approach 1: Dispaly image at at full size
 				// g.drawImage(icon2.getImage(), 0, 0, null);
 				// Approach 2: Scale image to size of component
-				Dimension d = getSize();
+				d = getSize();
 				g.drawImage(icon2.getImage(), 0, 0, d.width, d.height, null);
 				// Approach 3: Fix the image position in the scroll pane
 				// Point p = scrollPane.getViewport().getViewPosition();
@@ -279,7 +280,7 @@ public class MainGUI {
 				// Approach 1: Dispaly image at at full size
 				// g.drawImage(icon2.getImage(), 0, 0, null);
 				// Approach 2: Scale image to size of component
-				Dimension d = getSize();
+				d = getSize();
 				g.drawImage(title.getImage(), 0, 0, d.width, d.height, null);
 				// Approach 3: Fix the image position in the scroll pane
 				// Point p = scrollPane.getViewport().getViewPosition();
