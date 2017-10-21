@@ -21,11 +21,11 @@ public class MyPanel2 extends JPanel {
 	public JLabel lbl_showtime;
 	public ImageIcon icon;
 	private JLabel likecount;
-	private JPanel panel;
+	private JPanel pn_like;
 	private ImageIcon like;
 
 	public MyPanel2(SpringLayout sl_pn_scroll, JPanel pn_1) {
-		like = new ImageIcon(".\\Image\\cloud.png");
+		like = new ImageIcon(".\\Image\\blue.png");
 		setBorder(new MatteBorder(1, 0, 1, 0, (Color) Color.LIGHT_GRAY));
 		sl_pn_scroll.putConstraint(SpringLayout.NORTH, this, 38, SpringLayout.SOUTH, pn_1);
 		sl_pn_scroll.putConstraint(SpringLayout.WEST, this, 0, SpringLayout.WEST, pn_1);
@@ -96,7 +96,7 @@ public class MyPanel2 extends JPanel {
 		likecount.setHorizontalAlignment(SwingConstants.CENTER);
 		add(likecount);
 		
-		panel = new JPanel() {
+		pn_like = new JPanel() {
 			public void paintComponent(Graphics g) {
 				// Approach 1: Dispaly image at at full size
 //				g.drawImage(like.getImage(), 0, 0, null);
@@ -110,13 +110,13 @@ public class MyPanel2 extends JPanel {
 				super.paintComponent(g);
 			}
 		};
-		sl_pn_2.putConstraint(SpringLayout.NORTH, panel, 6, SpringLayout.SOUTH, pn_2_weather);
-		sl_pn_2.putConstraint(SpringLayout.WEST, panel, 6, SpringLayout.EAST, likecount);
-		sl_pn_2.putConstraint(SpringLayout.SOUTH, panel, 16, SpringLayout.SOUTH, pn_2_weather);
-		panel.setPreferredSize(new Dimension(30,30));
+		sl_pn_2.putConstraint(SpringLayout.NORTH, pn_like, 5, SpringLayout.SOUTH, pn_2_weather);
+		sl_pn_2.putConstraint(SpringLayout.WEST, pn_like, 7, SpringLayout.EAST, likecount);
+		sl_pn_2.putConstraint(SpringLayout.SOUTH, pn_like, 23, SpringLayout.SOUTH, pn_2_weather);
+		pn_like.setPreferredSize(new Dimension(20,30));
 
 
-		add(panel);
+		add(pn_like);
 	}
 
 	public void get_icon(String str) {
