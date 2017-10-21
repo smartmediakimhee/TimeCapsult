@@ -32,7 +32,7 @@ public class MyPanel2 extends JPanel {
 	private ImageIcon like2;
 	private Dimension liked;
 	public JLabel lbl_num;
-	private JLabel lbl_name;
+	public JLabel lbl_name;
 	private JPanel panel;
 	private JPanel panel_1;
 	private JPanel panel_2;

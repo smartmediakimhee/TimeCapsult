@@ -22,12 +22,14 @@ import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SpringLayout;
 import javax.swing.border.LineBorder;
 
 import com.DB.Board_1_DAO;
+import com.DB.Rel_Mem_Cap;
 import com.DTO.Board_1_DTO;
 import com.DTO.MemberDTO;
 
@@ -387,6 +389,13 @@ public class BoardMainGUI implements Runnable {
 
 	private synchronized void Show() {
 		Date nowDate = new Date();
+		if(board_Arr.size() <= 0) {
+			System.out.println("표시할글이 존재하지 않습니다.");
+			pn_1.lbl_title.setText("아니.. 아직도 작성한 글이 없어요..?");
+			pn_1.pn_1_howtime.setText("해당 아이디로 작성한 글이 없습니다!");
+			pn_1.lbl_showtime.setText("글을 작성해 보세요~");
+			pn_1.get_icon(whereIconsrc("맑음"));
+		}else {
 		for (int i = 0; i < board_Arr.size(); i++) {
 			StringBuffer sb = new StringBuffer(board_Arr.get(i).getContent());
 
@@ -433,8 +442,10 @@ public class BoardMainGUI implements Runnable {
 					panelArr.get(i - 1).lbl_howtime.setText(board_Arr.get(i).getContent());
 				}
 				panelArr.get(i - 1).get_icon(whereIconsrc("비옴"));
-				panelArr.get(i-1).lbl_num.setText(Integer.toString(board_Arr.get(i).getId()));
+				panelArr.get(i - 1).lbl_num.setText(Integer.toString(board_Arr.get(i).getId()));
+				panelArr.get(i - 1).lbl_name.setText(new Rel_Mem_Cap().membersCapsule(board_Arr.get(i).getId()));
 			}
+		}
 		}
 	}
 

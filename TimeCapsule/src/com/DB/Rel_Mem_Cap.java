@@ -21,6 +21,7 @@ public class Rel_Mem_Cap {
 	private PreparedStatement pstmt2;
 	private CallableStatement cstmt;
 	private ResultSet rs;
+
 	private void getConnection() throws ClassNotFoundException, SQLException {
 		if (conn == null) { // dbConn이 null이면 Connection 객체 얻어오기..
 			// 접속정보
@@ -35,7 +36,7 @@ public class Rel_Mem_Cap {
 			System.out.println("DB연결완료");
 		}
 	}
-	
+
 	public void dbClose() {
 
 		if (rs != null) {
@@ -73,39 +74,65 @@ public class Rel_Mem_Cap {
 		conn = null;
 	}
 
-	public ArrayList<String> membersCapsule(String member_id) {
-		ArrayList<String> capsuleList = new ArrayList<String>();
+	public String membersCapsule(int board_id) {
+		String str = "";
 		try {
 			getConnection();
-			
 
-			String sql = "SELECT * FROM REL_MEMBER_BOARD1 WHERE MEMBER_ID = ?";
+			String sql = "SELECT * FROM REL_MEMBER_BOARD1 WHERE BOARD1_ID = ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, member_id);
-			
-			ResultSet r = pstmt.executeQuery();
-			
-				System.out.println();
+			pstmt.setInt(1, board_id);
 
-			while (r.next()) {
-				capsuleList.add(r.getString("BOARD1_ID"));
+			ResultSet r = pstmt.executeQuery();
+
+			System.out.println();
+
+			if (r.next()) {
+				str = new MemberDAO().selectMember(r.getString("MEMBER_ID")).getName();
 			}
-			
-			
+
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			dbClose();
 		}
 
-		
+		return str;
+	}
 
-		
+	public ArrayList<String> membersCapsule(String member_id) {
+		ArrayList<String> capsuleList = new ArrayList<String>();
+		try {
+			getConnection();
+
+			String sql = "SELECT * FROM REL_MEMBER_BOARD1 WHERE MEMBER_ID = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, member_id);
+
+			ResultSet r = pstmt.executeQuery();
+
+			System.out.println();
+
+			while (r.next()) {
+				capsuleList.add(r.getString("BOARD1_ID"));
+			}
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			dbClose();
+		}
+
 		return capsuleList;
 	}
 }
