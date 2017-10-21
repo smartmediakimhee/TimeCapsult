@@ -164,10 +164,10 @@ public class postGUI {
 		panel_big.add(pn_underimg);
 
 		JPanel pn_small = new JPanel();
+		sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_small, -31, SpringLayout.SOUTH, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.EAST, pn_small, -240, SpringLayout.EAST, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.WEST, pn_underimg, 54, SpringLayout.EAST, pn_small);
 		pn_small.setBorder(new LineBorder(Color.GRAY, 2));
-		sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_small, -31, SpringLayout.SOUTH, panel_big);
 		pn_small.setBackground(new Color(255, 0, 0, 0));
 		panel_big.add(pn_small);
 		SpringLayout sl_pn_small = new SpringLayout();
@@ -233,10 +233,10 @@ public class postGUI {
 				super.paintComponent(g);
 			}
 		};
-		sl_panel_big.putConstraint(SpringLayout.WEST, pn_logo, 69, SpringLayout.WEST, panel_big);
-		sl_panel_big.putConstraint(SpringLayout.EAST, pn_logo, -1629, SpringLayout.EAST, panel_big);
-		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_small, 0, SpringLayout.NORTH, pn_logo);
 		sl_panel_big.putConstraint(SpringLayout.WEST, pn_small, 6, SpringLayout.EAST, pn_logo);
+		sl_panel_big.putConstraint(SpringLayout.WEST, pn_logo, 69, SpringLayout.WEST, panel_big);
+		sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_logo, 270, SpringLayout.NORTH, panel_big);
+		sl_panel_big.putConstraint(SpringLayout.EAST, pn_logo, -1629, SpringLayout.EAST, panel_big);
 
 		JPanel panel_period = new JPanel() {
 			public void paintComponent(Graphics g) {
@@ -355,10 +355,10 @@ public class postGUI {
 		pn_small.add(txtPeriod);
 		txtPeriod.setColumns(10);
 		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_logo, 89, SpringLayout.NORTH, panel_big);
-		sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_logo, 280, SpringLayout.NORTH, panel_big);
 		panel_big.add(pn_logo);
 
 		JPanel pn_nickname = new JPanel();
+		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_small, 64, SpringLayout.SOUTH, pn_nickname);
 		pn_nickname.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
 		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_nickname, 3, SpringLayout.NORTH, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.WEST, pn_nickname, -142, SpringLayout.WEST, lbl_login);
