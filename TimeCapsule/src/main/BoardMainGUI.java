@@ -190,7 +190,7 @@ public class BoardMainGUI implements Runnable {
 
 		JLabel lbl_sort = new JLabel("이걸 누르면 정렬이 될껄?");
 		sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_sort, 800, SpringLayout.NORTH, panel_big);
-		sl_panel_big.putConstraint(SpringLayout.WEST, lbl_sort, 200, SpringLayout.WEST, panel_big);
+		sl_panel_big.putConstraint(SpringLayout.WEST, lbl_sort,1600 , SpringLayout.WEST, panel_big);
 
 		lbl_sort.addMouseListener(new MouseAdapter() {
 			@Override
