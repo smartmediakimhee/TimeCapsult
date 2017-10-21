@@ -47,10 +47,10 @@ public class MyPanel extends JPanel {
 		lbl_title = new JLabel("\uC2A4\uB9C8\uD2B8\uBBF8\uB514\uC5B4\uC778\uC7AC\uAC1C\uBC1C\uC6D0"); // 패널1의 첫번째 라벨로
 		lbl_title.setAutoscrolls(true);																								// 스마트미디어인재개발원텍스트가
 																										// 기입된 라벨을 만듬
-		sl_pn_1.putConstraint(SpringLayout.NORTH, lbl_title, 34, SpringLayout.NORTH, this);// 아까 설정한 sl_pn_1(스프링레이아웃)에
+		sl_pn_1.putConstraint(SpringLayout.NORTH, lbl_title, 10, SpringLayout.NORTH, this);// 아까 설정한 sl_pn_1(스프링레이아웃)에
 																							// 위치선정(pn_1_lbl의 북쪽을 패널1의
 																							// 북쪽으로부터 34만큼 떨어지게끔 만듬)
-		sl_pn_1.putConstraint(SpringLayout.WEST, lbl_title, 145, SpringLayout.WEST, this);
+		sl_pn_1.putConstraint(SpringLayout.WEST, lbl_title, 10, SpringLayout.WEST, this);
 		lbl_title.setHorizontalAlignment(SwingConstants.CENTER);// 텍스트를 중앙정렬
 		lbl_title.setFont(new Font("굴림", Font.PLAIN, 30));
 		
