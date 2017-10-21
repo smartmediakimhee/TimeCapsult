@@ -36,6 +36,8 @@ import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class postGUI {
 	JScrollPane scrollPane;
@@ -54,7 +56,6 @@ public class postGUI {
 	private JTextField txt_minute;
 	private JTextField txt_title;
 	private JTextField txt_content;
-	private JTextField textField_1;
 	private static JTextField txtPeriod;
 	private static String calendarDate;
 	private JCalendar calerdar;
@@ -83,6 +84,8 @@ public class postGUI {
 	public postGUI() {
 		// Logged_in_ID.setText()
 		initialize();
+		txtPeriod.setForeground(Color.gray);
+		txtPeriod.setText("마우스를 클릭하면 달력이 나타납니다.");
 	}
 
 	/**
@@ -178,6 +181,35 @@ public class postGUI {
 		textField.setColumns(10);
 
 		txt_hour = new JTextField();
+		txt_hour.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				if (txt_hour.getText().equals("")) {
+					txt_hour.setForeground(Color.gray);
+					txt_hour.setText("hour");
+				}
+			}
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (txt_hour.getText().equals("hour")) {
+					txt_hour.setForeground(Color.black);
+					txt_hour.setText("");
+					
+				}
+			}
+		});
+		txt_hour.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (txt_hour.getText().equals("hour")) {
+					txt_hour.setForeground(Color.BLACK);
+					txt_hour.setText("");
+				}
+			}
+		});
+		txt_hour.setForeground(Color.GRAY);
+		txt_hour.setFont(new Font("a엄마의편지B", Font.PLAIN, 15));
+		txt_hour.setBorder(new LineBorder(Color.LIGHT_GRAY, 2, true));
 		sl_pn_small.putConstraint(SpringLayout.NORTH, txt_hour, 269, SpringLayout.NORTH, pn_small);
 		sl_pn_small.putConstraint(SpringLayout.EAST, textField, -6, SpringLayout.WEST, txt_hour);
 		sl_pn_small.putConstraint(SpringLayout.WEST, txt_hour, 822, SpringLayout.WEST, pn_small);
@@ -187,6 +219,9 @@ public class postGUI {
 		pn_small.add(txt_hour);
 
 		txt_minute = new JTextField();
+		txt_minute.setForeground(Color.GRAY);
+		txt_minute.setFont(new Font("a엄마의편지B", Font.PLAIN, 15));
+		txt_minute.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
 		sl_pn_small.putConstraint(SpringLayout.NORTH, txt_minute, 269, SpringLayout.NORTH, pn_small);
 		sl_pn_small.putConstraint(SpringLayout.EAST, txt_hour, -8, SpringLayout.WEST, txt_minute);
 		sl_pn_small.putConstraint(SpringLayout.WEST, txt_minute, 968, SpringLayout.WEST, pn_small);
@@ -197,6 +232,9 @@ public class postGUI {
 		pn_small.add(txt_minute);
 
 		txt_title = new JTextField();
+		txt_title.setForeground(Color.GRAY);
+		txt_title.setFont(new Font("a엄마의편지B", Font.PLAIN, 15));
+		txt_title.setBorder(new LineBorder(Color.LIGHT_GRAY, 2, true));
 		sl_pn_small.putConstraint(SpringLayout.NORTH, textField, 43, SpringLayout.SOUTH, txt_title);
 		sl_pn_small.putConstraint(SpringLayout.SOUTH, textField, -12, SpringLayout.NORTH, txt_title);
 		sl_pn_small.putConstraint(SpringLayout.SOUTH, txt_minute, -15, SpringLayout.NORTH, txt_title);
@@ -209,6 +247,8 @@ public class postGUI {
 		pn_small.add(txt_title);
 
 		txt_content = new JTextField();
+		txt_content.setBorder(new LineBorder(new Color(192, 192, 192), 2, true));
+		txt_content.setFont(new Font("a엄마의편지B", Font.PLAIN, 20));
 		sl_pn_small.putConstraint(SpringLayout.EAST, txt_content, -277, SpringLayout.EAST, pn_small);
 		sl_pn_small.putConstraint(SpringLayout.SOUTH, txt_title, -15, SpringLayout.NORTH, txt_content);
 		sl_pn_small.putConstraint(SpringLayout.NORTH, txt_content, 361, SpringLayout.NORTH, pn_small);
@@ -216,6 +256,7 @@ public class postGUI {
 		txt_content.setText("content");
 		txt_content.setHorizontalAlignment(SwingConstants.CENTER);
 		txt_content.setColumns(10);
+		txt_content.setDocument((new JTextFieldLimit(100)));
 		pn_small.add(txt_content);
 
 		JPanel pn_logo = new JPanel() {
@@ -331,18 +372,15 @@ public class postGUI {
 		btn_in.setText("in");
 		pn_small.add(btn_in);
 
-		textField_1 = new JTextField();
-		textField_1.setText("hour");
-		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_1.setColumns(10);
-		pn_small.add(textField_1);
-
 		txtPeriod = new JTextField();
+		txtPeriod.setFont(new Font("a엄마의편지B", Font.PLAIN, 15));
+		txtPeriod.setBorder(new LineBorder(Color.LIGHT_GRAY, 2, true));
 		sl_pn_small.putConstraint(SpringLayout.NORTH, txtPeriod, 269, SpringLayout.NORTH, pn_small);
 		sl_pn_small.putConstraint(SpringLayout.SOUTH, txtPeriod, -13, SpringLayout.NORTH, txt_title);
 		txtPeriod.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
+				txtPeriod.setForeground(Color.BLACK);
 				JCal cal = new JCal();
 				cal.main(null);
 				txtPeriod.setText(calendarDate);
@@ -390,5 +428,4 @@ public class postGUI {
 		txtPeriod.setText(calendarDate);
 		
 	}
-
 }
