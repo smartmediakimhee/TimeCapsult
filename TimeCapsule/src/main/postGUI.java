@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -63,9 +65,9 @@ public class postGUI {
 	private JCalendar calerdar;
 	private JComboBox timebox;
 	public static String date = "";
-	private String temp2;
+	private String temp2 = "선택안함";
 	private JComboBox minbox;
-	private String temp3;
+	private String temp3 = "선택안함";
 
 	/**
 	 * Launch the application.
@@ -110,35 +112,35 @@ public class postGUI {
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1920, 1040);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		timebox = new JComboBox();
-		((JLabel)timebox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+		((JLabel) timebox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 		timebox.setBackground(Color.WHITE);
 		timebox.setOpaque(false);
-		timebox.addItemListener(new ItemListener(){
-			   public void itemStateChanged(ItemEvent ev){
-			    if(ev.getStateChange() == ItemEvent.SELECTED){
-			     JComboBox jbox2 = (JComboBox)ev.getItemSelectable();
-			    temp2 = jbox2.getSelectedItem().toString();
-			     System.out.println(temp2);
-			    }
-			   }
-			  });
+		timebox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent ev) {
+				if (ev.getStateChange() == ItemEvent.SELECTED) {
+					JComboBox jbox2 = (JComboBox) ev.getItemSelectable();
+					temp2 = jbox2.getSelectedItem().toString();
+					System.out.println(temp2);
+				}
+			}
+		});
 
 		minbox = new JComboBox();
-		((JLabel)minbox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+		((JLabel) minbox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 		minbox.setBackground(Color.WHITE);
 		minbox.setOpaque(false);
 		minbox.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
-		minbox.addItemListener(new ItemListener(){
-			   public void itemStateChanged(ItemEvent ev){
-			    if(ev.getStateChange() == ItemEvent.SELECTED){
-			     JComboBox jbox = (JComboBox)ev.getItemSelectable();
-			    temp3 = jbox.getSelectedItem().toString();
-			     System.out.println(temp3);
-			    }
-			   }
-			  });
+		minbox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent ev) {
+				if (ev.getStateChange() == ItemEvent.SELECTED) {
+					JComboBox jbox = (JComboBox) ev.getItemSelectable();
+					temp3 = jbox.getSelectedItem().toString();
+					System.out.println(temp3);
+				}
+			}
+		});
 
 		JPanel panel_big = new JPanel() {
 			public void paintComponent(Graphics g) {
@@ -232,10 +234,11 @@ public class postGUI {
 					txt_title.setForeground(Color.gray);
 				}
 			}
+
 			@Override
 			public void focusGained(FocusEvent e) {
 				if (txt_title.getText().equals("title")) {
-					
+
 					txt_title.setForeground(Color.black);
 					txt_title.setText("");
 				}
@@ -247,7 +250,7 @@ public class postGUI {
 				if (txt_title.getText().equals("title")) {
 					txt_title.setForeground(Color.black);
 					txt_title.setText("");
-					
+
 				}
 			}
 		});
@@ -270,12 +273,13 @@ public class postGUI {
 				if (txt_content.getText().equals("게시물의 내용은 200자 내외로 작성하시오.")) {
 					txt_content.setForeground(Color.black);
 					txt_content.setText("");
-					
+
 				}
 			}
+
 			@Override
 			public void focusLost(FocusEvent e) {
-				if (txt_content.getText().length()==0) {
+				if (txt_content.getText().length() == 0) {
 					txt_content.setText("게시물의 내용은 200자 내외로 작성하시오.");
 					txt_content.setForeground(Color.gray);
 				}
@@ -301,7 +305,6 @@ public class postGUI {
 		txt_content.setColumns(10);
 		txt_content.setDocument((new JTextFieldLimit(200)));
 		pn_small.add(txt_content);
-		
 
 		JPanel pn_logo = new JPanel() {
 			public void paintComponent(Graphics g) {
@@ -394,9 +397,10 @@ public class postGUI {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				btn_in.setOpaque(true);
-				btn_in.setBackground(new Color(255,160,160));
+				btn_in.setBackground(new Color(255, 160, 160));
 				btn_in.setCursor(new Cursor(12));
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				btn_in.setOpaque(false);
@@ -406,19 +410,22 @@ public class postGUI {
 		btn_in.setFont(new Font("a엄마의편지B", Font.PLAIN, 20));
 		btn_in.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if (!txtPeriod.getText().equals("마우스를 클릭하면 달력이 나타납니다.") && !temp2.equals("선택안함")&&!temp3.equals("선택안함")) {
+					Board_1_DAO b1 = new Board_1_DAO();
 
-				Board_1_DAO b1 = new Board_1_DAO();
+					String hour = temp2;
+					String minute = temp3;
+					String title = txt_title.getText();
+					String content = txt_content.getText();
 
-				String hour = temp2;
-				String minute = temp3;
-				String title = txt_title.getText();
-				String content = txt_content.getText();
-
-				String settime = date + " " + hour + ":" + minute + ":00";
-				if(b1.insertBoard_1(title, content, settime)) {
-					frame.dispose();
+					String settime = date + " " + hour + ":" + minute + ":00";
+					if (b1.insertBoard_1(title, content, settime)) {
+						frame.dispose();
+					}
+				} else {
+					System.out.println("날짜를 선택하라고 ㅋㅋㅋ");
+					JOptionPane.showMessageDialog(null, "글이 열릴 날짜를 정확히 선택해주세요.");
 				}
-
 			}
 		});
 		btn_in.setBackground(new Color(240, 240, 240));
@@ -479,24 +486,27 @@ public class postGUI {
 
 		logged_in_ID.setText(LoggedIN.getInfo().getName());
 		txtPeriod.setText(date);
-		
-		
+
 		sl_pn_small.putConstraint(SpringLayout.SOUTH, timebox, 0, SpringLayout.SOUTH, txtPeriod);
 		timebox.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
 		sl_pn_small.putConstraint(SpringLayout.NORTH, timebox, 0, SpringLayout.NORTH, txtPeriod);
-		timebox.setModel(new DefaultComboBoxModel(new String[] {"TIME", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"}));
+		timebox.setModel(new DefaultComboBoxModel(new String[] { "TIME", "01", "02", "03", "04", "05", "06", "07", "08",
+				"09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
 		pn_small.add(timebox);
-		
-		
+
 		sl_pn_small.putConstraint(SpringLayout.NORTH, minbox, 0, SpringLayout.NORTH, timebox);
 		sl_pn_small.putConstraint(SpringLayout.SOUTH, minbox, 0, SpringLayout.SOUTH, timebox);
-		minbox.setModel(new DefaultComboBoxModel(new String[] {"MIN", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"}));
+		minbox.setModel(new DefaultComboBoxModel(
+				new String[] { "MIN", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12",
+						"13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28",
+						"29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44",
+						"45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
 		pn_small.add(minbox);
 	}
 
 	public static void getDate(String date2) {
 		calendarDate = date2;
 		txtPeriod.setText(calendarDate);
-		
+
 	}
 }

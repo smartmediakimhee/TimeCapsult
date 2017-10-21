@@ -39,6 +39,7 @@ public class BoardMainGUI implements Runnable {
 	private ImageIcon icon2;
 	private JFrame frame;
 	private ImageIcon icon3;
+	private ImageIcon icon4;
 	private Boolean b = false;
 	private Thread thread;
 
@@ -84,6 +85,7 @@ public class BoardMainGUI implements Runnable {
 		icon = new ImageIcon("Image\\back.jpg");
 		icon2 = new ImageIcon("Image\\1.png");
 		icon3 = new ImageIcon("Image\\icon2.png");
+		icon4 = new ImageIcon("Image\\rain.png");
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1920, 1040);
 		frame.addWindowListener(new WindowAdapter() {
@@ -160,6 +162,34 @@ public class BoardMainGUI implements Runnable {
 		sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_img1, -867, SpringLayout.SOUTH, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.EAST, pn_img1, -1759, SpringLayout.EAST, panel_big);
 		panel_big.add(pn_img1);
+		
+		JPanel pn_img11 = new JPanel() {
+			public void paintComponent(Graphics g) {
+				// Approach 1: Dispaly image at at full size
+				g.drawImage(icon3.getImage(), 0, 0, null);
+				// Approach 2: Scale image to size of component
+//				 Dimension d = getSize();
+//				 g.drawImage(icon3.getImage(), 0, 0, d.width, d.height, null);
+				// Approach 3: Fix the image position in the scroll pane
+				// Point p = scrollPane.getViewport().getViewPosition();
+				// g.drawImage(icon.getImage(), p.x, p.y, null);
+				setOpaque(false); // 그림을 표시하게 설정,투명하게 조절
+				super.paintComponent(g);
+			}
+		};
+		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_img11, 800, SpringLayout.NORTH, panel_big);
+		sl_panel_big.putConstraint(SpringLayout.WEST, pn_img11, 200, SpringLayout.WEST, panel_big);
+		sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_img11, -82, SpringLayout.SOUTH, panel_big);
+		sl_panel_big.putConstraint(SpringLayout.EAST, pn_img11, -60, SpringLayout.EAST, panel_big);
+		panel_big.add(pn_img11);
+		
+//		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_img2, 813, SpringLayout.NORTH, panel_big);
+//		sl_panel_big.putConstraint(SpringLayout.WEST, pn_img2, 0, SpringLayout.WEST, lbl_login);
+//		sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_img2, -82, SpringLayout.SOUTH, panel_big);
+//		sl_panel_big.putConstraint(SpringLayout.EAST, pn_img2, -40, SpringLayout.EAST, panel_big);
+//		panel_big.add(pn_img2);
+
+	
 
 		JPanel pn_img2 = new JPanel() {
 			public void paintComponent(Graphics g) {
