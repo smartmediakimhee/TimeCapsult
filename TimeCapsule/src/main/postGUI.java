@@ -112,6 +112,7 @@ public class postGUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		timebox = new JComboBox();
+		((JLabel)timebox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 		timebox.setBackground(Color.WHITE);
 		timebox.setOpaque(false);
 		timebox.addItemListener(new ItemListener(){
@@ -125,6 +126,7 @@ public class postGUI {
 			  });
 
 		minbox = new JComboBox();
+		((JLabel)minbox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 		minbox.setBackground(Color.WHITE);
 		minbox.setOpaque(false);
 		minbox.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
@@ -387,7 +389,21 @@ public class postGUI {
 		pn_small.add(panel_content);
 		;
 
-		JButton btn_in = new JButton(new ImageIcon("./Image/btn.png"));
+		JButton btn_in = new JButton();
+		btn_in.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btn_in.setOpaque(true);
+				btn_in.setBackground(new Color(255,160,160));
+				btn_in.setCursor(new Cursor(12));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btn_in.setOpaque(false);
+			}
+		});
+		btn_in.setOpaque(false);
+		btn_in.setFont(new Font("a엄마의편지B", Font.PLAIN, 20));
 		btn_in.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -409,7 +425,7 @@ public class postGUI {
 		sl_pn_small.putConstraint(SpringLayout.SOUTH, btn_in, 108, SpringLayout.SOUTH, txt_content);
 		sl_pn_small.putConstraint(SpringLayout.EAST, btn_in, -530, SpringLayout.EAST, pn_small);
 		btn_in.setBorderPainted(false);
-		btn_in.setText("in");
+		btn_in.setText("Create");
 		pn_small.add(btn_in);
 
 		txtPeriod = new JTextField();
@@ -437,9 +453,9 @@ public class postGUI {
 
 		JPanel pn_nickname = new JPanel();
 		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_small, 64, SpringLayout.SOUTH, pn_nickname);
+		sl_panel_big.putConstraint(SpringLayout.WEST, pn_nickname, -121, SpringLayout.WEST, lbl_login);
 		pn_nickname.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
 		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_nickname, 3, SpringLayout.NORTH, panel_big);
-		sl_panel_big.putConstraint(SpringLayout.WEST, pn_nickname, -142, SpringLayout.WEST, lbl_login);
 		sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_nickname, 0, SpringLayout.SOUTH, lbl_login);
 		sl_panel_big.putConstraint(SpringLayout.EAST, pn_nickname, -6, SpringLayout.WEST, lbl_login);
 		panel_big.add(pn_nickname);
