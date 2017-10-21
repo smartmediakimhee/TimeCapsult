@@ -21,8 +21,11 @@ public class MyPanel2 extends JPanel {
 	public JLabel lbl_showtime;
 	public ImageIcon icon;
 	private JLabel likecount;
+	private JPanel panel;
+	private ImageIcon like;
 
 	public MyPanel2(SpringLayout sl_pn_scroll, JPanel pn_1) {
+		like = new ImageIcon(".\\Image\\cloud.png");
 		setBorder(new MatteBorder(1, 0, 1, 0, (Color) Color.LIGHT_GRAY));
 		sl_pn_scroll.putConstraint(SpringLayout.NORTH, this, 38, SpringLayout.SOUTH, pn_1);
 		sl_pn_scroll.putConstraint(SpringLayout.WEST, this, 0, SpringLayout.WEST, pn_1);
@@ -89,9 +92,31 @@ public class MyPanel2 extends JPanel {
 		
 		likecount = new JLabel("1000");
 		sl_pn_2.putConstraint(SpringLayout.NORTH, likecount, 6, SpringLayout.SOUTH, pn_2_weather);
-		sl_pn_2.putConstraint(SpringLayout.WEST, likecount, 6, SpringLayout.WEST, pn_2_weather);
+		sl_pn_2.putConstraint(SpringLayout.WEST, likecount, -20, SpringLayout.WEST, pn_2_weather);
 		likecount.setHorizontalAlignment(SwingConstants.CENTER);
 		add(likecount);
+		
+		panel = new JPanel() {
+			public void paintComponent(Graphics g) {
+				// Approach 1: Dispaly image at at full size
+//				g.drawImage(like.getImage(), 0, 0, null);
+				// Approach 2: Scale image to size of component
+				Dimension d = getSize();
+				g.drawImage(like.getImage(), 0, 0, d.width, d.height, null);
+				// Approach 3: Fix the image position in the scroll pane
+				// Point p = scrollPane.getViewport().getViewPosition();
+				// g.drawImage(icon.getImage(), p.x, p.y, null);
+				setOpaque(false); // 그림을 표시하게 설정,투명하게 조절
+				super.paintComponent(g);
+			}
+		};
+		sl_pn_2.putConstraint(SpringLayout.NORTH, panel, 6, SpringLayout.SOUTH, pn_2_weather);
+		sl_pn_2.putConstraint(SpringLayout.WEST, panel, 6, SpringLayout.EAST, likecount);
+		sl_pn_2.putConstraint(SpringLayout.SOUTH, panel, 16, SpringLayout.SOUTH, pn_2_weather);
+		panel.setPreferredSize(new Dimension(30,30));
+
+
+		add(panel);
 	}
 
 	public void get_icon(String str) {
