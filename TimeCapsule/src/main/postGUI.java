@@ -38,6 +38,10 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
+import javax.swing.DefaultComboBoxModel;
 
 public class postGUI {
 	JScrollPane scrollPane;
@@ -52,15 +56,16 @@ public class postGUI {
 	ImageIcon back;
 	private JFrame frame;
 	private JTextField textField;
-	private JTextField txt_hour;
-	private JTextField txt_minute;
 	private JTextField txt_title;
 	private JTextField txt_content;
 	private static JTextField txtPeriod;
 	private static String calendarDate;
 	private JCalendar calerdar;
-
+	private JComboBox timebox;
 	public static String date = "";
+	private String temp2;
+	private JComboBox minbox;
+	private String temp3;
 
 	/**
 	 * Launch the application.
@@ -103,6 +108,33 @@ public class postGUI {
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1920, 1040);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		timebox = new JComboBox();
+		timebox.setBackground(Color.WHITE);
+		timebox.setOpaque(false);
+		timebox.addItemListener(new ItemListener(){
+			   public void itemStateChanged(ItemEvent ev){
+			    if(ev.getStateChange() == ItemEvent.SELECTED){
+			     JComboBox jbox2 = (JComboBox)ev.getItemSelectable();
+			    temp2 = jbox2.getSelectedItem().toString();
+			     System.out.println(temp2);
+			    }
+			   }
+			  });
+
+		minbox = new JComboBox();
+		minbox.setBackground(Color.WHITE);
+		minbox.setOpaque(false);
+		minbox.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+		minbox.addItemListener(new ItemListener(){
+			   public void itemStateChanged(ItemEvent ev){
+			    if(ev.getStateChange() == ItemEvent.SELECTED){
+			     JComboBox jbox = (JComboBox)ev.getItemSelectable();
+			    temp3 = jbox.getSelectedItem().toString();
+			     System.out.println(temp3);
+			    }
+			   }
+			  });
 
 		JPanel panel_big = new JPanel() {
 			public void paintComponent(Graphics g) {
@@ -174,71 +206,52 @@ public class postGUI {
 		pn_small.setBackground(new Color(255, 0, 0, 0));
 		panel_big.add(pn_small);
 		SpringLayout sl_pn_small = new SpringLayout();
+		sl_pn_small.putConstraint(SpringLayout.WEST, timebox, 813, SpringLayout.WEST, pn_small);
+		sl_pn_small.putConstraint(SpringLayout.EAST, timebox, -19, SpringLayout.WEST, minbox);
+		sl_pn_small.putConstraint(SpringLayout.WEST, minbox, 967, SpringLayout.WEST, pn_small);
+		sl_pn_small.putConstraint(SpringLayout.EAST, minbox, -277, SpringLayout.EAST, pn_small);
 		pn_small.setLayout(sl_pn_small);
+		pn_small.setOpaque(false);
 
 		textField = new JTextField();
+		sl_pn_small.putConstraint(SpringLayout.WEST, textField, 381, SpringLayout.WEST, pn_small);
+		sl_pn_small.putConstraint(SpringLayout.EAST, textField, -563, SpringLayout.EAST, pn_small);
 		pn_small.add(textField);
 		textField.setColumns(10);
 
-		txt_hour = new JTextField();
-		txt_hour.addFocusListener(new FocusAdapter() {
+		txt_title = new JTextField();
+		txt_title.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
-				if (txt_hour.getText().equals("")) {
-					txt_hour.setForeground(Color.gray);
-					txt_hour.setText("hour");
+				if (txt_title.getText().equals("")) {
+					txt_title.setText("title");
+					txt_title.setForeground(Color.gray);
 				}
 			}
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (txt_hour.getText().equals("hour")) {
-					txt_hour.setForeground(Color.black);
-					txt_hour.setText("");
+				if (txt_title.getText().equals("title")) {
+					
+					txt_title.setForeground(Color.black);
+					txt_title.setText("");
+				}
+			}
+		});
+		txt_title.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (txt_title.getText().equals("title")) {
+					txt_title.setForeground(Color.black);
+					txt_title.setText("");
 					
 				}
 			}
 		});
-		txt_hour.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				if (txt_hour.getText().equals("hour")) {
-					txt_hour.setForeground(Color.BLACK);
-					txt_hour.setText("");
-				}
-			}
-		});
-		txt_hour.setForeground(Color.GRAY);
-		txt_hour.setFont(new Font("a엄마의편지B", Font.PLAIN, 15));
-		txt_hour.setBorder(new LineBorder(Color.LIGHT_GRAY, 2, true));
-		sl_pn_small.putConstraint(SpringLayout.NORTH, txt_hour, 269, SpringLayout.NORTH, pn_small);
-		sl_pn_small.putConstraint(SpringLayout.EAST, textField, -6, SpringLayout.WEST, txt_hour);
-		sl_pn_small.putConstraint(SpringLayout.WEST, txt_hour, 822, SpringLayout.WEST, pn_small);
-		txt_hour.setHorizontalAlignment(SwingConstants.CENTER);
-		txt_hour.setText("hour");
-		txt_hour.setColumns(10);
-		pn_small.add(txt_hour);
-
-		txt_minute = new JTextField();
-		txt_minute.setForeground(Color.GRAY);
-		txt_minute.setFont(new Font("a엄마의편지B", Font.PLAIN, 15));
-		txt_minute.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
-		sl_pn_small.putConstraint(SpringLayout.NORTH, txt_minute, 269, SpringLayout.NORTH, pn_small);
-		sl_pn_small.putConstraint(SpringLayout.EAST, txt_hour, -8, SpringLayout.WEST, txt_minute);
-		sl_pn_small.putConstraint(SpringLayout.WEST, txt_minute, 968, SpringLayout.WEST, pn_small);
-		sl_pn_small.putConstraint(SpringLayout.EAST, txt_minute, -277, SpringLayout.EAST, pn_small);
-		txt_minute.setText("minute");
-		txt_minute.setHorizontalAlignment(SwingConstants.CENTER);
-		txt_minute.setColumns(10);
-		pn_small.add(txt_minute);
-
-		txt_title = new JTextField();
 		txt_title.setForeground(Color.GRAY);
 		txt_title.setFont(new Font("a엄마의편지B", Font.PLAIN, 15));
 		txt_title.setBorder(new LineBorder(Color.LIGHT_GRAY, 2, true));
 		sl_pn_small.putConstraint(SpringLayout.NORTH, textField, 43, SpringLayout.SOUTH, txt_title);
 		sl_pn_small.putConstraint(SpringLayout.SOUTH, textField, -12, SpringLayout.NORTH, txt_title);
-		sl_pn_small.putConstraint(SpringLayout.SOUTH, txt_minute, -15, SpringLayout.NORTH, txt_title);
-		sl_pn_small.putConstraint(SpringLayout.SOUTH, txt_hour, -13, SpringLayout.NORTH, txt_title);
 		sl_pn_small.putConstraint(SpringLayout.EAST, txt_title, -277, SpringLayout.EAST, pn_small);
 		sl_pn_small.putConstraint(SpringLayout.NORTH, txt_title, 315, SpringLayout.NORTH, pn_small);
 		txt_title.setHorizontalAlignment(SwingConstants.CENTER);
@@ -294,8 +307,6 @@ public class postGUI {
 				super.paintComponent(g);
 			}
 		};
-
-		sl_pn_small.putConstraint(SpringLayout.WEST, textField, 26, SpringLayout.EAST, panel_period);
 		sl_pn_small.putConstraint(SpringLayout.SOUTH, panel_period, -582, SpringLayout.SOUTH, pn_small);
 		sl_pn_small.putConstraint(SpringLayout.WEST, panel_period, 301, SpringLayout.WEST, pn_small);
 		sl_pn_small.putConstraint(SpringLayout.EAST, panel_period, -1024, SpringLayout.EAST, pn_small);
@@ -353,8 +364,8 @@ public class postGUI {
 
 				Board_1_DAO b1 = new Board_1_DAO();
 
-				String hour = txt_hour.getText();
-				String minute = txt_minute.getText();
+				String hour = temp2;
+				String minute = temp3;
 				String title = txt_title.getText();
 				String content = txt_content.getText();
 
@@ -373,6 +384,8 @@ public class postGUI {
 		pn_small.add(btn_in);
 
 		txtPeriod = new JTextField();
+		sl_pn_small.putConstraint(SpringLayout.WEST, txtPeriod, 28, SpringLayout.EAST, panel_period);
+		sl_pn_small.putConstraint(SpringLayout.EAST, txtPeriod, -16, SpringLayout.WEST, timebox);
 		txtPeriod.setFont(new Font("a엄마의편지B", Font.PLAIN, 15));
 		txtPeriod.setBorder(new LineBorder(Color.LIGHT_GRAY, 2, true));
 		sl_pn_small.putConstraint(SpringLayout.NORTH, txtPeriod, 269, SpringLayout.NORTH, pn_small);
@@ -388,8 +401,6 @@ public class postGUI {
 		});
 		txtPeriod.setHorizontalAlignment(SwingConstants.CENTER);
 		txtPeriod.setText("period");
-		sl_pn_small.putConstraint(SpringLayout.WEST, txtPeriod, -439, SpringLayout.WEST, txt_hour);
-		sl_pn_small.putConstraint(SpringLayout.EAST, txtPeriod, -15, SpringLayout.WEST, txt_hour);
 		pn_small.add(txtPeriod);
 		txtPeriod.setColumns(10);
 		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_logo, 89, SpringLayout.NORTH, panel_big);
@@ -420,7 +431,19 @@ public class postGUI {
 
 		logged_in_ID.setText(LoggedIN.getInfo().getName());
 		txtPeriod.setText(date);
-
+		
+		
+		sl_pn_small.putConstraint(SpringLayout.SOUTH, timebox, 0, SpringLayout.SOUTH, txtPeriod);
+		timebox.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+		sl_pn_small.putConstraint(SpringLayout.NORTH, timebox, 0, SpringLayout.NORTH, txtPeriod);
+		timebox.setModel(new DefaultComboBoxModel(new String[] {"TIME", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"}));
+		pn_small.add(timebox);
+		
+		
+		sl_pn_small.putConstraint(SpringLayout.NORTH, minbox, 0, SpringLayout.NORTH, timebox);
+		sl_pn_small.putConstraint(SpringLayout.SOUTH, minbox, 0, SpringLayout.SOUTH, timebox);
+		minbox.setModel(new DefaultComboBoxModel(new String[] {"MIN", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"}));
+		pn_small.add(minbox);
 	}
 
 	public static void getDate(String date2) {
