@@ -85,7 +85,6 @@ public class MemberDAO {
 		return result;
 	}
 
-	
 	//구현안함
 	public ArrayList<MemberDTO> selectAllMember() {
 		ArrayList<MemberDTO> dto = new ArrayList<>();
