@@ -155,7 +155,8 @@ public class JoinGUI {
 		panel_2.add(lblNewLabel);
 
 		idInput = new JTextField();
-		idInput.setFont(new Font(".\\font\\A서당개.TTF", Font.PLAIN, 24));
+		
+		idInput.setFont(new Font("a내손글씨L", Font.PLAIN, 24));
 //		".\\Image\\exitarrow.png"
 		idInput.addFocusListener(new FocusAdapter() {
 			@Override
@@ -201,7 +202,7 @@ public class JoinGUI {
 		panel_2.add(idInput);
 		idInput.setColumns(10);
 		idInput.setOpaque(false);
-
+	
 		JLabel label_3 = new JLabel("\uBE44\uBC00\uBC88\uD638");
 		label_3.setBounds(143, 307, 57, 15);
 		panel_2.add(label_3);

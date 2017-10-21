@@ -16,6 +16,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.WindowFocusListener;
+import java.awt.event.WindowEvent;
 
 public class JCal {
    private JFrame frame;
@@ -51,6 +55,9 @@ public class JCal {
    private void initialize() {
 	  
       frame = new JFrame();
+
+
+
       frame.setBounds(100, 100, 302, 247);
       frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       SpringLayout springLayout = new SpringLayout();
@@ -65,6 +72,13 @@ public class JCal {
       panel.setLayout(new CardLayout(0, 0));
       
       JCalendar calendar = new JCalendar();
+      calendar.getDayChooser().getDayPanel().addMouseListener(new MouseAdapter() {
+      	@Override
+      	public void mouseReleased(MouseEvent e) {
+      		frame.dispose();
+      	}
+      	
+      });
       
       panel.add(calendar, "name_28143323268548");
       
@@ -87,8 +101,7 @@ public class JCal {
               System.out.println(date);
               postGUI.getDate(date);
          }
-
-         
+       
       });
       
        

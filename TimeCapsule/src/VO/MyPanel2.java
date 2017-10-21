@@ -58,7 +58,7 @@ public class MyPanel2 extends JPanel {
 		sl_pn_2.putConstraint(SpringLayout.SOUTH, lbl_howtime, 186, SpringLayout.SOUTH, lbl_title);
 		lbl_howtime.setOpaque(false);
 		lbl_howtime.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_howtime.setFont(new Font("±¼¸²", Font.PLAIN, 30));
+		lbl_howtime.setFont(new Font("aÆæ±Û¾¾B", Font.PLAIN, 30));
 		lbl_howtime.setBackground(Color.WHITE);
 		this.add(lbl_howtime);
 
