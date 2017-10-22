@@ -423,9 +423,9 @@ public class BoardMainGUI implements Runnable {
 
 		// 보드arr초기화
 		init_boardArr();
-		pn_1.lbl_title.setText("여기는 이제 광고판입니다");
-		pn_1.pn_1_howtime.setText("광고비 시간당 3천만원부터");
-		pn_1.lbl_showtime.setText("광고를해보아요~");
+		pn_1.lbl_title.setText("");
+		pn_1.pn_1_howtime.setText("");
+		pn_1.lbl_showtime.setText("");
 		pn_1.get_icon(whereIconsrc(new MyWeather().getWeather()));
 		// 정렬
 		// sortBoardArrtime(board_Arr);
@@ -542,10 +542,10 @@ public class BoardMainGUI implements Runnable {
 	private synchronized void Show() {
 		Date nowDate = new Date();
 		if (board_Arr.size() <= 0) {
-			pn_1.lbl_title.setText("여기는 이제 광고판입니다");
-			pn_1.pn_1_howtime.setText("광고비 시간당 3천만원부터");
-			pn_1.lbl_showtime.setText("광고를해보아요~");
-			pn_1.get_icon(whereIconsrc("맑음"));
+			pn_1.lbl_title.setText("");
+			pn_1.pn_1_howtime.setText("");
+			pn_1.lbl_showtime.setText("");
+			pn_1.get_icon(whereIconsrc(""));
 			target = pn_1;
 			panelArr.add(new MyPanel2(sl_pn_scroll, target));
 			pn_scroll.add(panelArr.get(0));
@@ -553,12 +553,12 @@ public class BoardMainGUI implements Runnable {
 			panelArr.get(0).lbl_title.setText("아니.. 아직도 작성한 글이 없어요..?");
 			panelArr.get(0).lbl_howtime.setText("해당 아이디로 작성한 글이 없습니다!");
 			panelArr.get(0).lbl_showtime.setText("글을 작성해 보세요~");
-			panelArr.get(0).get_icon(whereIconsrc("맑음"));
+			panelArr.get(0).get_icon(whereIconsrc(""));
 		} else {
-			pn_1.lbl_title.setText("여기는 이제 광고판입니다");
-			pn_1.pn_1_howtime.setText("광고비 시간당 3천만원부터");
-			pn_1.lbl_showtime.setText("광고를해보아요~");
-			pn_1.get_icon(whereIconsrc("맑음"));
+			pn_1.lbl_title.setText("");
+			pn_1.pn_1_howtime.setText("");
+			pn_1.lbl_showtime.setText("");
+			pn_1.get_icon(whereIconsrc(""));
 			size.setSize(10, panelsHeightSize(board_Arr.size()+1));
 			// pn_2.setOpaque(false);
 			scrollPane_1.getVerticalScrollBar().setUnitIncrement(30);
