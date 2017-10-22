@@ -199,7 +199,20 @@ public class BoardMainGUI implements Runnable {
 				super.paintComponent(g);
 			}
 		};
-
+		pn_img1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				viewCaseNum=0;
+				member_id = LoggedIN.Logged_in_id;
+				isok2=true;
+				
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pn_img1.setCursor(new Cursor(12));
+			}
+		});
 		sl_panel_big.putConstraint(SpringLayout.NORTH, pn_img1, 28, SpringLayout.NORTH, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.WEST, pn_img1, 10, SpringLayout.WEST, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_img1, -867, SpringLayout.SOUTH, panel_big);
