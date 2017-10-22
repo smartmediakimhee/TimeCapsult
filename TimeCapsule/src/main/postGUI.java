@@ -75,6 +75,7 @@ public class postGUI {
 	Dimension d;
 
 	ImageIcon back;
+	ImageIcon exit;
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField txt_title;
@@ -118,6 +119,7 @@ public class postGUI {
 	 */
 	private void initialize() {
 		calendar = new JCalendar();
+		exit = new ImageIcon(".\\Image\\exitleft.png");
 		back = new ImageIcon("../TimeCapsule/Image/back.jpg");
 		icon = new ImageIcon("../TimeCapsule/Image/1.png");
 		icon2 = new ImageIcon("../TimeCapsule/Image/capsulered.png");
@@ -544,6 +546,40 @@ public class postGUI {
 		txt.setFont(new Font("a엄마의편지L", Font.PLAIN, 20));
 		txt.setText(
 				"\uAC8C\uC2DC\uBB3C\uC758 \uB0B4\uC6A9\uC740 200\uC790 \uB0B4\uB85C \uC791\uC131\uD558\uC2DC\uC624.");
+		
+		JPanel pn_exit = new JPanel() {
+			public void paintComponent(Graphics g) {
+				// Approach 1: Dispaly image at at full size
+//				g.drawImage(content.getImage(), 0, 0, null);
+				// Approach 2: Scale image to size of component
+
+				 Dimension d = getSize();
+				 g.drawImage(exit.getImage(), 0, 0, d.width, d.height, null);
+				// Approach 3: Fix the image position in the scroll pane
+				// Point p = scrollPane.getViewport().getViewPosition();
+				// g.drawImage(icon.getImage(), p.x, p.y, null);
+				setOpaque(false); // 그림을 표시하게 설정,투명하게 조절
+				super.paintComponent(g);
+			}
+		};
+		sl_pn_small.putConstraint(SpringLayout.NORTH, pn_exit, -78, SpringLayout.SOUTH, pn_small);
+		sl_pn_small.putConstraint(SpringLayout.WEST, pn_exit, 10, SpringLayout.WEST, pn_small);
+		sl_pn_small.putConstraint(SpringLayout.SOUTH, pn_exit, -10, SpringLayout.SOUTH, pn_small);
+		sl_pn_small.putConstraint(SpringLayout.EAST, pn_exit, 77, SpringLayout.WEST, pn_small);
+		pn_exit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				frame.dispose();
+				new MainGUI().main(null);
+			}
+			public void mouseEntered(MouseEvent arg0) {
+				pn_exit.setCursor(new Cursor(12));
+			}
+		});
+//		sl_pn_small.putConstraint(SpringLayout.SOUTH, pn_exit, 60, SpringLayout.NORTH, pn_exit);
+//		sl_pn_small.putConstraint(SpringLayout.EAST, pn_exit, 60, SpringLayout.WEST, pn_exit);
+		pn_exit.setToolTipText("\uB85C\uADF8\uC778\uD654\uBA74\uC73C\uB85C \uB3CC\uC544\uAC00\uAE30");
+		pn_small.add(pn_exit);
 	}
 
 	public static void getDate(String date2) {
