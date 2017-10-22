@@ -215,7 +215,7 @@ public class JoinGUI {
 				for (int i = 0; i < 1; i++) {
 					if (nameInput.getText().length() == 0) {
 						nameInput.setForeground(Color.gray);
-						nameInput.setText("특수문자제외8~12자리");
+						nameInput.setText("특수문자제외12자리이내");
 					}
 				}
 
@@ -223,7 +223,7 @@ public class JoinGUI {
 
 			@Override
 			public void focusGained(FocusEvent arg0) {
-				if (nameInput.getText().equals("특수문자제외8~12자리")) {
+				if (nameInput.getText().equals("특수문자제외12자리이내")) {
 					nameInput.setForeground(Color.black);
 					nameInput.setText("");
 				}
@@ -232,7 +232,7 @@ public class JoinGUI {
 		nameInput.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (nameInput.getText().equals("특수문자제외8~12자리")) {
+				if (nameInput.getText().equals("특수문자제외12자리이내")) {
 					nameInput.setForeground(Color.black);
 					nameInput.setText("");
 				}
@@ -303,7 +303,7 @@ public class JoinGUI {
 			public void focusLost(FocusEvent e) {
 				if (pwInput.getText().length() == 0) {
 					pwInput.setText("ssssssss");
-					lbl_pw.setText("비밀번호는 6~8자리");
+					lbl_pw.setText("비밀번호는 8자리이내");
 
 				}
 			}
