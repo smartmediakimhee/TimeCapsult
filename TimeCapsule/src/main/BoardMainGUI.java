@@ -270,8 +270,10 @@ public class BoardMainGUI implements Runnable {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				thread.interrupt();
+				
 				postGUI post = null;
 				post.main(null);
+				frame.dispose();
 			}
 
 			@Override
@@ -329,7 +331,7 @@ public class BoardMainGUI implements Runnable {
 		scroll_pn_friend.setOpaque(false);
 		pn_friend = new JPanel();
 		pn_friend.setOpaque(false);
-		
+
 		scroll_pn_friend.add(pn_friend);
 		scroll_pn_friend.setViewportView(pn_friend);
 		pn_friend.setLayout(null);
