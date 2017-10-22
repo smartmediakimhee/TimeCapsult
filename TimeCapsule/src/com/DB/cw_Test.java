@@ -72,6 +72,7 @@ public class cw_Test {
 		//멤버 아이디로 캡슐정보(어레이리스트) 조회
 		b1.selectMembersCapsules("47").get(0).getContent();
 		
+		System.out.println(b1.getWeather(104));
 	}
 
 }

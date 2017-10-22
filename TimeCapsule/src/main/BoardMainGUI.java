@@ -21,18 +21,24 @@ import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SpringLayout;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import com.DB.Board_1_DAO;
+import com.DB.Friend_DAO;
 import com.DB.Like_DAO;
 import com.DB.Rel_Mem_Cap;
 import com.DTO.Board_1_DTO;
+import com.DTO.FriendDTO;
 
 import VO.MyPanel;
 import VO.MyPanel2;
+import VO.MyPanelFriend;
+import function.MyWeather;
 import function.Mytimer;
 
 public class BoardMainGUI implements Runnable {
@@ -53,17 +59,27 @@ public class BoardMainGUI implements Runnable {
 	MyPanel pn_1;
 	private boolean isSortboardArr = false;
 	private Date setDate = null;
-	private String member_id = "1";
-	private static boolean isok = false;
-	private static int viewCaseNum = 0;
+	public static String member_id = "1";
+	public static boolean isok = false;
+	public static boolean isok2 = false;
+	public static int viewCaseNum = 0;
 
 	//
 	static Dimension size;
 	static JScrollPane scrollPane_1;
+	static JScrollPane scrollPane_2;
 	static JPanel pn_scroll;
 	static SpringLayout sl_pn_scroll;
 	static JPanel target;
 
+	//
+	
+	ArrayList<MyPanelFriend> f_info_list = new ArrayList<>();
+	ArrayList<FriendDTO> farr = new ArrayList<>();
+	static JScrollPane scroll_pn_friend;
+	static JPanel pn_friend;
+	static Dimension size2;
+	
 	//
 	/**
 	 * Launch the application.
@@ -87,6 +103,9 @@ public class BoardMainGUI implements Runnable {
 	public BoardMainGUI() {
 
 		initialize();
+
+		
+		
 	}
 
 	/**
@@ -122,7 +141,7 @@ public class BoardMainGUI implements Runnable {
 				super.paintComponent(g);
 			}
 		};
-
+		panel_big.setOpaque(false);
 		frame.getContentPane().add(panel_big, BorderLayout.CENTER);
 		SpringLayout sl_panel_big = new SpringLayout();
 		panel_big.setLayout(sl_panel_big);
@@ -195,6 +214,7 @@ public class BoardMainGUI implements Runnable {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (isSortboardArr) {
+					JOptionPane.showMessageDialog(null, "게시글을 남은 열림시간순으로 정렬합니다");
 					sortBoardArrtime();
 					isSortboardArr = false;
 				} else {
@@ -202,7 +222,6 @@ public class BoardMainGUI implements Runnable {
 					isSortboardArr = true;
 				}
 			}
-
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lbl_sort.setCursor(new Cursor(12));
@@ -277,7 +296,7 @@ public class BoardMainGUI implements Runnable {
 		scrollPane_1.getViewport().setOpaque(false);
 
 		pn_scroll = new JPanel();
-		pn_scroll.setBorder(new LineBorder(new Color(192, 192, 192), 0, true));
+		pn_scroll.setBorder(new LineBorder(null, 0, true));
 		scrollPane_1.setViewportView(pn_scroll);
 
 		pn_scroll.setOpaque(false);
@@ -295,37 +314,38 @@ public class BoardMainGUI implements Runnable {
 		sl_pn_scroll = new SpringLayout();
 		pn_scroll.setLayout(sl_pn_scroll);
 		
-		JScrollPane scroll_pn_friend = new JScrollPane();
 		
-	
+		
+		
+		
+		scroll_pn_friend = new JScrollPane();
 		sl_panel_big.putConstraint(SpringLayout.NORTH, scroll_pn_friend, 100, SpringLayout.NORTH, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.SOUTH, scroll_pn_friend, 600, SpringLayout.NORTH, scroll_pn_friend);
 		sl_panel_big.putConstraint(SpringLayout.WEST, scroll_pn_friend, 1420, SpringLayout.WEST, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.EAST, scroll_pn_friend, 475, SpringLayout.WEST, scroll_pn_friend);
 		panel_big.add(scroll_pn_friend);
-		scroll_pn_friend.setBackground(Color.black);
+//		scroll_pn_friend.setBackground(Color.black);
 		
-		JPanel pn_friend = new JPanel();
+		scroll_pn_friend.setOpaque(false);
+		pn_friend = new JPanel();
+		pn_friend.setOpaque(false);
 		
-		
-	
-		ArrayList<JPanel> f_info_list = new ArrayList<JPanel>();
-		
-		pn_friend.setOpaque(true);
-		
+		scroll_pn_friend.add(pn_friend);
 		scroll_pn_friend.setViewportView(pn_friend);
 		pn_friend.setLayout(null);
+		size2 = new Dimension();
+		farr = new Friend_DAO().list(LoggedIN.Logged_in_id);
 		
-		pn_friend.setBackground(Color.GREEN);
-		
-		for (int i = 0; i < 10; i++) {
-			f_info_list.add(new JPanel());
-			f_info_list.get(i).setBounds(10, i*60, 475, 60);
-			f_info_list.get(i).setBackground(Color.gray);
-			scroll_pn_friend.add(f_info_list.get(i));
-			System.out.println(i);
+		for (int i = 0; i < farr.size(); i++) {
+			f_info_list.add(new MyPanelFriend());
+			f_info_list.get(i).setBackground(new Color(230,166,166));
+			f_info_list.get(i).setBounds(10, i*45, 460, 40);
+			f_info_list.get(i).lbl_string.setText(farr.get(i).getName());
+			pn_friend.add(f_info_list.get(i));
 		}
 		
+		size2.setSize(10, 45*farr.size()+10);
+		pn_friend.setPreferredSize(size2);
 		
 		
 //		f_info_list.add(new pn_friend)
@@ -334,7 +354,7 @@ public class BoardMainGUI implements Runnable {
 		
 
 //		
-		 size.setSize(10, 6000);// 객체의 사이즈를 지정
+//		 size.setSize(10, 6000);// 객체의 사이즈를 지정
 //				size.setSize(10, panelsHeightSize(4)); // panelHeightSize(int count) 에서 count 는 페널들이 담긴 ArrayList의 size 값이다.
 //				pn_friend.setPreferredSize(size);// 사이즈 정보를 가지고 있는 객체를 이용해 패널의 사이즈 지정
 //				scroll_pn_friend.setViewportView(pn_friend);
@@ -361,7 +381,7 @@ public class BoardMainGUI implements Runnable {
 		pn_1.lbl_title.setText("여기는 이제 광고판입니다");
 		pn_1.pn_1_howtime.setText("광고비 시간당 3천만원부터");
 		pn_1.lbl_showtime.setText("광고를해보아요~");
-		pn_1.get_icon(whereIconsrc("맑음"));
+		pn_1.get_icon(whereIconsrc(new MyWeather().getWeather()));
 		// 정렬
 		// sortBoardArrtime(board_Arr);
 
@@ -389,6 +409,27 @@ public class BoardMainGUI implements Runnable {
 		thread.start();
 	}
 
+	private void initfriend() {
+		farr.clear();
+		f_info_list.clear();
+		pn_friend.removeAll();
+		
+		pn_friend = new JPanel();
+		pn_friend.setOpaque(false);
+		scroll_pn_friend.setViewportView(pn_friend);
+		pn_friend.setLayout(null);
+		size2 = new Dimension();
+		farr = new Friend_DAO().list(LoggedIN.Logged_in_id);
+		for (int i = 0; i < farr.size(); i++) {
+			f_info_list.add(new MyPanelFriend());
+			f_info_list.get(i).setBounds(10, i*45, 374, 40);
+			f_info_list.get(i).lbl_string.setText(farr.get(i).getName() + " 님과 (서로친구)");
+			pn_friend.add(f_info_list.get(i));
+		}
+		size2.setSize(10, 45*30+10);
+		pn_friend.setPreferredSize(size2);
+		
+	}
 	private void initPanelArr() {
 
 		panelArr.clear();
@@ -499,7 +540,7 @@ public class BoardMainGUI implements Runnable {
 					} else {
 						panelArr.get(i).lbl_howtime.setText(board_Arr.get(i).getContent());
 					}
-					panelArr.get(i).get_icon(whereIconsrc("비옴"));
+					panelArr.get(i).get_icon(whereIconsrc(new Board_1_DAO().getWeather(board_Arr.get(i).getId())));
 					panelArr.get(i).lbl_num.setText(Integer.toString(board_Arr.get(i).getId()));
 					panelArr.get(i).lbl_name.setText(new Rel_Mem_Cap().membersCapsule(board_Arr.get(i).getId()));
 					panelArr.get(i).likecount.setText(new Like_DAO().countLike(board_Arr.get(i).getId()));
@@ -513,13 +554,15 @@ public class BoardMainGUI implements Runnable {
 		}
 	}
 
+	
+	
 	private String whereIconsrc(String weather) {
 		String src = "";
 		if (weather.equals("맑음")) {
 			src = "Image\\sun.png";
 		} else if (weather.equals("흐림")) {
 			src = "Image\\cloud.png";
-		} else if (weather.equals("비옴")) {
+		} else if (weather.equals("비")) {
 			src = "Image\\rain.png";
 		} else if (weather.equals("눈")) {
 			src = "Image\\snow.png";
@@ -531,6 +574,16 @@ public class BoardMainGUI implements Runnable {
 	public void run() {
 		try {
 			while (!Thread.currentThread().isInterrupted()) {
+				if(isok) {
+				initfriend();
+				isok=false;
+				}
+				if(isok2) {
+					init_boardArr();
+					initPanelArr();
+					viewCaseNum=0;
+					isok2=false;
+				}
 				Show();
 				System.out.println("##스레드 동작중##");
 				Thread.sleep(1000);

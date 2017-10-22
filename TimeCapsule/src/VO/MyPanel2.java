@@ -9,14 +9,19 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
+import com.DB.Friend_DAO;
 import com.DB.Like_DAO;
+import com.DB.MemberDAO;
 
+import main.BoardMainGUI;
 import main.LoggedIN;
+import main.MainGUI;
 import main.postGUI;
 
 import java.awt.event.MouseAdapter;
@@ -181,6 +186,21 @@ public class MyPanel2 extends JPanel {
 		add(panel_3);
 
 		lbl_name = new JLabel("\uC784\uC1A1\uD558\uD558\uD558");
+		lbl_name.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(new Friend_DAO().add(LoggedIN.Logged_in_id, new MemberDAO().selectMember_byname(lbl_name.getText()))) {
+					JOptionPane.showMessageDialog(null, lbl_name.getText() + "님이 친구로 등록되었습니다!");
+					BoardMainGUI.isok=true;
+				}else {
+					JOptionPane.showMessageDialog(null, "이미 등록한 친구거나 사소한 에러로 친구추가 실패햇시유...");
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lbl_name.setCursor(new Cursor(12));
+			}
+		});
 		panel_3.add(lbl_name);
 		lbl_name.setHorizontalAlignment(SwingConstants.RIGHT);
 		lbl_name.setForeground(Color.GRAY);

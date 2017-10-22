@@ -255,6 +255,31 @@ public class Board_1_DAO {
 
 		return dto;
 	}
+	
+	public String getWeather(int board_id) {
+		String weather=null;
+		try {
+			getConnection();
+
+			String sql = "SELECT * FROM table_weather WHERE board_id = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, board_id);
+			ResultSet r = pstmt.executeQuery();
+
+			if(r.next()) {
+				weather = r.getString("weather");
+						
+			}
+
+		} catch (Exception e) {
+			System.out.println("예외발생:getMember()=> " + e.getMessage());
+		} finally {
+			dbClose();
+		}
+
+		return weather;
+	}
+	
 
 
 	public boolean deleteBoard_1(String id) {

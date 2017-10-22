@@ -141,6 +141,29 @@ public class MemberDAO {
 		return dto;
 	}
 
+	public String selectMember_byname(String name) {
+		String dto = "";
+		try {
+			getConnection();
+
+			String sql = "SELECT * FROM member WHERE name = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			ResultSet r = pstmt.executeQuery();
+
+			if(r.next()) {
+				dto = r.getString("id");
+			}else {
+				return dto = null;
+			}
+		} catch (Exception e) {
+			System.out.println("예외발생:getMember()=> " + e.getMessage());
+		} finally {
+			dbClose();
+		}
+		return dto;
+	}
+	
 	public MemberDTO selectMember_byEmail(String email) {
 		MemberDTO dto = null;
 		try {
