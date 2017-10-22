@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -45,6 +46,7 @@ public class BoardMainGUI implements Runnable {
 	JScrollPane scrollPane;
 	private ImageIcon icon;
 	private ImageIcon icon2;
+	private ImageIcon list;
 	private JFrame frame;
 	private ImageIcon icon3;
 	private ImageIcon icon4;
@@ -112,6 +114,7 @@ public class BoardMainGUI implements Runnable {
 	 * Initialize the contents of the frame.
 	 */
 	private synchronized void initialize() {
+		list = new ImageIcon("Image\\list.png");
 		icon = new ImageIcon("Image\\back.jpg");
 		icon2 = new ImageIcon("Image\\1.png");
 		icon3 = new ImageIcon("Image\\icon2.png");
@@ -157,6 +160,10 @@ public class BoardMainGUI implements Runnable {
 				initPanelArr();
 				// target = pn_1;
 				// initPanelArr(scrollPane_1, pn_scroll, size, sl_pn_scroll, target);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lbl_log_id.setCursor(new Cursor(12));
 			}
 		});
 		panel_big.add(lbl_log_id);
@@ -206,7 +213,43 @@ public class BoardMainGUI implements Runnable {
 		sl_panel_big.putConstraint(SpringLayout.EAST, pn_img1, -1759, SpringLayout.EAST, panel_big);
 		panel_big.add(pn_img1);
 
-		JLabel lbl_sort = new JLabel("이걸 누르면 정렬이 될껄?");
+		Button btn_sort = new Button("정렬");
+		btn_sort.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (isSortboardArr) {
+					JOptionPane.showMessageDialog(null, "게시글을 남은 열림시간순으로 정렬합니다");
+					sortBoardArrtime();
+					isSortboardArr = false;
+				} else {
+					init_boardArr();
+					isSortboardArr = true;
+				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btn_sort.setCursor(new Cursor(12));
+			}
+		});
+		
+		sl_panel_big.putConstraint(SpringLayout.NORTH, btn_sort, 968, SpringLayout.NORTH, panel_big);
+		sl_panel_big.putConstraint(SpringLayout.WEST, btn_sort, 1350, SpringLayout.WEST, panel_big);
+		panel_big.add(btn_sort);
+		
+/*		JLabel lbl_sort = new JLabel() {
+			public void paintComponent(Graphics g) {
+				// Approach 1: Dispaly image at at full size
+//				g.drawImage(Mainicon.getImage(), 0, 0, null);
+				// Approach 2: Scale image to size of component
+				Dimension d = new Dimension(200, 200);
+				g.drawImage(list.getImage(), 0, 0, d.width, d.height, null);
+				// Approach 3: Fix the image position in the scroll pane
+				// Point p = scrollPane.getViewport().getViewPosition();
+				// g.drawImage(icon.getImage(), p.x, p.y, null);
+				setOpaque(false); // 그림을 표시하게 설정,투명하게 조절
+				super.paintComponent(g);
+			}
+		};
 		sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_sort, 800, SpringLayout.NORTH, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.WEST, lbl_sort, 1600, SpringLayout.WEST, panel_big);
 
@@ -226,7 +269,7 @@ public class BoardMainGUI implements Runnable {
 			public void mouseEntered(MouseEvent e) {
 				lbl_sort.setCursor(new Cursor(12));
 			}
-		});
+		});*/
 		/*
 		 * sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_sort, 800,
 		 * SpringLayout.NORTH, panel_big); sl_panel_big.putConstraint(SpringLayout.WEST,
@@ -235,7 +278,7 @@ public class BoardMainGUI implements Runnable {
 		 * SpringLayout.SOUTH, panel_big); sl_panel_big.putConstraint(SpringLayout.EAST,
 		 * lbl_sort, -60, SpringLayout.EAST, panel_big);
 		 */
-		panel_big.add(lbl_sort);
+	/*	panel_big.add(lbl_sort);*/
 
 		// sl_panel_big.putConstraint(SpringLayout.NORTH, pn_img2, 813,
 		// SpringLayout.NORTH, panel_big);
@@ -562,7 +605,7 @@ public class BoardMainGUI implements Runnable {
 		String src = "";
 		if (weather.equals("맑음")) {
 			src = "Image\\sun.png";
-		} else if (weather.equals("흐림")) {
+		} else if (weather.equals("흐림") || weather.equals("구름많음") || weather.equals("구름조금")) {
 			src = "Image\\cloud.png";
 		} else if (weather.equals("비")) {
 			src = "Image\\rain.png";
