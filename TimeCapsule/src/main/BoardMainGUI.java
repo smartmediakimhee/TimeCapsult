@@ -232,6 +232,23 @@ public class BoardMainGUI implements Runnable {
 			}
 		});
 		
+		
+		pn_img1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				viewCaseNum = 0;
+				member_id = LoggedIN.Logged_in_id;
+				isok2 = true;
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pn_img1.setCursor(new Cursor(12));
+			}
+		});
+
+		
+		
 		sl_panel_big.putConstraint(SpringLayout.NORTH, btn_sort, 968, SpringLayout.NORTH, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.WEST, btn_sort, 1350, SpringLayout.WEST, panel_big);
 		panel_big.add(btn_sort);
@@ -364,8 +381,8 @@ public class BoardMainGUI implements Runnable {
 		
 		
 		scroll_pn_friend = new JScrollPane();
-		sl_panel_big.putConstraint(SpringLayout.NORTH, scroll_pn_friend, 100, SpringLayout.NORTH, panel_big);
-		sl_panel_big.putConstraint(SpringLayout.SOUTH, scroll_pn_friend, 600, SpringLayout.NORTH, scroll_pn_friend);
+		sl_panel_big.putConstraint(SpringLayout.NORTH, scroll_pn_friend, 200, SpringLayout.NORTH, panel_big);
+		sl_panel_big.putConstraint(SpringLayout.SOUTH, scroll_pn_friend, 300, SpringLayout.NORTH, scroll_pn_friend);
 		sl_panel_big.putConstraint(SpringLayout.WEST, scroll_pn_friend, 1420, SpringLayout.WEST, panel_big);
 		sl_panel_big.putConstraint(SpringLayout.EAST, scroll_pn_friend, 475, SpringLayout.WEST, scroll_pn_friend);
 		panel_big.add(scroll_pn_friend);
