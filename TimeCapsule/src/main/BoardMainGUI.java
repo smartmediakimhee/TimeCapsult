@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.ScrollPane;
@@ -320,7 +321,7 @@ public class BoardMainGUI implements Runnable {
       // SpringLayout.EAST, panel_big);
       // panel_big.add(pn_img2);
 
-      JPanel pn_img2 = new JPanel() {
+      JPanel pn_img_write = new JPanel() {
          public void paintComponent(Graphics g) {
 
             // Approach 1: Dispaly image at at full size
@@ -339,7 +340,7 @@ public class BoardMainGUI implements Runnable {
          }
       };
 
-      pn_img2.addMouseListener(new MouseAdapter() {
+      pn_img_write.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseClicked(MouseEvent e) {
             thread.interrupt();
@@ -351,15 +352,15 @@ public class BoardMainGUI implements Runnable {
 
          @Override
          public void mouseEntered(MouseEvent e) {
-            pn_img2.setCursor(new Cursor(12));
+            pn_img_write.setCursor(new Cursor(12));
          }
       });
 
-      sl_panel_big.putConstraint(SpringLayout.NORTH, pn_img2, 813, SpringLayout.NORTH, panel_big);
-      sl_panel_big.putConstraint(SpringLayout.WEST, pn_img2, 0, SpringLayout.WEST, lbl_login);
-      sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_img2, -82, SpringLayout.SOUTH, panel_big);
-      sl_panel_big.putConstraint(SpringLayout.EAST, pn_img2, -40, SpringLayout.EAST, panel_big);
-      panel_big.add(pn_img2);
+      sl_panel_big.putConstraint(SpringLayout.NORTH, pn_img_write, 900, SpringLayout.NORTH, panel_big);
+      sl_panel_big.putConstraint(SpringLayout.WEST, pn_img_write, 1450, SpringLayout.WEST, panel_big);
+      sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_img_write, 90, SpringLayout.NORTH, pn_img_write);
+      sl_panel_big.putConstraint(SpringLayout.EAST, pn_img_write, 90, SpringLayout.WEST, pn_img_write);
+      panel_big.add(pn_img_write);
 
       scrollPane_1 = new JScrollPane();
       sl_panel_big.putConstraint(SpringLayout.NORTH, scrollPane_1, 0, SpringLayout.NORTH, pn_img1);
@@ -394,10 +395,10 @@ public class BoardMainGUI implements Runnable {
       
       
       scroll_pn_friend = new JScrollPane();
-      sl_panel_big.putConstraint(SpringLayout.NORTH, scroll_pn_friend, 200, SpringLayout.NORTH, panel_big);
+      sl_panel_big.putConstraint(SpringLayout.NORTH, scroll_pn_friend, 100, SpringLayout.NORTH, panel_big);
       sl_panel_big.putConstraint(SpringLayout.SOUTH, scroll_pn_friend, 500, SpringLayout.NORTH, scroll_pn_friend);
       sl_panel_big.putConstraint(SpringLayout.WEST, scroll_pn_friend, 1470, SpringLayout.WEST, panel_big);
-      sl_panel_big.putConstraint(SpringLayout.EAST, scroll_pn_friend, 375, SpringLayout.WEST, scroll_pn_friend);
+      sl_panel_big.putConstraint(SpringLayout.EAST, scroll_pn_friend, 150, SpringLayout.WEST, scroll_pn_friend);
       panel_big.add(scroll_pn_friend);
 //      scroll_pn_friend.setBackground(Color.black);
       
@@ -413,10 +414,16 @@ public class BoardMainGUI implements Runnable {
       pn_friend.setLayout(null);
       size2 = new Dimension();
       farr = new Friend_DAO().list(LoggedIN.Logged_in_id);
-      
+      JLabel lbl_flist = new JLabel("친구목록");
+      sl_panel_big.putConstraint(SpringLayout.NORTH, lbl_flist, -40, SpringLayout.NORTH, scroll_pn_friend);
+      sl_panel_big.putConstraint(SpringLayout.WEST, lbl_flist, 25, SpringLayout.WEST, scroll_pn_friend);
+      panel_big.add(lbl_flist);
+      lbl_flist.setForeground(Color.gray);
+      lbl_flist.setFont(new Font("a엄마의편지B", Font.PLAIN, 25));
+
       for (int i = 0; i < farr.size(); i++) {
          f_info_list.add(new MyPanelFriend());
-         f_info_list.get(i).setBackground(new Color(230,166,166));
+         f_info_list.get(i).setBackground(new Color(1,0,0,0.1f));
          f_info_list.get(i).setBounds(5, i*30, 360, 25);
          f_info_list.get(i).lbl_string.setText(farr.get(i).getName());
          
@@ -501,7 +508,7 @@ public class BoardMainGUI implements Runnable {
       farr = new Friend_DAO().list(LoggedIN.Logged_in_id);
       for (int i = 0; i < farr.size(); i++) {
          f_info_list.add(new MyPanelFriend());
-         f_info_list.get(i).setBounds(10, i*45, 374, 40);
+         f_info_list.get(i).setBounds(10, i*45, 120, 40);
          f_info_list.get(i).lbl_string.setText(farr.get(i).getName() + " 님과 (서로친구)");
          pn_friend.add(f_info_list.get(i));
       }

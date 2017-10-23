@@ -5,6 +5,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -35,7 +36,7 @@ public class MyPanelFriend extends JPanel {
 		lbl_icon = new JLabel("    ") {
 			public void paintComponent(Graphics g) {
 				// Approach 1: Dispaly image at at full size
-				// g.drawImage(icon.getImage(), 0, 0, null);
+				//g.drawImage(icon.getImage(), 30, 30, null);
 				// Approach 2: Scale image to size of component
 				Dimension d = getSize();
 				g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
@@ -61,15 +62,29 @@ public class MyPanelFriend extends JPanel {
 				lbl_string.setCursor(new Cursor(12));
 			}
 		});
+		SpringLayout sl =  new SpringLayout();
+		this.setLayout(sl);
 		lbl_string.setForeground(Color.GRAY);
 		lbl_string.setFont(new Font("a엄마의편지B", Font.BOLD, 12));
 		lbl_string.setHorizontalAlignment(SwingConstants.LEFT);
+		
+		sl.putConstraint(SpringLayout.NORTH, lbl_string, 0, SpringLayout.NORTH, this);
+		sl.putConstraint(SpringLayout.WEST, lbl_string, 30, SpringLayout.WEST, this);
+		sl.putConstraint(SpringLayout.SOUTH, lbl_string, 25, SpringLayout.NORTH, lbl_string);
+		sl.putConstraint(SpringLayout.EAST, lbl_string, 150, SpringLayout.WEST, lbl_string);
+		
 		lbl_icon.setForeground(Color.GRAY);
 		lbl_icon.setOpaque(false);
 		lbl_icon.setFont(new Font("a엄마의편지B", Font.BOLD, 12));
 		lbl_icon.setHorizontalAlignment(SwingConstants.LEFT);
+		
+		sl.putConstraint(SpringLayout.NORTH, lbl_icon, 2, SpringLayout.NORTH, this);
+		sl.putConstraint(SpringLayout.WEST, lbl_icon, 5, SpringLayout.WEST, this);
+		sl.putConstraint(SpringLayout.SOUTH, lbl_icon, 20, SpringLayout.NORTH, lbl_icon);
+		sl.putConstraint(SpringLayout.EAST, lbl_icon, 20, SpringLayout.WEST, lbl_icon);
 		this.add(lbl_icon);
 		this.add(lbl_string);
+		
 
 	}
 }
