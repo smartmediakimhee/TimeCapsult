@@ -503,33 +503,8 @@ public class BoardMainGUI implements Runnable {
 
 	public void initPanelArr() {
 
-<<<<<<< HEAD
-   @Override
-   public void run() {
-      try {
-         while (!Thread.currentThread().isInterrupted()) {
-            if(isok) {
-            initfriend();
-            sortBoardArrID();
-            isok=false;
-            }
-           if(isok2) {
-              init_boardArr();
-               initPanelArr();
-               sortBoardArrID();
-               viewCaseNum=0;
-              isok2=false;
-            }
-        init_boardArr();
-        initPanelArr();
-            Show();
-            System.out.println("##스레드 동작중##");
-            Thread.sleep(2000);
-         }
-=======
 		panelArr.clear();
 		pn_scroll.removeAll();
->>>>>>> branch 'master' of https://github.com/smartmediakimhee/TimeCapsult.git
 
 		pn_1 = new MyPanel(pn_scroll, sl_pn_scroll);
 		pn_scroll.add(pn_1); // 스크롤패널에 패널1을 위에 조건값으로 추가
