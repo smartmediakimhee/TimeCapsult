@@ -5,6 +5,7 @@ import com.DTO.MemberDTO;
 
 public class LoggedIN {
 	public static String Logged_in_id="1";
+	public static String dbIP="192.168.0.24";
 	
 	public static MemberDTO getInfo(){
 		

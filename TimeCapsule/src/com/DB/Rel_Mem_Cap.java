@@ -25,7 +25,7 @@ public class Rel_Mem_Cap {
 	private void getConnection() throws ClassNotFoundException, SQLException {
 		if (conn == null) { // dbConn이 null이면 Connection 객체 얻어오기..
 			// 접속정보
-			String url = "jdbc:oracle:thin:@192.168.0.24:1521:xe";
+			String url = "jdbc:oracle:thin:@"+main.LoggedIN.dbIP+":1521:xe";
 			String user = "test";
 			String pw = "test";
 
