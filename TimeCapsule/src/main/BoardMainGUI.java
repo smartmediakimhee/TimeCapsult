@@ -196,16 +196,17 @@ public class BoardMainGUI implements Runnable {
       JPanel pn_img1 = new JPanel() {
          public void paintComponent(Graphics g) {
             // Approach 1: Dispaly image at at full size
-            g.drawImage(icon2.getImage(), 0, 0, null);
+//            g.drawImage(icon2.getImage(), 10, 10, 113, 35, null);
             // Approach 2: Scale image to size of component
-            // Dimension d = getSize();
-            // g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
+             Dimension d = getSize();
+             g.drawImage(icon2.getImage(), 0, 0, d.width, d.height, null);
             // Approach 3: Fix the image position in the scroll pane
             // Point p = scrollPane.getViewport().getViewPosition();
             // g.drawImage(icon.getImage(), p.x, p.y, null);
             setOpaque(false); // 그림을 표시하게 설정,투명하게 조절
             super.paintComponent(g);
          }
+         
       };
       pn_img1.addMouseListener(new MouseAdapter() {
          @Override
@@ -221,10 +222,11 @@ public class BoardMainGUI implements Runnable {
             pn_img1.setCursor(new Cursor(12));
          }
       });
-      sl_panel_big.putConstraint(SpringLayout.NORTH, pn_img1, 28, SpringLayout.NORTH, panel_big);
-      sl_panel_big.putConstraint(SpringLayout.WEST, pn_img1, 10, SpringLayout.WEST, panel_big);
-      sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_img1, -867, SpringLayout.SOUTH, panel_big);
-      sl_panel_big.putConstraint(SpringLayout.EAST, pn_img1, -1759, SpringLayout.EAST, panel_big);
+
+      sl_panel_big.putConstraint(SpringLayout.NORTH, pn_img1, 40, SpringLayout.NORTH, panel_big);
+      sl_panel_big.putConstraint(SpringLayout.WEST, pn_img1, 400, SpringLayout.WEST, panel_big);
+      sl_panel_big.putConstraint(SpringLayout.EAST, pn_img1, 113, SpringLayout.WEST, pn_img1);
+      sl_panel_big.putConstraint(SpringLayout.SOUTH, pn_img1, 35, SpringLayout.NORTH, pn_img1);
       panel_big.add(pn_img1);
 
       Button btn_sort = new Button("정렬");
