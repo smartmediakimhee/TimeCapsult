@@ -72,6 +72,8 @@ public class cw_Test {
 		
 		System.out.println("수정완료");
 		
+        System.out.println(new Board_1_DAO().selectAllBoard1().size());
+		
 	}
 
 }
