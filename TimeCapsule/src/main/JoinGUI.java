@@ -151,12 +151,13 @@ public class JoinGUI {
 		panel_1.add(panel_2);
 
 		JLabel lblNewLabel = new JLabel("\uC774\uBA54\uC77C");
+		lblNewLabel.setFont(new Font("aÆæ±Û¾¾B", Font.PLAIN, 12));
 		lblNewLabel.setBounds(143, 203, 57, 15);
 		panel_2.add(lblNewLabel);
 
 		idInput = new JTextField();
 		
-		idInput.setFont(new Font("a³»¼Õ±Û¾¾L", Font.PLAIN, 24));
+		idInput.setFont(new Font("aÆæ±Û¾¾B", Font.PLAIN, 17));
 //		".\\Image\\exitarrow.png"
 		idInput.addFocusListener(new FocusAdapter() {
 			@Override
@@ -204,11 +205,12 @@ public class JoinGUI {
 		idInput.setOpaque(false);
 	
 		JLabel label_3 = new JLabel("\uBE44\uBC00\uBC88\uD638");
+		label_3.setFont(new Font("aÆæ±Û¾¾B", Font.PLAIN, 12));
 		label_3.setBounds(143, 307, 57, 15);
 		panel_2.add(label_3);
 
 		nameInput = new JTextField();
-		nameInput.setFont(new Font("a³»¼Õ±Û¾¾L", Font.PLAIN, 24));
+		nameInput.setFont(new Font("aÆæ±Û¾¾B", Font.PLAIN, 17));
 		nameInput.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -258,6 +260,7 @@ public class JoinGUI {
 		panel_2.add(nameInput);
 
 		JLabel label_6 = new JLabel("\uB2C9\uB124\uC784");
+		label_6.setFont(new Font("aÆæ±Û¾¾B", Font.PLAIN, 12));
 		label_6.setBounds(143, 416, 57, 15);
 		panel_2.add(label_6);
 
