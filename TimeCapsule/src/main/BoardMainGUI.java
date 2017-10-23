@@ -694,7 +694,8 @@ public class BoardMainGUI implements Runnable {
                viewCaseNum=0;
               isok2=false;
             }
-        
+        init_boardArr();
+        initPanelArr();
             Show();
             System.out.println("##스레드 동작중##");
             Thread.sleep(2000);
