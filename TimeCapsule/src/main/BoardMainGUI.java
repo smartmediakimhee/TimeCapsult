@@ -156,6 +156,7 @@ public class BoardMainGUI implements Runnable {
          public synchronized void mouseClicked(MouseEvent e) {
             viewCaseNum = 1;
             member_id = LoggedIN.getInfo().getId();
+            JOptionPane.showMessageDialog(null, lbl_log_id.getText() + "님의 글목록을 불러옵니다.");
             System.out.println("멤버로보기선택함" + member_id + "##################################");
             init_boardArr();
             initPanelArr();
@@ -211,7 +212,7 @@ public class BoardMainGUI implements Runnable {
       pn_img1.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseClicked(MouseEvent e) {
-            
+        	 JOptionPane.showMessageDialog(null, "모든글보기");
             viewCaseNum=0;
             member_id = LoggedIN.Logged_in_id;
             isok2=true;
@@ -511,7 +512,7 @@ public class BoardMainGUI implements Runnable {
       for (int i = 0; i < farr.size(); i++) {
          f_info_list.add(new MyPanelFriend());
          f_info_list.get(i).setBounds(10, i*45, 120, 40);
-         f_info_list.get(i).lbl_string.setText(farr.get(i).getName() + " 님과 (서로친구)");
+         f_info_list.get(i).lbl_string.setText(farr.get(i).getName());
          pn_friend.add(f_info_list.get(i));
       }
       size2.setSize(10, 45*30+10);
@@ -695,7 +696,7 @@ public class BoardMainGUI implements Runnable {
             }
             Show();
             System.out.println("##스레드 동작중##");
-            Thread.sleep(1000);
+            Thread.sleep(2000);
          }
 
       } catch (InterruptedException e) {
