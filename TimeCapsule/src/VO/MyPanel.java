@@ -30,13 +30,13 @@ public class MyPanel extends JPanel {
 	private JPanel panel_1;
 
 	public MyPanel(JPanel pn_scroll, SpringLayout sl_pn_scroll) {
-		timeImage = new ImageIcon(".\\Image\\timecapsule_ad.PNG");
-		setBorder(new MatteBorder(1, 0, 1, 0, (Color) Color.LIGHT_GRAY)); // 패널1에 테두리 (top,left,bottom,right
+		timeImage = new ImageIcon(".\\Image\\ad_83.png");
+		setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(192, 192, 192))); // 패널1에 테두리 (top,left,bottom,right
 																			// (컬러객체)컬러라이트그레이색으로
 		sl_pn_scroll.putConstraint(SpringLayout.EAST, this, 653, SpringLayout.WEST, pn_scroll); // 패널 1의 동쪽은 스크롤패널서쪽
 																								// 기준으로653만큼 떨어져있음
 		setOpaque(false); // 패널1에 투명주기
-		setBackground(Color.ORANGE); // 패널1에 백그라운드 색상 , 하지만 위에 setOpaque(투명도)를 줬기때문에 무시당함
+		setBackground(new Color(0,0,0,0.1f)); // 패널1에 백그라운드 색상 , 하지만 위에 setOpaque(투명도)를 줬기때문에 무시당함
 		sl_pn_scroll.putConstraint(SpringLayout.NORTH, this, 10, SpringLayout.NORTH, pn_scroll);// 패널1의 북쪽은 스클롤패널의
 																								// 북쪽으로부터 10만큼 떨어져있음
 		sl_pn_scroll.putConstraint(SpringLayout.WEST, this, 10, SpringLayout.WEST, pn_scroll);// 패널1의 서쪽은 스크롤패널의 서쪽으로부터
