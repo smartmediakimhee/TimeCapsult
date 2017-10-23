@@ -28,7 +28,7 @@ public class Rel_Mem_Cap {
 			String url = "jdbc:oracle:thin:@"+main.LoggedIN.dbIP+":1521:xe";
 			String user = "test";
 			String pw = "test";
-
+			System.out.println("rel_mem dao접속");
 			// JDBC드라이버 로드
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			// 오라클(DBMS)에 연결하여 Connection 객체 얻기.

@@ -472,7 +472,7 @@ public class BoardMainGUI implements Runnable {
       pn_1.get_icon(whereIconsrc(new MyWeather().getWeather()));
       // 정렬
       // sortBoardArrtime(board_Arr);
-
+      sortBoardArrID();
       // 재생성오류해결
       if (!panelArr.isEmpty()) {
          System.out.println("패널초기화");
@@ -541,6 +541,25 @@ public class BoardMainGUI implements Runnable {
       scrollPane_1.getVerticalScrollBar().setUnitIncrement(30);
    }
 
+   private void sortBoardArrID() {
+	      Date nowDate = new Date();
+	      ArrayList<Board_1_DTO> tempArr = new ArrayList<>();
+
+	      Collections.sort(board_Arr, new Comparator() {
+	         @Override
+	         public int compare(Object o1, Object o2) {
+	            Board_1_DTO b1 = (Board_1_DTO) o1;
+	            Board_1_DTO b2 = (Board_1_DTO) o2;
+	            return ((Integer)b2.getId()).compareTo(b1.getId());
+	         }
+	      });
+
+	      for (Board_1_DTO board : board_Arr) {
+	         System.out.println("소트테스트 : " + board.getSettime());
+	      }
+
+	   }
+   
    private void sortBoardArrtime() {
       Date nowDate = new Date();
       ArrayList<Board_1_DTO> tempArr = new ArrayList<>();
@@ -626,7 +645,7 @@ public class BoardMainGUI implements Runnable {
                if (!timer.isOpen(nowDate, setDate)) {
                   panelArr.get(i).lbl_howtime.setText(timer.howOpen(nowDate, setDate));
                } else {
-                  panelArr.get(i).lbl_howtime.setText(board_Arr.get(i).getContent());
+            	  panelArr.get(i).lbl_howtime.setText(board_Arr.get(i).getContent());
                }
                panelArr.get(i).get_icon(whereIconsrc(new Board_1_DAO().getWeather(board_Arr.get(i).getId())));
                panelArr.get(i).lbl_num.setText(Integer.toString(board_Arr.get(i).getId()));
@@ -664,13 +683,15 @@ public class BoardMainGUI implements Runnable {
          while (!Thread.currentThread().isInterrupted()) {
             if(isok) {
             initfriend();
+            sortBoardArrID();
             isok=false;
             }
-            if(isok2) {
-               init_boardArr();
+           if(isok2) {
+              init_boardArr();
                initPanelArr();
+               sortBoardArrID();
                viewCaseNum=0;
-               isok2=false;
+              isok2=false;
             }
             Show();
             System.out.println("##스레드 동작중##");
