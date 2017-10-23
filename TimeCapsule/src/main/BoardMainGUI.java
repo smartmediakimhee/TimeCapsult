@@ -395,12 +395,15 @@ public class BoardMainGUI implements Runnable {
       
       scroll_pn_friend = new JScrollPane();
       sl_panel_big.putConstraint(SpringLayout.NORTH, scroll_pn_friend, 200, SpringLayout.NORTH, panel_big);
-      sl_panel_big.putConstraint(SpringLayout.SOUTH, scroll_pn_friend, 300, SpringLayout.NORTH, scroll_pn_friend);
-      sl_panel_big.putConstraint(SpringLayout.WEST, scroll_pn_friend, 1420, SpringLayout.WEST, panel_big);
-      sl_panel_big.putConstraint(SpringLayout.EAST, scroll_pn_friend, 475, SpringLayout.WEST, scroll_pn_friend);
+      sl_panel_big.putConstraint(SpringLayout.SOUTH, scroll_pn_friend, 500, SpringLayout.NORTH, scroll_pn_friend);
+      sl_panel_big.putConstraint(SpringLayout.WEST, scroll_pn_friend, 1470, SpringLayout.WEST, panel_big);
+      sl_panel_big.putConstraint(SpringLayout.EAST, scroll_pn_friend, 375, SpringLayout.WEST, scroll_pn_friend);
       panel_big.add(scroll_pn_friend);
 //      scroll_pn_friend.setBackground(Color.black);
       
+      
+      scroll_pn_friend.getViewport().setOpaque(false);
+      scroll_pn_friend.setBorder(null);
       scroll_pn_friend.setOpaque(false);
       pn_friend = new JPanel();
       pn_friend.setOpaque(false);
@@ -414,12 +417,13 @@ public class BoardMainGUI implements Runnable {
       for (int i = 0; i < farr.size(); i++) {
          f_info_list.add(new MyPanelFriend());
          f_info_list.get(i).setBackground(new Color(230,166,166));
-         f_info_list.get(i).setBounds(10, i*45, 460, 40);
+         f_info_list.get(i).setBounds(5, i*30, 360, 25);
          f_info_list.get(i).lbl_string.setText(farr.get(i).getName());
+         
          pn_friend.add(f_info_list.get(i));
       }
       
-      size2.setSize(10, 45*farr.size()+10);
+      size2.setSize(10, 30*farr.size()+10);
       pn_friend.setPreferredSize(size2);
       
       

@@ -63,9 +63,11 @@ public class MyPanelFriend extends JPanel {
 		});
 		lbl_string.setForeground(Color.GRAY);
 		lbl_string.setFont(new Font("a엄마의편지B", Font.BOLD, 12));
+		lbl_string.setHorizontalAlignment(SwingConstants.LEFT);
 		lbl_icon.setForeground(Color.GRAY);
 		lbl_icon.setOpaque(false);
 		lbl_icon.setFont(new Font("a엄마의편지B", Font.BOLD, 12));
+		lbl_icon.setHorizontalAlignment(SwingConstants.LEFT);
 		this.add(lbl_icon);
 		this.add(lbl_string);
 
