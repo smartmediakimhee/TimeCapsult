@@ -290,10 +290,10 @@ public class JoinGUI {
 		btn_JOIN.setBackground(Color.LIGHT_GRAY);
 		btn_JOIN.setBounds(143, 501, 269, 38);
 		panel_2.add(btn_JOIN);
-		JLabel lbl_pw = new JLabel("\uBE44\uBC00\uBC88\uD638\uB294 6~8\uC790\uB9AC");
+		JLabel lbl_pw = new JLabel("\uBE44\uBC00\uBC88\uD638\uB294 8\uC790\uB9AC\uC774\uB0B4");
 		lbl_pw.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_pw.setForeground(Color.GRAY);
-		lbl_pw.setBounds(199, 307, 117, 15);
+		lbl_pw.setBounds(199, 307, 152, 15);
 		panel_2.add(lbl_pw);
 
 		pwInput = new JPasswordField(); // 비밀번호 입력창
