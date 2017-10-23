@@ -75,7 +75,7 @@ public class JoinGUI {
 
 		pwInput.setText("ssssssss");
 		nameInput.setForeground(Color.gray);
-		nameInput.setText("\uD2B9\uC218\uBB38\uC790\uC81C\uC6788~12\uC790\uB9AC");
+		nameInput.setText("\uD2B9\uC218\uBB38\uC790\uC81C\uC67812\uC790\uB9AC\uC774\uB0B4");
 
 	}
 
