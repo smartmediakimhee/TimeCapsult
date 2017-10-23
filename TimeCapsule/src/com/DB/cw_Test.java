@@ -17,6 +17,7 @@ public class cw_Test {
 		Like_DAO likeDao = new Like_DAO();
 		Friend_DAO fd = new Friend_DAO();
 		MemberDAO md = new MemberDAO();
+		System.out.println();
 		// TODO Auto-generated method stub
 		
 //		System.out.println("±€¡¶∏Ò");
