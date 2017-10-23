@@ -101,6 +101,8 @@ public class MainGUI {
 		SpringLayout sl_panel = new SpringLayout();
 		panel.setLayout(sl_panel);
 
+		
+		
 		JLabel lbl_login = new JLabel("IN");
 		sl_panel.putConstraint(SpringLayout.NORTH, lbl_login, 10, SpringLayout.NORTH, panel);
 		sl_panel.putConstraint(SpringLayout.SOUTH, lbl_login, -970, SpringLayout.SOUTH, panel);
@@ -110,40 +112,11 @@ public class MainGUI {
 			public void mouseClicked(MouseEvent arg0) {
 				
 
-				Board_1_DAO b1 = new Board_1_DAO();
-				MemberDAO md = new MemberDAO();
-
-				String email = id_input.getText();
-				String pw = pw_input.getText();
-				
-				
-				MemberDTO mt = md.selectMember_byEmail(email);
-				
-				if (mt == null) {// 입력된 값이 DB 에 없을경우
-					JOptionPane.showMessageDialog(null, "이메일이 존재하지 않습니다. 이메일을 확인해주세요.");
-				} else {
-					System.out.println();
-					System.out.println(mt.getEmail());
-					System.out.println(mt.getPw());
-					System.out.println(mt.getName());
-					System.out.println(mt.getId());
-				}
-
-				if (mt.getPw().equals(pw)) {
-					BoardMainGUI bmgui = null;
-					LoggedIN.Logged_in_id = (new MemberDAO().selectMember_byEmail(email).getId());
-					bmgui.main(null);
-					frame.dispose();
-					
-					
-					
-				}  else {
-					
-					JOptionPane.showMessageDialog(null, "이메일과 패스워드를 확인하세요.");
-
-				}
+				login();
 
 			}
+
+
 
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
@@ -298,6 +271,15 @@ public class MainGUI {
 		panel_1.add(pn_title);
 
 		pw_input = new JPasswordField();
+		pw_input.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if(arg0.getKeyCode()==10) {
+					System.out.println(arg0.getKeyCode());
+					login();
+				}
+			}
+		});
 		pw_input.setDocument((new JTextFieldLimit(8)));
 		
 
@@ -335,4 +317,40 @@ public class MainGUI {
 		pw_input.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.LIGHT_GRAY));
 
 	}
+	
+	private void login() {
+		Board_1_DAO b1 = new Board_1_DAO();
+		MemberDAO md = new MemberDAO();
+
+		String email = id_input.getText();
+		String pw = pw_input.getText();
+		
+		
+		MemberDTO mt = md.selectMember_byEmail(email);
+		
+		if (mt == null) {// 입력된 값이 DB 에 없을경우
+			JOptionPane.showMessageDialog(null, "이메일이 존재하지 않습니다. 이메일을 확인해주세요.");
+		} else {
+			System.out.println();
+			System.out.println(mt.getEmail());
+			System.out.println(mt.getPw());
+			System.out.println(mt.getName());
+			System.out.println(mt.getId());
+		}
+
+		if (mt.getPw().equals(pw)) {
+			BoardMainGUI bmgui = null;
+			LoggedIN.Logged_in_id = (new MemberDAO().selectMember_byEmail(email).getId());
+			bmgui.main(null);
+			frame.dispose();
+			
+			
+			
+		}  else {
+			
+			JOptionPane.showMessageDialog(null, "이메일과 패스워드를 확인하세요.");
+
+		}
+	}
+	
 }
