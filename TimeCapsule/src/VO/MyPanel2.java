@@ -140,7 +140,7 @@ public class MyPanel2 extends JPanel {
 		add(panel);
 		panel.setLayout(new GridLayout(1, 0, 0, 0));
 
-		lbl_title = new JLabel("\uC2A4\uB9C8\uD2B8\uBBF8\uB514\uC5B4\uC778\uC7AC\uAC1C\uBC1C\uC6D0");
+		lbl_title = new JLabel();
 		panel.add(lbl_title);
 		lbl_title.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_title.setFont(new Font("aÆæ±Û¾¾B", Font.PLAIN, 30));
@@ -151,7 +151,7 @@ public class MyPanel2 extends JPanel {
 		add(panel_1);
 		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
 
-		lbl_howtime = new JLabel("18:27:00'");
+		lbl_howtime = new JLabel();
 		panel_1.add(lbl_howtime);
 		lbl_howtime.setForeground(Color.GRAY);
 		lbl_howtime.setOpaque(false);
@@ -185,7 +185,7 @@ public class MyPanel2 extends JPanel {
 		panel_3.setBounds(504, 11, 147, 26);
 		add(panel_3);
 
-		lbl_name = new JLabel("\uC784\uC1A1\uD558\uD558\uD558");
+		lbl_name = new JLabel();
 		lbl_name.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
