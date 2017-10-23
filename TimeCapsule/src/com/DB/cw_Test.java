@@ -17,6 +17,7 @@ public class cw_Test {
 		Like_DAO likeDao = new Like_DAO();
 		Friend_DAO fd = new Friend_DAO();
 		MemberDAO md = new MemberDAO();
+		System.out.println();
 		// TODO Auto-generated method stub
 		
 //		System.out.println("글제목");
@@ -34,10 +35,6 @@ public class cw_Test {
 //		
 //		likeDao.like(LoggedIN.Logged_in, "5");
 
-		
-		//친구 기능 구현
-
-		
 		//친구 추가
 //		fd.add(LoggedIN.Logged_in, "2");
 		
@@ -64,15 +61,17 @@ public class cw_Test {
 		
 		//좋아요 수 가져오기
 //		System.out.println(likeDao.countLike(2));
-//		
 //		MyWeather mw = new MyWeather();
 //		System.out.println(mw.getWeather());
 		
 		
 		//멤버 아이디로 캡슐정보(어레이리스트) 조회
-		b1.selectMembersCapsules("47").get(0).getContent();
+//		b1.selectMembersCapsules("47").get(0).getContent();
+//		
+//		System.out.println(b1.getWeather(104));
 		
-		System.out.println(b1.getWeather(104));
+		System.out.println("수정완료");
+		
 	}
 
 }
