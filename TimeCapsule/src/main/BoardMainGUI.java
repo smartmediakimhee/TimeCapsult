@@ -156,8 +156,10 @@ public class BoardMainGUI implements Runnable {
 				member_id = LoggedIN.getInfo().getId();
 				JOptionPane.showMessageDialog(null, lbl_log_id.getText() + "님의 글목록을 불러옵니다.");
 				System.out.println("멤버로보기선택함" + member_id + "##################################");
-				init_boardArr();
-				initPanelArr();
+				isok2 = true;
+
+				// init_boardArr();
+				// initPanelArr();
 				// target = pn_1;
 				// initPanelArr(scrollPane_1, pn_scroll, size, sl_pn_scroll, target);
 			}
@@ -214,8 +216,9 @@ public class BoardMainGUI implements Runnable {
 				JOptionPane.showMessageDialog(null, "모든글보기");
 				viewCaseNum = 0;
 				member_id = LoggedIN.Logged_in_id;
-				isok2 = true;
-
+				isok2 = false;
+				if (isok)
+					isok = false;
 			}
 
 			@Override
@@ -235,12 +238,12 @@ public class BoardMainGUI implements Runnable {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (isSortboardArr) {
-					
-					//sortBoardArrtime();
+
+					// sortBoardArrtime();
 					isSortboardArr = false;
 				} else {
 					JOptionPane.showMessageDialog(null, "게시글을 남은 열림시간순으로 정렬합니다");
-					//init_boardArr();
+					// init_boardArr();
 					isSortboardArr = true;
 				}
 			}
@@ -256,7 +259,10 @@ public class BoardMainGUI implements Runnable {
 			public void mouseClicked(MouseEvent e) {
 				viewCaseNum = 0;
 				member_id = LoggedIN.Logged_in_id;
-				isok2 = true;
+				isok2 = false;
+
+				if (isok)
+					isok = false;
 			}
 
 			@Override
@@ -495,7 +501,7 @@ public class BoardMainGUI implements Runnable {
 
 	}
 
-	private void initPanelArr() {
+	public void initPanelArr() {
 
 		panelArr.clear();
 		pn_scroll.removeAll();
@@ -510,6 +516,14 @@ public class BoardMainGUI implements Runnable {
 			panelArr.add(new MyPanel2(sl_pn_scroll, target));
 			pn_scroll.add(panelArr.get(i));
 			target = panelArr.get(i);
+		}
+		if (panelArr.size() == 1) {
+			target = panelArr.get(0);
+			for (int i = 1; i < 7; i++) {
+				panelArr.add(new MyPanel2(sl_pn_scroll, target));
+				pn_scroll.add(panelArr.get(i));
+				target = panelArr.get(i);
+			}
 		}
 		System.out.println("##########" + panelArr.size() + "" + " 판넬어레이 사이즈는");
 		size.setSize(10, panelsHeightSize(board_Arr.size() + 1));
@@ -556,7 +570,7 @@ public class BoardMainGUI implements Runnable {
 
 	}
 
-	private synchronized void init_boardArr() {
+	public synchronized void init_boardArr() {
 		// board_Arr의 초기화 선택
 		// 0.모든글보기 1.나의글보기 2.선택한 유저의 글모음
 		board_Arr.clear();
@@ -579,6 +593,7 @@ public class BoardMainGUI implements Runnable {
 	}
 
 	private synchronized void Show() {
+
 		Date nowDate = new Date();
 		if (board_Arr.size() <= 0) {
 			pn_1.lbl_title.setText("");
@@ -612,7 +627,10 @@ public class BoardMainGUI implements Runnable {
 					e.printStackTrace();
 				}
 				if (board_Arr.size() > 0) {
-
+					if (panelArr.size() == 1 && i != 0) {
+						panelArr.get(i).setVisible(true);
+					}
+				}
 					System.out.println("다른보드게시판생성중 " + i);
 					System.out.println(panelArr.size());
 					System.out.println(board_Arr.get(i).getTitle());
@@ -632,9 +650,10 @@ public class BoardMainGUI implements Runnable {
 						panelArr.get(i).pn_like.repaint();
 					}
 
-				}
+				
 			}
 		}
+
 	}
 
 	private String whereIconsrc(String weather) {
@@ -656,24 +675,28 @@ public class BoardMainGUI implements Runnable {
 		try {
 			while (!Thread.currentThread().isInterrupted()) {
 
-			
 				if (isok) {
 					initfriend();
-					sortBoardArrID();
+					init_boardArr();
+					initPanelArr();
 					isok = false;
-				}else if (isok2) {
-					init_boardArr();
-					initPanelArr();
-					sortBoardArrID();
-					viewCaseNum = 0;
-					isok2 = false;
-				}else {
-					init_boardArr();
-					initPanelArr();
-					sortBoardArrID();
 				}
-				if(isSortboardArr) {
+				if (isok2) {
+					viewCaseNum = 1;
+					init_boardArr();
+					initPanelArr();
+					// viewCaseNum = 0;
+					// isok2 = false;
+				} else {
+					viewCaseNum = 0;
+					init_boardArr();
+					initPanelArr();
+				}
+
+				if (isSortboardArr) {
 					sortBoardArrtime();
+				} else {
+					sortBoardArrID();
 				}
 				Show();
 				System.out.println("##스레드 동작중##");
